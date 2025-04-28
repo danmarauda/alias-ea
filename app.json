@@ -1,0 +1,56 @@
+{
+  "expo": {
+    "newArchEnabled": true,
+    "name": "Multia",
+    "slug": "multia",
+    "version": "1.0.0",
+    "runtimeVersion": "1.0.0",
+    "scheme": "multia",
+    
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "experiments": {
+      "tsconfigPaths": true
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "softwareKeyboardLayoutMode": "pan",
+      "navigationBarColor": "transparent",
+      "navigationBarHidden": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "1ae0353a-78b8-4453-8442-8afec9602b84"
+      }
+    },
+    "owner": "thomino",
+    "updates": {
+      "url": "https://u.expo.dev/1ae0353a-78b8-4453-8442-8afec9602b84"
+    }
+  }
+}

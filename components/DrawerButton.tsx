@@ -11,14 +11,14 @@ interface DrawerButtonProps {
   isAvatar?: boolean;
 }
 
-export default function DrawerButton({ size = 'md', className, style, isAvatar = false }: DrawerButtonProps) {
+export default function DrawerButton({ size = 'lg', className, style, isAvatar = false }: DrawerButtonProps) {
   const { openDrawer } = useDrawer();
   const colors = useThemeColors();
 
   const sizeMap = {
     sm: 16,
     md: 24,
-    lg: 32,
+    lg: 30,
   };
 
   return (
@@ -34,7 +34,7 @@ export default function DrawerButton({ size = 'md', className, style, isAvatar =
         {isAvatar ? (
           <Avatar src="https://mighty.tools/mockmind-api/content/human/5.jpg" size="xs" />
         ) : (
-          <Icon name="Menu" size={sizeMap[size]} color={colors.text} />
+          <Icon name="ListPlus" size={sizeMap[size]} color={colors.text} strokeWidth={1.4} />
         )}
       </Pressable>
     </View>

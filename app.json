@@ -1,11 +1,11 @@
 {
   "expo": {
     "newArchEnabled": true,
-    "name": "Multia",
-    "slug": "multia",
+    "name": "Luna",
+    "slug": "luna",
     "version": "1.0.0",
     "runtimeVersion": "1.0.0",
-    "scheme": "multia",
+    "scheme": "luna",
     
     "web": {
       "favicon": "./assets/favicon.png"
@@ -43,14 +43,10 @@
     "extra": {
       "router": {
         "origin": false
-      },
-      "eas": {
-        "projectId": "1ae0353a-78b8-4453-8442-8afec9602b84"
       }
+     
     },
-    "owner": "thomino",
-    "updates": {
-      "url": "https://u.expo.dev/1ae0353a-78b8-4453-8442-8afec9602b84"
-    }
+    "owner": "thomino"
+    
   }
 }

@@ -27,7 +27,7 @@ const ListLink: React.FC<ListLinkProps> = ({
   onPress,
   showChevron = false,
   className = '',
-  iconSize = 20,
+  iconSize = 18,
   rightIcon = "ChevronRight",
   disabled = false,
   style,
@@ -63,8 +63,8 @@ const ListLink: React.FC<ListLinkProps> = ({
   // If we have an href, make it a Link, otherwise a Pressable
   if (href && !disabled) {
     return (
-      <Link href={href} asChild className={` ${hasBorder ?  'border-b border-light-secondary dark:border-dark-secondary' : ''}`}>
-        <Pressable>
+      <Link href={href} asChild >
+        <Pressable className={` ${hasBorder ? 'border-b border-light-primary dark:border-dark-primary' : ''}`}>
           <Content />
         </Pressable>
       </Link>
@@ -74,7 +74,7 @@ const ListLink: React.FC<ListLinkProps> = ({
   return (
     <Pressable
       onPress={disabled ? undefined : onPress}
-      className={`border-b ${hasBorder ? 'border-light-secondary dark:border-dark-secondary' : ''}`}
+      className={` ${hasBorder ? ' border-b border-light-primary dark:border-dark-primary' : ''}`}
     >
       <Content />
     </Pressable>

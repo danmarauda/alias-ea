@@ -27,7 +27,7 @@ module.exports = {
         // Dark theme colors
         dark: {
           primary: '#171717', // Black
-          secondary: '#262626',
+          secondary: '#323232',
           darker: '#000000',
           text: '#ffffff', // White
           subtext: '#A1A1A1'

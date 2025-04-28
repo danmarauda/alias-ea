@@ -1,39 +1,71 @@
 import { Link, router } from 'expo-router';
-import { View, Text, Pressable, TouchableOpacity } from 'react-native';
+import { View, Text, Pressable, TouchableOpacity, TextInput, Touchable } from 'react-native';
 import ThemedText from './ThemedText';
 import Icon, { IconName } from './Icon';
-import Avatar from './Avatar';
-import { SearchPressable } from '@/app/(drawer)/(tabs)/index';
+import useThemeColors from '@/app/contexts/ThemeColors';
 import ThemeToggle from '@/components/ThemeToggle';
 import ThemedScroller from './ThemeScroller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Avatar from './Avatar';
 
 
-    export default function CustomDrawerContent() {
+const History = [
+    { label: 'Best recipes for a healthy diet' },
+    { label: 'How to lose weight fast' },
+    { label: 'What is the best way to learn React Native?' },
+    { label: 'How to get rich fast?' }
+];
+
+
+export default function CustomDrawerContent() {
     const insets = useSafeAreaInsets();
+    const colors = useThemeColors();
     return (
-        <ThemedScroller className="flex-1 p-8 bg-white dark:bg-dark-primary" style={{ paddingTop: insets.top }}>
+        <View className="flex-1 px-global bg-white dark:bg-dark-primary" style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+            <ThemedScroller className='flex-1 px-0'>
+                <View className='flex-row justify-between items-center mt-4'>
+                    <View
+                        className='bg-light-secondary dark:bg-white/20 rounded-full relative flex-1 mr-4'>
+                        <Icon name="Search" className="absolute top-3.5 left-4 z-50" size={20} />
+                        <TextInput
+                            //ref={inputRef}
+                            className='h-[47px] pl-12 pr-3 rounded-lg text-black dark:text-white'
+                            placeholder='Search'
+                            placeholderTextColor={colors.placeholder}
+                            //onChangeText={setSearchQuery}
+                            //value={searchQuery}
+                            returnKeyType="done"
+                            //onFocus={() => setIsInputFocused(true)}
+                            //onBlur={() => setIsInputFocused(searchQuery.length > 0)}
+                            autoFocus={true}
+                        />
+                    </View>
+                    <ThemeToggle />
+                </View>
 
-            <ThemedText className='text-2xl font-outfit-bold mb-4    mt-4'>Multia<Text className="text-highlight">.</Text></ThemedText>
-            <SearchPressable />
 
-            <View className='flex-col pb-6 mb-6 mt-10 border-b border-light-secondary dark:border-dark-secondary'>
-                <NavItem href="/screens/profile" icon="User" label="Profile" />
-                <NavItem href="/screens/orders" icon="Package" label="Orders" />
-                <NavItem href="/screens/admin" icon="Contact" label="Admin" />
-                <NavItem href="/screens/onboarding-start" icon="Lightbulb" label="Onboarding" />
-                <NavItem href="/screens/welcome" icon="Package" label="Welcome" />
-                <NavItem href="/screens/notification-permission" icon="ShieldCheck" label="Permissions" />
-                <NavItem href="/screens/chat/list" icon="MessageCircle" label="Chat" />
-                <NavItem href="/screens/login" icon="ArrowLeft" label="Sign out" />
+                <View className='flex-col pb-4 mb-4 mt-4 border-b border-light-secondary dark:border-dark-secondary'>
+                    <NavItem href="/" icon="Plus" label="New chat" />
+                    <NavItem href="/screens/search-form" icon="LayoutGrid" label="Explore" />
+                </View>
 
-            </View>
-            <View className='flex-row justify-between items-center'>    
-                <ThemedText className='text-sm text-light-subtext dark:text-dark-subtext'>Version 1.0.0</ThemedText>
-                <ThemeToggle />
-            </View>
+                {History.map((item, index) => (
+                    <Link className='text-black dark:text-white text-base font-semibold py-3' key={index} href="/">
+                        {item.label}
+                    </Link>
+                ))}
 
-        </ThemedScroller>
+            </ThemedScroller>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => router.push('/screens/profile')} className='flex-row justify-start items-center pt-4 pb-4  border-t border-light-secondary dark:border-dark-secondary'>
+                <Avatar src={require('@/assets/img/thomino.jpg')} size="md" />
+                <View className='ml-4'>
+                    <ThemedText className='text-base font-semibold'>Thomino</ThemedText>
+                    <ThemedText className='opacity-50 text-xs'>thomino@gmail.com</ThemedText>
+                </View>
+                <Icon name="ChevronRight" size={18} className='ml-auto' />
+            </TouchableOpacity>
+
+        </View>
     );
 }
 
@@ -47,13 +79,13 @@ type NavItemProps = {
 
 export const NavItem = ({ href, icon, label, description }: NavItemProps) => (
 
-    <TouchableOpacity onPress={() => router.push(href)} className={`flex-row items-center py-3`}>
-        <View className='flex-row items-center justify-center w-10 h-10 bg-light-secondary dark:bg-dark-secondary rounded-xl'>
+    <TouchableOpacity onPress={() => router.push(href)} className={`flex-row items-center py-2`}>
+        <View className='flex-row items-center justify-center w-9 h-9 bg-light-secondary dark:bg-dark-secondary rounded-lg'>
             <Icon name={icon} size={18} className='' />
         </View>
         <View className='flex-1 ml-4 '>
             {label &&
-                <ThemedText className="text-lg font-bold text-gray-800 dark:text-gray-200">{label}</ThemedText>
+                <ThemedText className="text-base font-bold text-gray-800 dark:text-gray-200">{label}</ThemedText>
             }
             {description &&
                 <ThemedText className='opacity-50 text-xs'>{description}</ThemedText>

@@ -28,7 +28,7 @@ export default function DrawerLayout() {
                     flex: 1,
                 },
                 overlayColor: 'rgba(0,0,0, 0.4)',
-                swipeEdgeWidth: 40
+                swipeEdgeWidth: 300
             }}
             drawerContent={(props) => <CustomDrawerContent />}
         >
@@ -38,7 +38,7 @@ export default function DrawerLayout() {
                     title: 'Menu',
                     drawerLabel: 'Menu',
                 }}
-                redirect={true}
+                //redirect={true}
             />
         </Drawer>
     );

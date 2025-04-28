@@ -32,7 +32,7 @@ function ThemedLayout() {
 
 export default function RootLayout() {
   return (
-    <GestureHandlerRootView className={`bg-light-primary dark:bg-dark-primary ${Platform.OS === 'ios' ? 'pb-6 ' : ''}`} style={{ flex: 1 }}>
+    <GestureHandlerRootView className={`bg-light-primary dark:bg-dark-primary ${Platform.OS === 'ios' ? 'pb-0 ' : ''}`} style={{ flex: 1 }}>
       <BusinessModeProvider>
         <ThemeProvider>
           <DrawerProvider>

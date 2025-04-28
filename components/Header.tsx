@@ -159,7 +159,7 @@ const Header: React.FC<HeaderProps> = ({
             </TouchableOpacity>
           )}
 
-          {leftComponent && (
+          {leftComponent || title && (
             <View className='flex-row items-center relative z-50 py-4   '>
               {leftComponent}
 

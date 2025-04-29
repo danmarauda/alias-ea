@@ -6,7 +6,6 @@
     "version": "1.0.0",
     "runtimeVersion": "1.0.0",
     "scheme": "luna",
-    
     "web": {
       "favicon": "./assets/favicon.png"
     },
@@ -43,10 +42,14 @@
     "extra": {
       "router": {
         "origin": false
+      },
+      "eas": {
+        "projectId": "a0a0f625-0457-4ab7-a22f-509a24238a11"
       }
-     
     },
-    "owner": "thomino"
-    
+    "owner": "thomino",
+    "updates": {
+      "url": "https://u.expo.dev/a0a0f625-0457-4ab7-a22f-509a24238a11"
+    }
   }
 }

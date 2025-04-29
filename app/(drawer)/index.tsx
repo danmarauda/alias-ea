@@ -5,8 +5,6 @@ import { View, Text, Pressable, Image, KeyboardAvoidingView, Platform } from 're
 import Icon from '@/components/Icon';
 import ThemedText from '@/components/ThemedText';
 import DrawerButton from '@/components/DrawerButton';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import AnimatedView from '@/components/AnimatedView';
 import { shadowPresets } from '@/utils/useShadow';
 import { ChatInput } from '@/components/ChatInput';
 import { BotSwitch } from '@/components/BotSwitch';
@@ -80,6 +78,7 @@ const HomeScreen = () => {
                 {/* Main Content */}
                 <View style={{ flex: 1 }}>
                     <Header
+                        title=""
                         leftComponent={leftComponent}
                         rightComponents={rightComponents}
                     />

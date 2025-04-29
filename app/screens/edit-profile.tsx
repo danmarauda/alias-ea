@@ -65,7 +65,7 @@ export default function EditProfileScreen() {
 
           </TouchableOpacity>
           <View className="mt-4">
-            <Button title={profileImage ? 'Change photo' : 'Upload photo'} className="text-sm text-light-subtext dark:text-dark-subtext" onPress={pickImage} />
+            <Button variant='ghost' title={profileImage ? 'Change photo' : 'Upload photo'} className="text-sm bg-light-secondary dark:bg-dark-secondary" onPress={pickImage} />
 
             {profileImage && (
               <Button

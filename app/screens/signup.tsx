@@ -5,7 +5,7 @@ import Input from '@/components/forms/Input';
 import ThemedText from '@/components/ThemedText';
 import { Button } from '@/components/Button';
 import useThemeColors from '@/app/contexts/ThemeColors';
-import AntDesign from '@expo/vector-icons/AntDesign';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function SignupScreen() {
   const colors = useThemeColors();
@@ -118,18 +118,19 @@ export default function SignupScreen() {
     console.log(`Login with ${provider}`);
     // Implement social login logic here
   };
-
+  const insets = useSafeAreaInsets();
   return (
-    <View className="flex-1 bg-light-primary dark:bg-dark-primary p-6">
+    <View style={{paddingTop: insets.top }} className="flex-1 bg-light-primary dark:bg-dark-primary p-6">
      
       
       <View className="mt-8">
-        <ThemedText className="text-4xl font-outfit-bold mb-14">Velora.</ThemedText>
-        <ThemedText className="text-xl font-bold mb-4">Create account</ThemedText>
+        <ThemedText className="text-4xl font-outfit-bold mb-14">Luna.</ThemedText>
+        <ThemedText className="text-xl font-bold mb-10">Create account</ThemedText>
         
         <Input
           label="Email"
           //leftIcon="mail"
+          variant="underlined"
           value={email}
           onChangeText={(text) => {
             setEmail(text);
@@ -143,7 +144,7 @@ export default function SignupScreen() {
         
         <Input
           label="Password"
-          //leftIcon="lock"
+          variant="underlined"
           value={password}
           onChangeText={(text) => {
             setPassword(text);
@@ -157,7 +158,7 @@ export default function SignupScreen() {
        
         <Input
           label="Confirm password"
-          //leftIcon="lock"
+          variant="underlined"
           value={confirmPassword}
           onChangeText={(text) => {
             setConfirmPassword(text);

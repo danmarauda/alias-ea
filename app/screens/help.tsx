@@ -7,39 +7,38 @@ import Section from '@/components/layout/Section';
 import Icon from '@/components/Icon';
 import { Button } from '@/components/Button';
 import AnimatedView from '@/components/AnimatedView';
-import Divider from '@/components/layout/Divider';
 
 // FAQ data
 const faqData = [
   {
     id: '1',
-    question: 'How do I track my order?',
-    answer: 'You can track your order by going to the Orders section in your account. Click on the specific order you want to track, and you will see its current status and tracking information if available.'
+    question: 'How do I start a conversation with Luna?',
+    answer: 'Starting a conversation with Luna is easy. Simply tap on the mic icon to start voice input, or use the text input at the bottom of the screen to type your message. Luna will respond instantly to your queries.'
   },
   {
     id: '2',
-    question: 'What is your return policy?',
-    answer: 'We accept returns within 30 days of purchase. Items must be in their original condition with tags attached. To start a return, go to your Orders section and select the item you wish to return.'
+    question: 'What can Luna help me with?',
+    answer: 'Luna can assist with a wide range of tasks including answering questions, providing information, generating content, suggesting ideas, translating text, explaining concepts, and having natural conversations. Just ask, and Luna will try to help!'
   },
   {
     id: '3',
-    question: 'How long does shipping take?',
-    answer: 'Standard shipping usually takes 3-5 business days within the continental US. Express shipping is 1-2 business days. International shipping can take 7-14 business days depending on the destination country.'
+    question: 'Does Luna remember our previous conversations?',
+    answer: 'Yes, Luna maintains context within the same session, so you can refer back to information from earlier in your conversation. For privacy reasons, conversations aren\'t stored permanently unless you explicitly save them.'
   },
   {
     id: '4',
-    question: 'Do you ship internationally?',
-    answer: 'Yes, we ship to most countries worldwide. International shipping rates and delivery times vary based on the destination. You can see the exact shipping cost during checkout.'
+    question: 'How accurate is Luna\'s information?',
+    answer: 'Luna strives to provide accurate and helpful information. However, it\'s trained on data with a cutoff date and may not have information about very recent events. Always verify critical information from official sources.'
   },
   {
     id: '5',
-    question: 'How do I change or cancel my order?',
-    answer: 'You can change or cancel your order within 1 hour of placing it. Please contact our customer service team immediately. After this window, your order may have already been processed for shipping.'
+    question: 'Can I change Luna\'s voice or personality?',
+    answer: 'Yes! You can customize Luna\'s voice by going to Settings > AI Voice and selecting from the available options. Each voice has a unique tone and style to match your preferences.'
   },
   {
     id: '6',
-    question: 'Are there any discount codes available?',
-    answer: 'We regularly offer promotions and discount codes. You can subscribe to our newsletter to receive updates on our latest deals, or check our social media pages for exclusive offers.'
+    question: 'Is my conversation with Luna private?',
+    answer: 'Your privacy is important to us. Conversations with Luna are encrypted and not shared with third parties. We only store conversations temporarily to improve our service, and you can delete your conversation history at any time from Settings.'
   }
 ];
 
@@ -48,21 +47,21 @@ const contactInfo = [
   {
     id: 'email',
     type: 'Email',
-    value: 'support@velora.com',
+    value: 'support@luna-ai.com',
     icon: 'Mail' as const,
-    action: () => Linking.openURL('mailto:support@velora.com')
+    action: () => Linking.openURL('mailto:support@luna-ai.com')
   },
   {
     id: 'phone',
     type: 'Phone',
-    value: '+1 (800) 555-1234',
+    value: '+1 (800) 123-LUNA',
     icon: 'Phone' as const,
-    action: () => Linking.openURL('tel:+18005551234')
+    action: () => Linking.openURL('tel:+18001235862')
   },
   {
     id: 'hours',
-    type: 'Business Hours',
-    value: 'Monday-Friday: 9am-6pm EST',
+    type: 'Support Hours',
+    value: '24/7 AI Support Available',
     icon: 'Clock' as const,
     action: undefined
   }
@@ -135,7 +134,7 @@ export default function HelpScreen() {
               title="Email Us" 
               iconStart="Mail"
               className="mt-8"
-              onPress={() => Linking.openURL('mailto:support@velora.com')}
+              onPress={() => Linking.openURL('mailto:support@luna-ai.com')}
             />
           </View>
         </AnimatedView>

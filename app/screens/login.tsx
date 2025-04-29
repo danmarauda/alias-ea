@@ -4,7 +4,7 @@ import { Stack, Link, router } from 'expo-router';
 import Input from '@/components/forms/Input';
 import ThemedText from '@/components/ThemedText';
 import { Button } from '@/components/Button';
-import Icon from '@/components/Icon';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useThemeColors from '@/app/contexts/ThemeColors';
 
 export default function LoginScreen() {
@@ -60,17 +60,20 @@ export default function LoginScreen() {
     // Implement social login logic here
   };
 
+  const insets = useSafeAreaInsets();
+
   return (
-    <View className="flex-1 bg-light-primary dark:bg-dark-primary p-6">
+    <View style={{paddingTop: insets.top }} className="flex-1 bg-light-primary pt-20 dark:bg-dark-primary p-6">
      
       
       <View className="mt-8">
-      <ThemedText className="text-4xl font-outfit-bold mb-14">Velora.</ThemedText>
+      <ThemedText className="text-4xl font-outfit-bold mb-14">Luna.</ThemedText>
         <ThemedText className="text-3xl font-bold mb-1">Welcome back</ThemedText>
         <ThemedText className="text-light-subtext dark:text-dark-subtext mb-14">Sign in to your account</ThemedText>
         
         <Input
           label="Email"
+          variant="underlined"
           value={email}
           onChangeText={(text) => {
             setEmail(text);
@@ -84,6 +87,7 @@ export default function LoginScreen() {
         
         <Input
           label="Password"
+          variant="underlined"
           value={password}
           onChangeText={(text) => {
             setPassword(text);

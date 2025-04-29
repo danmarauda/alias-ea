@@ -4,10 +4,10 @@ import { Link, router } from 'expo-router';
 import Input from '@/components/forms/Input';
 import ThemedText from '@/components/ThemedText';
 import { Button } from '@/components/Button';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function ForgotPasswordScreen() {
-
+  const insets = useSafeAreaInsets();
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -46,11 +46,11 @@ export default function ForgotPasswordScreen() {
   };
 
   return (
-    <View className="flex-1 bg-light-primary dark:bg-dark-primary p-6">
+    <View style={{paddingTop: insets.top }} className="flex-1 bg-light-primary dark:bg-dark-primary p-6">
      
       
       <View className="mt-8">
-        <ThemedText className="text-3xl font-bold mb-1">Reset Password</ThemedText>
+        <ThemedText className="text-3xl font-bold mb-1 mt-10">Reset Password</ThemedText>
         <ThemedText className="text-light-subtext dark:text-dark-subtext mb-14">
           Enter your email address and we'll send you a link to reset your password
         </ThemedText>
@@ -58,6 +58,7 @@ export default function ForgotPasswordScreen() {
         <Input
           label="Email"
           value={email}
+          variant="underlined"
           onChangeText={(text) => {
             setEmail(text);
             if (emailError) validateEmail(text);

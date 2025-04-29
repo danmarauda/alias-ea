@@ -1,5 +1,5 @@
 import { Pressable, TouchableOpacity } from "react-native";
-
+import { shadowPresets } from '@/utils/useShadow';
 import { View } from "react-native";
 import AnimatedView from "./AnimatedView";
 import LottieView from 'lottie-react-native';
@@ -19,9 +19,11 @@ export const Sphere = () => {
                 shouldResetAnimation={true}
             >
                 <TouchableOpacity 
-                activeOpacity={0.8}
+                //activeOpacity={0.5}
                 className='relative w-[250px] h-[250px] items-center justify-center' onPress={toggleSpeaking}>
-                    <View className='w-[140px] relative z-[9999] h-[140px] rounded-full bg-light-secondary dark:bg-dark-primary items-center justify-center'>
+                    <View 
+                    style={shadowPresets.large}
+                    className='w-[140px] relative z-[9999] h-[140px] rounded-full bg-light-secondary dark:bg-dark-primary items-center justify-center'>
                         <LottieView
                             autoPlay
                             style={{

@@ -36,15 +36,17 @@ export default function EditProfileScreen() {
 
   return (
     <>
-      <Header showBackButton
+      <Header
+      title="Profile settings"
+      showBackButton
         rightComponents={[
           <Button title="Save changes" />
         ]}
       />
-      <ThemedScroller>
-        <Section titleSize='3xl' className='pt-4 pb-10' title="Profile Settings" subtitle="Manage your account settings" />
+      <ThemedScroller className='px-8'>
 
-        <View className="items-center flex-row mb-8 mt-6">
+
+        <View className="items-center flex-col mb-8 mt-8">
           <TouchableOpacity
             onPress={pickImage}
             className="relative"
@@ -62,7 +64,7 @@ export default function EditProfileScreen() {
             )}
 
           </TouchableOpacity>
-          <View className="ml-4">
+          <View className="mt-4">
             <Button title={profileImage ? 'Change photo' : 'Upload photo'} className="text-sm text-light-subtext dark:text-dark-subtext" onPress={pickImage} />
 
             {profileImage && (
@@ -75,44 +77,30 @@ export default function EditProfileScreen() {
             )}
           </View>
         </View>
-        <Section titleSize='xl' className='pt-4 pb-8' title="Personal information" subtitle="Manage your personal information" />
-        <Input
-          label="First Name"
-          value="John"
-          keyboardType="email-address"
-          autoCapitalize="none" />
-        <Input
-          label="Last Name"
-          value="Doe"
-          containerClassName='flex-1'
-          keyboardType="email-address"
-          autoCapitalize="none" />
+        <View className='p-global bg-light-secondary dark:bg-dark-secondary/50 rounded-2xl'>
+          <Section titleSize='xl' className='pt-0 pb-8' title="Personal information" subtitle="Manage your personal information" />
+          <Input
+            label="First Name"
+            variant='underlined'
+            value="John"
+            keyboardType="email-address"
+            autoCapitalize="none" />
+          <Input
+            label="Last Name"
+            value="Doe"
+            variant="underlined"
+            containerClassName='flex-1'
+            keyboardType="email-address"
+            autoCapitalize="none" />
 
-        <Input
-          label="Email"
-          keyboardType="email-address"
-          value="john.doe@example.com"
-          autoCapitalize="none" />
-
-
-        <Divider className='my-4' />
-
-        <Section titleSize='xl' className='pt-4 pb-4' title="Interests" subtitle="Choose your interests to personalize your experience" />
-        <View className="flex-row gap-2 flex-wrap">
-          <Chip label="Logo design" />
-          <Chip label="UI/UX design" />
-          <Chip label="Web design" />
-          <Chip label="Mobile design" />
-          <Chip label="Graphic design" />
-          <Chip label="Illustration" />
-          <Chip label="Motion design" />
-          <Chip label="Product design" />
-          <Chip label="Interior design" />
-          <Chip label="Fashion design" />
-          <Chip label="Architecture design" />
-          <Chip label="Industrial design" />
-
+          <Input
+            label="Email"
+            variant="underlined"
+            keyboardType="email-address"
+            value="john.doe@example.com"
+            autoCapitalize="none" />
         </View>
+
 
 
 

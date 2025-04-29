@@ -154,7 +154,7 @@ const Input: React.FC<CustomTextInputProps> = ({
   // Underlined input with only bottom border
   if (variant === 'underlined') {
     return (
-      <View className={`mb-global relative ${containerClassName}`} style={{ position: 'relative' }}>
+      <View className={`mb-6 relative ${containerClassName}`} style={{ position: 'relative' }}>
         <View className="relative">
           <Pressable className='px-0 bg-light-primary dark:bg-dark-primary z-40' onPress={() => inputRef.current?.focus()}>
             <Animated.Text 
@@ -175,7 +175,7 @@ const Input: React.FC<CustomTextInputProps> = ({
                 paddingHorizontal: 0, // No horizontal padding
                 position: 'absolute',
                 zIndex: 50,
-                backgroundColor: colors.bg,
+                //backgroundColor: colors.bg,
               }]} 
               className="text-black dark:text-white"
             >

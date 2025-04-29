@@ -26,11 +26,9 @@ export default function ProfileScreen() {
                 </View>
 
                 <View style={shadowPresets.medium} className='bg-light-secondary dark:bg-dark-secondary/50 rounded-2xl  '>
-                    <ListLink className='px-5' hasBorder title="Settings"  icon="Settings" href="/screens/settings" />
+                    <ListLink className='px-5' hasBorder title="Settings"  icon="Settings" href="/screens/edit-profile" />
                     <ListLink className='px-5' hasBorder title="Upgrade to plus" icon="MapPin" href="/screens/subscription" />
-                    <ListLink className='px-5' hasBorder title="Payments"    icon="CreditCard" href="/screens/profile/payments" />
-                    <ListLink className='px-5' hasBorder title="Notifications" icon="Bell" href="/screens/profile/notifications" />
-                    <ListLink className='px-5' hasBorder title="Currency" icon="DollarSign" href="/screens/profile/currency" />
+                    <ListLink className='px-5' hasBorder title="Ai Voice"    icon="MicVocal" href="/screens/ai-voice" />
                     <ListLink className='px-5' hasBorder title="Help" icon="HelpCircle" href="/screens/help" />
                     <ListLink className='px-5' title="Logout" icon="LogOut" href="/screens/logout" />
                 </View>

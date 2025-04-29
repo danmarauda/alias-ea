@@ -10,6 +10,7 @@ import { useState, useEffect, useRef } from "react";
 import Animated, { useAnimatedStyle, withTiming, useSharedValue } from "react-native-reanimated";
 import * as ImagePicker from 'expo-image-picker';
 import { CardScroller } from "./CardScroller";
+import { AnimationType } from './AnimatedView';
 
 
 type ChatInputProps = {
@@ -29,6 +30,8 @@ export const ChatInput = (props: ChatInputProps) => {
     const [selectedImages, setSelectedImages] = useState<string[]>([]);
     const [inputText, setInputText] = useState('');
     const [inputHeight, setInputHeight] = useState(40); // Initial height that works better
+    // Add a state to track whether items should be removed after animation completes
+    const [shouldRemoveItems, setShouldRemoveItems] = useState(false);
     
     // Maximum height corresponds to 5 lines of text (approximately)
     const MAX_INPUT_HEIGHT = 120;
@@ -58,6 +61,10 @@ export const ChatInput = (props: ChatInputProps) => {
     useEffect(() => {
         if (props.attachVisible !== undefined) {
             setIsAttachVisible(props.attachVisible);
+            // Reset shouldRemoveItems when attaching becomes visible
+            if (props.attachVisible) {
+                setShouldRemoveItems(false);
+            }
         }
     }, [props.attachVisible]);
     
@@ -70,13 +77,20 @@ export const ChatInput = (props: ChatInputProps) => {
             rotation.value = withTiming(0, { duration: 250 });
             // After animation completes, actually hide the component
             setTimeout(() => {
-                setIsAttachVisible(false);
-                setIsAnimatingOut(false);
+                setShouldRemoveItems(true);
+                // Add a small delay before fully removing the component
+                setTimeout(() => {
+                    setIsAttachVisible(false);
+                    setIsAnimatingOut(false);
+                    // Reset shouldRemoveItems for next time
+                    setShouldRemoveItems(false);
+                }, 50);
             }, 300); // Animation duration + a little buffer
         } else {
             // Show immediately
             setIsAttachVisible(true);
             setIsAnimatingOut(false);
+            setShouldRemoveItems(false);
             // Rotate icon to 45 degrees
             rotation.value = withTiming(135, { duration: 350 });
         }
@@ -100,8 +114,14 @@ export const ChatInput = (props: ChatInputProps) => {
             
             // After animation completes, actually hide the component
             setTimeout(() => {
-                setIsAttachVisible(false);
-                setIsAnimatingOut(false);
+                setShouldRemoveItems(true);
+                // Add a small delay before fully removing the component
+                setTimeout(() => {
+                    setIsAttachVisible(false);
+                    setIsAnimatingOut(false);
+                    // Reset shouldRemoveItems for next time
+                    setShouldRemoveItems(false);
+                }, 50);
             }, 300);
             
             // Call parent handler if needed
@@ -150,12 +170,8 @@ export const ChatInput = (props: ChatInputProps) => {
     };
     
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            //keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
-            //style={{ width: '100%' }}
-        >
-            <View className="px-2 w-full absolute bottom-0"  >
+       
+            <View style={{paddingBottom: insets.bottom}} className="px-global w-full "  >
                 {selectedImages.length > 0 && (
                     <View className="mb-0">
                         <ScrollableImageList 
@@ -166,7 +182,7 @@ export const ChatInput = (props: ChatInputProps) => {
                 )}
                 
                 {/**add seected images here */}
-                {(isAttachVisible || isAnimatingOut) && (
+                {(isAttachVisible || isAnimatingOut) && !shouldRemoveItems && (
                     <View className="flex-row w-full mb-2">
                         <AnimatedPickerItem 
                             icon="Image" 
@@ -233,7 +249,6 @@ export const ChatInput = (props: ChatInputProps) => {
                     </View>
                 </View>
             </View>
-        </KeyboardAvoidingView>
     );
 }
 
@@ -265,43 +280,24 @@ const AnimatedPickerItem = (props: {
     isExiting: boolean;
     onPress?: () => void;
 }) => {
-    const translateY = useSharedValue(50);
-    const opacity = useSharedValue(0);
-    
-    // Run animation whenever the component mounts or the isExiting prop changes
-    useEffect(() => {
-        if (props.isExiting) {
-            // Exit animation with delay
-            setTimeout(() => {
-                translateY.value = withTiming(50, { duration: 200 });
-                opacity.value = withTiming(0, { duration: 200 });
-            }, props.delay);
-        } else {
-            // Entry animation with delay
-            setTimeout(() => {
-                translateY.value = withTiming(0, { duration: 200 });
-                opacity.value = withTiming(1, { duration: 200 });
-            }, props.delay);
-        }
-    }, [props.isExiting, props.delay]);
-    
-    const animatedStyle = useAnimatedStyle(() => {
-        return {
-            transform: [{ translateY: translateY.value }],
-            opacity: opacity.value
-        };
-    });
+    const animation: AnimationType = props.isExiting ? 'slideOutBottom' : 'slideInBottom';
     
     return (
-        <Animated.View style={animatedStyle}>
+        <AnimatedView 
+            animation={animation}
+            duration={350}
+            delay={props.isExiting ? 0 : props.delay}
+            className="mr-1"
+            shouldResetAnimation={true}
+        >
             <TouchableOpacity 
                 style={{ ...shadowPresets.large }} 
-                className='items-center mr-2 justify-center rounded-2xl flex-row p-4 bg-light-secondary dark:bg-dark-secondary'
+                className='items-center justify-center rounded-2xl flex-row p-4 bg-light-secondary dark:bg-dark-secondary'
                 onPress={props.onPress}
             >
                 <Icon name={props.icon} size={18} />
                 <ThemedText className="ml-2">{props.label}</ThemedText>
             </TouchableOpacity>
-        </Animated.View>
+        </AnimatedView>
     );
 }

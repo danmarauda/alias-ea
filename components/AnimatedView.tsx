@@ -12,7 +12,12 @@ export type AnimationType =
     | 'bounceIn'
     | 'flipInX'
     | 'zoomInRotate'
-    | 'rotateIn';
+    | 'rotateIn'
+    | 'slideOutBottom'
+    | 'slideOutRight'
+    | 'slideOutLeft'
+    | 'slideOutTop'
+    | 'scaleOut';
 
 interface AnimatedViewProps {
     children?: React.ReactNode;
@@ -25,6 +30,7 @@ interface AnimatedViewProps {
     playOnlyOnce?: boolean;
     triggerOnVisible?: boolean; // Only animate when component becomes visible in viewport
     visibilityThreshold?: number; // Pixels needed to be visible to trigger (default: 50)
+    shouldResetAnimation?: boolean; // When true, will reset and replay animation when animation type changes
 }
 
 // Function to compare props for pure rendering
@@ -39,7 +45,8 @@ const propsAreEqual = (prevProps: AnimatedViewProps, nextProps: AnimatedViewProp
     if (prevProps.animation !== nextProps.animation ||
         prevProps.duration !== nextProps.duration ||
         prevProps.delay !== nextProps.delay ||
-        prevProps.easing !== nextProps.easing) {
+        prevProps.easing !== nextProps.easing ||
+        prevProps.shouldResetAnimation !== nextProps.shouldResetAnimation) {
         return false;
     }
     
@@ -73,6 +80,7 @@ function AnimatedViewComponent({
     playOnlyOnce = false,
     triggerOnVisible = false,
     visibilityThreshold = 30, // Default to 50px visibility required
+    shouldResetAnimation = true, // By default, reset animation when animation type changes
 }: AnimatedViewProps) {
     const animatedValue = useRef(new Animated.Value(0)).current;
     const isFocused = useIsFocused();
@@ -83,6 +91,10 @@ function AnimatedViewComponent({
     const { height: windowHeight } = Dimensions.get('window');
     const measureInterval = useRef<NodeJS.Timeout | null>(null);
     const isFirstRender = useRef(true);
+    // Track the last animation type to detect changes
+    const lastAnimationType = useRef<AnimationType>(animation);
+    // Track if we're currently animating out
+    const isAnimatingOut = useRef<boolean>(false);
 
     // Initialize with visibility detection - but delayed to ensure proper measurement
     useEffect(() => {
@@ -165,20 +177,40 @@ function AnimatedViewComponent({
         }
     };
 
-    // Start animation when conditions are met
+    // Check if this is an "out" animation
+    const isExitAnimation = (animType: AnimationType) => {
+        return animType.includes('Out');
+    };
+
+    // Start animation when conditions are met or when animation type changes
     useEffect(() => {
         // Skip if not focused or not visible
         if (!isFocused || !isVisible) return;
         
-        // If playOnlyOnce is true and animation has played once, don't play again
-        if (playOnlyOnce && hasAnimatedOnce.current) return;
+        // Detect if animation type changed
+        const animationChanged = lastAnimationType.current !== animation;
+        
+        // Update the current animation type
+        lastAnimationType.current = animation;
+        
+        // Check if we're switching to an exit animation
+        const isExiting = isExitAnimation(animation);
+        isAnimatingOut.current = isExiting;
+        
+        // If playOnlyOnce is true and animation has played once, only play again if shouldResetAnimation is true
+        // and the animation type has changed
+        if (playOnlyOnce && hasAnimatedOnce.current && (!shouldResetAnimation || !animationChanged)) {
+            return;
+        }
         
         // Add a unique identifier for this animation to prevent duplicate animations
         const animationId = Date.now();
         const currentAnimationId = animationId;
         
-        // Reset animation value
-        animatedValue.setValue(0);
+        // Reset animation value to appropriate starting point
+        if (animationChanged || !hasAnimatedOnce.current) {
+            animatedValue.setValue(0);
+        }
         
         // Start animation
         Animated.timing(animatedValue, {
@@ -198,9 +230,8 @@ function AnimatedViewComponent({
         return () => {
             // Animation will be cleaned up automatically by React Native
         };
-    // Restrict dependencies to only those that should trigger a re-animation
-    // Specifically exclude anything related to parent component state like header visibility
-    }, [isFocused, isVisible, playOnlyOnce]);
+    // Add animation to dependencies to retrigger when it changes
+    }, [isFocused, isVisible, playOnlyOnce, shouldResetAnimation, animation, duration, delay, easing]);
 
     const getAnimationStyle = (): any => {
         const baseStyle: ViewStyle = {};
@@ -308,6 +339,76 @@ function AnimatedViewComponent({
                         rotate: animatedValue.interpolate({
                             inputRange: [0, 0.5, 1],
                             outputRange: ['0deg', '50deg', '0deg']
+                        })
+                    }]
+                };
+
+            case 'slideOutBottom':
+                return {
+                    opacity: animatedValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [1, 0]
+                    }),
+                    transform: [{ 
+                        translateY: animatedValue.interpolate({ 
+                            inputRange: [0, 1], 
+                            outputRange: [0, 50] 
+                        }) 
+                    }]
+                };
+
+            case 'slideOutRight':
+                return {
+                    opacity: animatedValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [1, 0]
+                    }),
+                    transform: [{ 
+                        translateX: animatedValue.interpolate({ 
+                            inputRange: [0, 1], 
+                            outputRange: [0, 100] 
+                        }) 
+                    }]
+                };
+
+            case 'slideOutLeft':
+                return {
+                    opacity: animatedValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [1, 0]
+                    }),
+                    transform: [{ 
+                        translateX: animatedValue.interpolate({ 
+                            inputRange: [0, 1], 
+                            outputRange: [0, -100] 
+                        }) 
+                    }]
+                };
+
+            case 'slideOutTop':
+                return {
+                    opacity: animatedValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [1, 0]
+                    }),
+                    transform: [{ 
+                        translateY: animatedValue.interpolate({ 
+                            inputRange: [0, 1], 
+                            outputRange: [0, -50] 
+                        }) 
+                    }]
+                };
+
+            case 'scaleOut':
+                return {
+                    opacity: animatedValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [1, 0]
+                    }),
+                    transform: [{
+                        scale: animatedValue.interpolate({
+                            inputRange: [0, 1],
+                            outputRange: [1, 0.95]
                         })
                     }]
                 };

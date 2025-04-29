@@ -9,11 +9,13 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Avatar from './Avatar';
 
 
+
 const History = [
-    { label: 'Best recipes for a healthy diet' },
-    { label: 'How to lose weight fast' },
-    { label: 'What is the best way to learn React Native?' },
-    { label: 'How to get rich fast?' }
+    { label: 'Home', href: '/' },
+    { label: 'Chat with suggestions', href: '/(drawer)/suggestions' },
+    { label: 'How to lose weight fast', href: '/screens/search-form' },
+    { label: 'What is the best way to learn React Native?', href: '/screens/search-form' },
+    { label: 'How to get rich fast?', href: '/screens/search-form' }
 ];
 
 
@@ -50,7 +52,7 @@ export default function CustomDrawerContent() {
                 </View>
 
                 {History.map((item, index) => (
-                    <Link className='text-black dark:text-white text-base font-semibold py-3' key={index} href="/">
+                    <Link className='text-black dark:text-white text-base font-semibold py-3' key={index} href={item.href}>
                         {item.label}
                     </Link>
                 ))}
@@ -78,22 +80,20 @@ type NavItemProps = {
 };
 
 export const NavItem = ({ href, icon, label, description }: NavItemProps) => (
+        <TouchableOpacity className={`flex-row items-center py-2`}>
+            <View className='flex-row items-center justify-center w-9 h-9 bg-light-secondary dark:bg-dark-secondary rounded-lg'>
+                <Icon name={icon} size={18} className='' />
+            </View>
+            <View className='flex-1 ml-4 '>
+                {label &&
+                    <ThemedText className="text-base font-bold text-gray-800 dark:text-gray-200">{label}</ThemedText>
+                }
+                {description &&
+                    <ThemedText className='opacity-50 text-xs'>{description}</ThemedText>
+                }
+            </View>
 
-    <TouchableOpacity onPress={() => router.push(href)} className={`flex-row items-center py-2`}>
-        <View className='flex-row items-center justify-center w-9 h-9 bg-light-secondary dark:bg-dark-secondary rounded-lg'>
-            <Icon name={icon} size={18} className='' />
-        </View>
-        <View className='flex-1 ml-4 '>
-            {label &&
-                <ThemedText className="text-base font-bold text-gray-800 dark:text-gray-200">{label}</ThemedText>
-            }
-            {description &&
-                <ThemedText className='opacity-50 text-xs'>{description}</ThemedText>
-            }
-        </View>
-
-    </TouchableOpacity>
-
+        </TouchableOpacity>
 );
 
 

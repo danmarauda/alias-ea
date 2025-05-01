@@ -7,6 +7,7 @@ import Section from '@/components/layout/Section';
 import LottieView from 'lottie-react-native';
 import { shadowPresets } from "@/utils/useShadow";
 import useThemeColors from '../contexts/ThemeColors';
+import { VoiceSelectCard } from '@/components/VoiceSelectCard';
 
 // Add type for VoiceItem props
 type VoiceItemProps = {
@@ -33,9 +34,9 @@ export default function AiVoiceScreen() {
         ]}
       />
 
-      <ScrollView className="flex-1 px-8">
-        <Section title="Ai Voice" titleSize='3xl' className='py-8 mb-8' subtitle="Pick the voice that matches your style" />
-        <VoiceItem 
+      <ScrollView className="flex-1 px-global">
+        <Section title="Ai Voice" titleSize='3xl' className='py-8 mb-8 pl-3' subtitle="Pick the voice that matches your style" />
+        {/*<VoiceItem 
           isSelected={selectedVoice === "John"} 
           name="John" 
           description="Deep and rich tone" 
@@ -75,8 +76,46 @@ export default function AiVoiceScreen() {
           isSelected={selectedVoice === "Amanda"}
           name="Amanda"
           description="Confident and strong"
-          onSelect={handleSelectVoice}        />
-        
+          onSelect={handleSelectVoice}        />*/}
+        <View className='flex flex-row flex-wrap ' >
+          <VoiceSelectCard
+            isSelected={selectedVoice === "John"}
+            name="John"
+            description="Deep and rich tone"
+            onSelect={handleSelectVoice}
+          />
+          <VoiceSelectCard
+            isSelected={selectedVoice === "Jessica"}
+            name="Jessica"
+            description="Friendly and warm"
+            onSelect={handleSelectVoice}
+          />
+          <VoiceSelectCard
+            isSelected={selectedVoice === "Larry"}
+            name="Larry"
+            description="British gentleman"
+            onSelect={handleSelectVoice}
+          />
+          <VoiceSelectCard
+            isSelected={selectedVoice === "Monday"}
+            name="Monday"
+            description="Always annoyed"
+            onSelect={handleSelectVoice}
+          />
+          <VoiceSelectCard
+            isSelected={selectedVoice === "Tomas"}
+            name="Tomas"
+            description="Chill and relaxed"
+            onSelect={handleSelectVoice}
+          />
+          <VoiceSelectCard
+            isSelected={selectedVoice === "Jerry"}
+            name="Jerry"
+            description="Sarcastic and funny"
+            onSelect={handleSelectVoice}
+          />
+        </View>
+
       </ScrollView>
 
 
@@ -100,15 +139,15 @@ const VoiceItem = (props: VoiceItemProps) => {
     }).start();
     setIsVisible(!isVisible);
   };
-  
+
   // Function to handle the "Use" button click
   const handleUse = () => {
     props.onSelect(props.name);
   };
-  
+
   return (
     <View className='relative mb-3'>
-      <Pressable 
+      <Pressable
         className={`w-full relative z-50 flex-row items-center p-global rounded-2xl ${props.isSelected ? 'bg-teal-300' : 'bg-light-secondary dark:bg-dark-secondary'}`}
         onPress={toggleVisibility}
         style={{ ...shadowPresets.card }}
@@ -130,17 +169,17 @@ const VoiceItem = (props: VoiceItemProps) => {
           style={{
             width: '80%',
             height: 45,
-            position: 'absolute', left: -5,  bottom: 5, zIndex: 40
+            position: 'absolute', left: -5, bottom: 5, zIndex: 40
           }}
           source={require('@/assets/lottie/waves.json')}
         />
-        <View 
-        className='flex-row items-center justify-end w-full relative z-50 pr-global'>
-          <Button 
-            title="Use" 
-            size='small' 
-            className='bg-dark-primary dark:bg-light-primary' 
-            textClassName='text-white dark:text-black' 
+        <View
+          className='flex-row items-center justify-end w-full relative z-50 pr-global'>
+          <Button
+            title="Use"
+            size='small'
+            className='bg-dark-primary dark:bg-light-primary'
+            textClassName='text-white dark:text-black'
             variant='secondary'
             onPress={handleUse}
           />

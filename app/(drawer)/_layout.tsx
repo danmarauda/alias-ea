@@ -28,7 +28,7 @@ export default function DrawerLayout() {
                     flex: 1,
                 },
                 overlayColor: 'rgba(0,0,0, 0.4)',
-                swipeEdgeWidth: 300
+                swipeEdgeWidth: 100
             }}
             drawerContent={(props) => <CustomDrawerContent />}
         >

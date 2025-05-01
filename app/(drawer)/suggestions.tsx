@@ -9,6 +9,8 @@ import { shadowPresets } from '@/utils/useShadow';
 import { ChatInput } from '@/components/ChatInput';
 import { BotSwitch } from '@/components/BotSwitch';
 import { CardScroller } from '@/components/CardScroller';
+import Rive from 'rive-react-native';
+
 type MessageType = {
     id: string;
     text: string;
@@ -44,6 +46,8 @@ const HomeScreen = () => {
                         leftComponent={leftComponent}
                         rightComponents={rightComponents}
                     />
+
+                  
 
                     <View className='flex-1 items-center justify-end'>
                         <CardScroller className='px-global pb-2'>

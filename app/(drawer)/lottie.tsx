@@ -5,10 +5,10 @@ import { View, Text, Pressable, Image, KeyboardAvoidingView, Platform } from 're
 import Icon from '@/components/Icon';
 import ThemedText from '@/components/ThemedText';
 import DrawerButton from '@/components/DrawerButton';
+import { shadowPresets } from '@/utils/useShadow';
 import { ChatInput } from '@/components/ChatInput';
 import { BotSwitch } from '@/components/BotSwitch';
 import { Sphere } from '@/components/Sphere';
-import { AiCircle } from '@/components/AiCircle';
 // Types for the chat messages
 type MessageType = {
     id: string;
@@ -31,6 +31,8 @@ const HomeScreen = () => {
         <ThemedText key="app-title" className='text-2xl font-outfit-bold ml-4'>Luna<Text className="text-highlight">.</Text></ThemedText>
     ];
 
+  
+
     return (
         <View className="flex-1 bg-light-primary dark:bg-dark-primary relative">
             <KeyboardAvoidingView
@@ -47,12 +49,12 @@ const HomeScreen = () => {
                     />
 
                     {messages.length === 0 && !isLoading && (
-                        <AiCircle />
+                        <Sphere />
                     )}
 
                     {(messages.length > 0 || isLoading) && (
                         <ThemeScroller className="flex-1 px-4 pt-20">
-                      
+                          
 
                             {isLoading && (
                                 <View className="p-4 my-2 rounded-2xl bg-light-secondary dark:bg-dark-secondary max-w-[80%]">
@@ -75,5 +77,8 @@ const HomeScreen = () => {
         </View>
     );
 };
+
+// Helper function to get simulated responses
+
 
 export default HomeScreen;

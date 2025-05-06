@@ -22,8 +22,8 @@ export default function DrawerLayout() {
                 drawerType: 'slide',
                 drawerPosition: 'left',
                 drawerStyle: {
-                    //backgroundColor: colors.bg,
-                    backgroundColor: 'red',
+                    backgroundColor: colors.bg,
+                    //backgroundColor: 'red',
                     width: '85%',
                     flex: 1,
                 },

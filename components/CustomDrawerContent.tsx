@@ -13,7 +13,7 @@ import Avatar from './Avatar';
 const History = [
     { label: 'Home', href: '/' },
     { label: 'Chat with suggestions', href: '/(drawer)/suggestions' },
-    { label: 'How to lose weight fast', href: '/screens/search-form' },
+    { label: 'Lottie animation', href: '/(drawer)/lottie' },
     { label: 'What is the best way to learn React Native?', href: '/screens/search-form' },
     { label: 'How to get rich fast?', href: '/screens/search-form' }
 ];

@@ -6,7 +6,6 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { DrawerProvider } from '@/app/contexts/DrawerContext';
 import useThemedNavigation from './hooks/useThemedNavigation';
-import { BusinessModeProvider } from './contexts/BusinesModeContext';
 import { Platform } from 'react-native';
 
 
@@ -33,13 +32,13 @@ function ThemedLayout() {
 export default function RootLayout() {
   return (
     <GestureHandlerRootView className={`bg-light-primary dark:bg-dark-primary ${Platform.OS === 'ios' ? 'pb-0 ' : ''}`} style={{ flex: 1 }}>
-      <BusinessModeProvider>
+
         <ThemeProvider>
           <DrawerProvider>
             <ThemedLayout />
           </DrawerProvider>
         </ThemeProvider>
-      </BusinessModeProvider>
+
     </GestureHandlerRootView>
   );
 }

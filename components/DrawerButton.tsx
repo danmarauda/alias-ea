@@ -1,9 +1,10 @@
 import React from 'react';
 import { Pressable, View, ViewStyle } from 'react-native';
-import { useDrawer } from '@/app/contexts/DrawerContext';
 import Icon from './Icon';
-import { useThemeColors } from 'app/contexts/ThemeColors';
 import Avatar from './Avatar';
+import { useThemeColors } from 'app/contexts/ThemeColors';
+import { DrawerActions, useNavigation, NavigationProp } from '@react-navigation/native';
+
 interface DrawerButtonProps {
   size?: 'sm' | 'md' | 'lg';
   className?: string;
@@ -11,32 +12,44 @@ interface DrawerButtonProps {
   isAvatar?: boolean;
 }
 
-export default function DrawerButton({ size = 'lg', className, style, isAvatar = false }: DrawerButtonProps) {
-  const { openDrawer } = useDrawer();
+export default function DrawerButton({
+  size = 'md',
+  className,
+  style,
+  isAvatar = false,
+}: DrawerButtonProps) {
   const colors = useThemeColors();
+  const navigation = useNavigation<NavigationProp<any>>();
 
   const sizeMap = {
     sm: 16,
     md: 24,
-    lg: 30,
+    lg: 32,
+  };
+
+  const handlePress = () => {
+    try {
+      navigation.dispatch(DrawerActions.openDrawer());
+    } catch (e) {
+      console.warn('Drawer navigation context not available:', e);
+    }
   };
 
   return (
     <View className={`rounded-full ${className}`} style={style}>
       <Pressable
-        onPress={openDrawer}
-        style={({ pressed }) => [
-          {
-            opacity: pressed ? 0.7 : 1,
-          },
-        ]}
+        onPress={handlePress}
+        style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
       >
         {isAvatar ? (
-          <Avatar src="https://mighty.tools/mockmind-api/content/human/5.jpg" size="xs" />
+          <Avatar
+            src="https://mighty.tools/mockmind-api/content/human/5.jpg"
+            size="xs"
+          />
         ) : (
-          <Icon name="ListPlus" size={sizeMap[size]} color={colors.text} strokeWidth={1.4} />
+          <Icon name="Menu" size={sizeMap[size]} color={colors.text} />
         )}
       </Pressable>
     </View>
   );
-} 
+}

@@ -14,8 +14,7 @@ const History = [
     { label: 'Home', href: '/' },
     { label: 'Chat with suggestions', href: '/(drawer)/suggestions' },
     { label: 'Lottie animation', href: '/(drawer)/lottie' },
-    { label: 'What is the best way to learn React Native?', href: '/screens/search-form' },
-    { label: 'How to get rich fast?', href: '/screens/search-form' }
+    { label: 'Chat with results', href: '/(drawer)/results' },
 ];
 
 
@@ -24,29 +23,24 @@ export default function CustomDrawerContent() {
     const colors = useThemeColors();
     return (
         <View className="flex-1 px-global bg-white dark:bg-dark-primary" style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
-            <ThemedScroller className='flex-1 px-0'>
+            <ThemedScroller className='flex-1 px-0 bg-white dark:bg-dark-primary'>
                 <View className='flex-row justify-between items-center mt-4'>
                     <View
-                        className='bg-light-secondary dark:bg-white/20 rounded-full relative flex-1 mr-4'>
+                        className='bg-light-primary dark:bg-white/20 rounded-full relative flex-1 mr-4'>
                         <Icon name="Search" className="absolute top-3.5 left-4 z-50" size={20} />
                         <TextInput
-                            //ref={inputRef}
                             className='h-[47px] pl-12 pr-3 rounded-lg text-black dark:text-white'
                             placeholder='Search'
                             placeholderTextColor={colors.placeholder}
-                            //onChangeText={setSearchQuery}
-                            //value={searchQuery}
                             returnKeyType="done"
-                            //onFocus={() => setIsInputFocused(true)}
-                            //onBlur={() => setIsInputFocused(searchQuery.length > 0)}
-                            autoFocus={true}
+                            autoFocus={false}
                         />
                     </View>
                     <ThemeToggle />
                 </View>
 
 
-                <View className='flex-col pb-4 mb-4 mt-4 border-b border-light-secondary dark:border-dark-secondary'>
+                <View className='flex-col pb-4 mb-4 mt-4 border-b border-neutral-200 dark:border-dark-secondary'>
                     <NavItem href="/" icon="Plus" label="New chat" />
                     <NavItem href="/screens/search-form" icon="LayoutGrid" label="Explore" />
                 </View>
@@ -58,7 +52,7 @@ export default function CustomDrawerContent() {
                 ))}
 
             </ThemedScroller>
-            <TouchableOpacity activeOpacity={0.8} onPress={() => router.push('/screens/profile')} className='flex-row justify-start items-center pt-4 pb-4  border-t border-light-secondary dark:border-dark-secondary'>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => router.push('/screens/profile')} className='flex-row justify-start items-center pt-4 pb-4  border-t border-neutral-200 dark:border-dark-secondary'>
                 <Avatar src={require('@/assets/img/thomino.jpg')} size="md" />
                 <View className='ml-4'>
                     <ThemedText className='text-base font-semibold'>Thomino</ThemedText>
@@ -80,8 +74,9 @@ type NavItemProps = {
 };
 
 export const NavItem = ({ href, icon, label, description }: NavItemProps) => (
-        <TouchableOpacity className={`flex-row items-center py-2`}>
-            <View className='flex-row items-center justify-center w-9 h-9 bg-light-secondary dark:bg-dark-secondary rounded-lg'>
+
+        <TouchableOpacity onPress={() => router.push(href)} className={`flex-row items-center py-2`}>
+            <View className='flex-row items-center justify-center w-9 h-9 bg-light-primary dark:bg-dark-secondary rounded-lg'>
                 <Icon name={icon} size={18} className='' />
             </View>
             <View className='flex-1 ml-4 '>
@@ -94,6 +89,7 @@ export const NavItem = ({ href, icon, label, description }: NavItemProps) => (
             </View>
 
         </TouchableOpacity>
+
 );
 
 

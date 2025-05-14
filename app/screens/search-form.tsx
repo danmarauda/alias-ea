@@ -19,85 +19,77 @@ const SearchScreen = () => {
   const insets = useSafeAreaInsets();
 
   const aiModels = [
-    { 
-      id: 1, 
-      name: 'GPT-4 Turbo', 
-      creator: 'OpenAI', 
-      description: 'Most advanced reasoning with extended context window', 
-      image: require('@/assets/img/service-1.jpg'),
+    {
+      id: 1,
+      name: 'GPT-4 Turbo',
+      creator: 'OpenAI',
+      description: 'Most advanced reasoning with extended context window',
+      image: require('@/assets/img/logo-1.png'),
       category: 'top-picks'
     },
-    { 
-      id: 2, 
-      name: 'Claude 3 Opus', 
-      creator: 'Anthropic', 
-      description: 'High-performance vision and reasoning capabilities', 
-      image: require('@/assets/img/service-2.jpg'),
+    {
+      id: 2,
+      name: 'Claude 3 Opus',
+      creator: 'Anthropic',
+      description: 'High-performance vision and reasoning capabilities',
+      image: require('@/assets/img/logo-2.png'),
       category: 'featured'
     },
-    { 
-      id: 3, 
-      name: 'Gemini Pro', 
-      creator: 'Google', 
-      description: 'Multimodal AI for creative and technical tasks', 
-      image: require('@/assets/img/service-3.jpg'),
+    {
+      id: 3,
+      name: 'Gemini Pro',
+      creator: 'Google',
+      description: 'Multimodal AI for creative and technical tasks',
+      image: require('@/assets/img/logo-3.png'),
       category: 'trending'
     },
-    { 
-      id: 4, 
-      name: 'Midjourney', 
-      creator: 'Midjourney Inc', 
-      description: 'Text-to-image generation with artistic quality', 
-      image: require('@/assets/img/service-4.jpg'),
+    {
+      id: 4,
+      name: 'Midjourney',
+      creator: 'Midjourney Inc',
+      description: 'Text-to-image generation with artistic quality',
+      image: require('@/assets/img/logo-4.png'),
       category: 'top-picks'
     },
-    { 
-      id: 5, 
-      name: 'GitHub Copilot', 
-      creator: 'Microsoft', 
-      description: 'AI pair programmer for code completion', 
-      image: require('@/assets/img/service-2.jpg'),
+    {
+      id: 5,
+      name: 'GitHub Copilot',
+      creator: 'Microsoft',
+      description: 'AI pair programmer for code completion',
+      image: require('@/assets/img/logo-5.png'),
       category: 'productivity'
     },
-    { 
-      id: 6, 
-      name: 'Perplexity', 
-      creator: 'Perplexity AI', 
-      description: 'Real-time knowledge search with citations', 
-      image: require('@/assets/img/service-3.jpg'),
+    {
+      id: 6,
+      name: 'Perplexity',
+      creator: 'Perplexity AI',
+      description: 'Real-time knowledge search with citations',
+      image: require('@/assets/img/logo-2.png'),
       category: 'education'
     },
-    { 
-      id: 7, 
-      name: 'DALL-E 3', 
-      creator: 'OpenAI', 
-      description: 'Photorealistic image generation from text', 
-      image: require('@/assets/img/service-4.jpg'),
+    {
+      id: 7,
+      name: 'DALL-E 3',
+      creator: 'OpenAI',
+      description: 'Photorealistic image generation from text',
+      image: require('@/assets/img/logo-1.png'),
       category: 'trending'
     },
-    { 
-      id: 8, 
-      name: 'Whisper', 
-      creator: 'OpenAI', 
-      description: 'Speech recognition with multilingual support', 
-      image: require('@/assets/img/service-1.jpg'),
+    {
+      id: 8,
+      name: 'Whisper',
+      creator: 'OpenAI',
+      description: 'Speech recognition with multilingual support',
+      image: require('@/assets/img/logo-3.png'),
       category: 'productivity'
     },
-    { 
-      id: 9, 
-      name: 'Duolingo Max', 
-      creator: 'Duolingo', 
-      description: 'AI-powered language learning assistant', 
-      image: require('@/assets/img/service-2.jpg'),
+    {
+      id: 9,
+      name: 'Duolingo Max',
+      creator: 'Duolingo',
+      description: 'AI-powered language learning assistant',
+      image: require('@/assets/img/logo-4.png'),
       category: 'education'
-    },
-    { 
-      id: 10, 
-      name: 'Bing Chat', 
-      creator: 'Microsoft', 
-      description: 'Web-connected conversational AI assistant', 
-      image: require('@/assets/img/service-3.jpg'),
-      category: 'featured'
     },
   ];
 
@@ -110,7 +102,7 @@ const SearchScreen = () => {
   const filterData = (data: any[]) => {
     if (!searchQuery) return data;
     return data.filter(item =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.creator.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.description.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -126,7 +118,7 @@ const SearchScreen = () => {
   return (
     <>
       <View style={{ paddingTop: insets.top }} className='p-global bg-light-primary dark:bg-dark-primary'>
-        <View 
+        <View
           style={{ elevation: 10, shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 6.84, shadowOffset: { width: 0, height: 4 } }}
           className='bg-light-primary dark:bg-white/20 rounded-full relative'
         >
@@ -140,7 +132,7 @@ const SearchScreen = () => {
             onChangeText={setSearchQuery}
             value={searchQuery}
             returnKeyType="done"
-            autoFocus={true}
+            autoFocus={false}
           />
 
           {searchQuery.length > 0 && (
@@ -189,14 +181,16 @@ const SearchScreen = () => {
         <View className='mb-4 p-global'>
           {results.length > 0 ? (
             results.map((item) => (
-              <Link key={item.id} href={`/screens/ai-detail?id=${item.id}`} asChild>
-                <Pressable className="flex-row items-center justify-start p-2 rounded-xl bg-light-secondary dark:bg-dark-secondary mb-2">
-                    <Image source={item.image} className='w-14 h-14 rounded-full mr-4 ml-2' />
-                    <View className='flex-1'>
-                      <ThemedText className='text-base font-bold'>{item.name}</ThemedText>
-                      <ThemedText className='text-sm mb-1 line-clamp-1 w-full whitespace-nowrap overflow-hidden'>{item.description}</ThemedText>
-                      <ThemedText className='text-sm text-light-subtext dark:text-dark-subtext'>by {item.creator}</ThemedText>
-                    </View>
+              <Link key={item.id} href={`/screens/provider`} asChild>
+                <Pressable className="flex-row items-center justify-start py-2  mb-2">
+                  <View className='w-14 h-14 rounded-2xl items-center justify-center bg-light-secondary dark:bg-dark-secondary mr-5'>
+                    <Image source={item.image} className='w-8 h-8' />
+                  </View>
+                  <View className='flex-1'>
+                    <ThemedText className='text-base font-bold'>{item.name}</ThemedText>
+                    <ThemedText className='text-sm mb-1 line-clamp-1 w-full whitespace-nowrap overflow-hidden'>{item.description}</ThemedText>
+                    <ThemedText className='text-sm text-light-subtext dark:text-dark-subtext'>by {item.creator}</ThemedText>
+                  </View>
                 </Pressable>
               </Link>
             ))

@@ -31,7 +31,7 @@ const ShowRating: React.FC<ShowRatingProps> = ({
         switch (size) {
             case 'sm': return { icon: 12, text: 'text-xs' };
             case 'md': return { icon: 16, text: 'text-sm' };
-            case 'lg': return { icon: 20, text: 'text-base' };
+            case 'lg': return { icon: 20, text: 'text-lg font-bold' };
             default: return { icon: 16, text: 'text-sm' };
         }
     };

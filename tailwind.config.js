@@ -19,8 +19,8 @@ module.exports = {
         // Light theme colors
         highlight: '#0EA5E9',
         light: {
-          primary: '#ffffff', // White
-          secondary: '#F5F5F5', // Light gray
+          primary: '#f5f5f5', // Light gray
+          secondary: '#ffffff', // White
           text: '#000000', // Black
           subtext: '#64748B'
         },

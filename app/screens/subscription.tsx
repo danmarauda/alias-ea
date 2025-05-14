@@ -103,11 +103,9 @@ const Subscription = () => {
               <SelectPlan onSelect={() => handleSelect('Monthly')} isSelected={selectedPlan === 'Monthly'} period="Monthly" price="$6.99/month after trial" badge={undefined} save={undefined} />
             </View>
             <View className='px-5 pt-4 w-full items-center justify-center '>
-              <Link asChild href="/screens/profile/your-subscription">
                 <Pressable className='w-full items-center bg-sky-500 rounded-lg justify-center py-4'>
                   <Text className='text-white text-base'>Start free trial</Text>
                 </Pressable>
-              </Link>
               <ThemedText className='my-3'>Recurring billing. Cancel anytime</ThemedText>
             </View>
           </ActionSheet>

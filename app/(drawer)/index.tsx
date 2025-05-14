@@ -7,20 +7,10 @@ import ThemedText from '@/components/ThemedText';
 import DrawerButton from '@/components/DrawerButton';
 import { ChatInput } from '@/components/ChatInput';
 import { BotSwitch } from '@/components/BotSwitch';
-import { Sphere } from '@/components/Sphere';
 import { AiCircle } from '@/components/AiCircle';
-// Types for the chat messages
-type MessageType = {
-    id: string;
-    text: string;
-    isUser: boolean;
-    timestamp: Date;
-    images?: string[];
-};
+
 
 const HomeScreen = () => {
-    const [messages, setMessages] = useState<MessageType[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
 
     const rightComponents = [
         <BotSwitch />
@@ -38,38 +28,19 @@ const HomeScreen = () => {
                 keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
                 style={{ flex: 1 }}
             >
-                {/* Main Content */}
                 <View style={{ flex: 1 }}>
                     <Header
                         title=""
                         leftComponent={leftComponent}
-                        rightComponents={rightComponents}
-                    />
+                        rightComponents={rightComponents} />
+                    <View className='flex-1 items-center justify-center relative' />
 
-                    {messages.length === 0 && !isLoading && (
-                        <AiCircle />
-                    )}
-
-                    {(messages.length > 0 || isLoading) && (
-                        <ThemeScroller className="flex-1 px-4 pt-20">
-                      
-
-                            {isLoading && (
-                                <View className="p-4 my-2 rounded-2xl bg-light-secondary dark:bg-dark-secondary max-w-[80%]">
-                                    <View className="flex-row items-center">
-                                        <View className="w-2 h-2 bg-highlight rounded-full mx-1" />
-                                        <View className="w-2 h-2 bg-highlight rounded-full mx-1" />
-                                        <View className="w-2 h-2 bg-highlight rounded-full mx-1" />
-                                    </View>
-                                </View>
-                            )}
-
-                        </ThemeScroller>
-                    )}
-
-                    <ChatInput  />
+                    <ChatInput />
 
 
+                </View>
+                <View className='absolute h-screen w-screen right-0 top-0 items-center justify-center'>
+                    <AiCircle />
                 </View>
             </KeyboardAvoidingView>
         </View>

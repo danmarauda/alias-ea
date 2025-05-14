@@ -6,6 +6,7 @@ import Icon, { IconName } from './Icon';
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { BlurView } from 'expo-blur';
 
 type HeaderProps = {
   title?: string;
@@ -21,7 +22,7 @@ type HeaderProps = {
   style?: ViewStyle;
   collapsible?: boolean;
   visible?: boolean;
-  variant?: 'default' | 'transparent';
+  variant?: 'default' | 'transparent' | 'blurred';
 };
 
 const Header: React.FC<HeaderProps> = ({
@@ -43,8 +44,9 @@ const Header: React.FC<HeaderProps> = ({
   const colors = useThemeColors();
   const translateY = useRef(new Animated.Value(0)).current;
 
-  // Determine if we should use the transparent variant styling
+  // Determine if we should use the transparent or blurred variant styling
   const isTransparent = variant === 'transparent';
+  const isBlurred = variant === 'blurred';
   const insets = useSafeAreaInsets();
   useEffect(() => {
     if (!collapsible) return;
@@ -85,8 +87,8 @@ const Header: React.FC<HeaderProps> = ({
 
   const AnimatedView = Animated.createAnimatedComponent(View);
 
-  // Position absolute for collapsible or transparent variant
-  const containerStyle = (collapsible || isTransparent) ? {
+  // Position absolute for collapsible or transparent/blurred variant
+  const containerStyle = (collapsible || isTransparent || isBlurred) ? {
     transform: collapsible ? [{ translateY }] : undefined,
     position: 'absolute' as const,
     top: 0,
@@ -94,6 +96,50 @@ const Header: React.FC<HeaderProps> = ({
     right: 0,
     zIndex: 100,
   } : {};
+
+  if (isBlurred) {
+    return (
+      <BlurView
+        intensity={30}
+        tint="light"
+        style={[style, containerStyle, { paddingTop: insets.top }]}
+        className={`w-full pt-4  px-global z-50 bg-light-primary/60 dark:bg-dark-primary/80 ${className}`}
+      >
+        <View className="flex-row justify-between">
+          <View className='flex-row items-center'>
+            {showBackButton && (
+              <TouchableOpacity onPress={handleBackPress} className='mr-global relative z-50'>
+                <Icon name="ArrowLeft" size={24} color="white" />
+              </TouchableOpacity>
+            )}
+
+            <View className='flex-row items-center relative z-50'>
+              {leftComponent}
+
+              {title && (
+                <Text className='text-white text-lg font-bold'>{title}</Text>
+              )}
+            </View>
+          </View>
+
+          {middleComponent && (
+            <View className='flex-row items-center absolute top-0 left-0 right-0 bottom-0 justify-center'>
+              {middleComponent}
+            </View>
+          )}
+
+          <View className='flex-row items-center relative z-50'>
+            {rightComponents.map((component, index) => (
+              <View key={index} className="ml-6">
+                {component}
+              </View>
+            ))}
+          </View>
+        </View>
+        {children}
+      </BlurView>
+    );
+  }
 
   if (isTransparent) {
     return (
@@ -148,11 +194,11 @@ const Header: React.FC<HeaderProps> = ({
         style,
         containerStyle
       ]}
-      className={`w-full flex-row justify-between px-global bg-light-primary dark:bg-dark-primary relative z-50 ${className}`}
+      className={`w-full flex-row justify-between px-global pb-3 bg-light-primary dark:bg-dark-primary relative z-50 ${className}`}
     >
       
-      {(showBackButton || leftComponent) && (
-        <View className='flex-row items-center flex-1 '>
+      {(showBackButton || leftComponent || title) && (
+        <View className='flex-row items-center flex-1'>
           {showBackButton && (
             <TouchableOpacity onPress={handleBackPress} className='mr-global relative z-50 py-4'>
               <Icon name="ArrowLeft" size={24} color={isTransparent ? 'white' : colors.icon} />
@@ -160,7 +206,7 @@ const Header: React.FC<HeaderProps> = ({
           )}
 
           {leftComponent || title && (
-            <View className='flex-row items-center relative z-50 py-4   '>
+            <View className='flex-row items-center relative z-50 py-4  '>
               {leftComponent}
 
               {title && (

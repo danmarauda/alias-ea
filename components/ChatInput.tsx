@@ -11,6 +11,7 @@ import Animated, { useAnimatedStyle, withTiming, useSharedValue, useAnimatedKeyb
 import * as ImagePicker from 'expo-image-picker';
 import { CardScroller } from "./CardScroller";
 import { AnimationType } from './AnimatedView';
+import useThemeColors from "@/app/contexts/ThemeColors";
 
 
 type ChatInputProps = {
@@ -21,6 +22,7 @@ type ChatInputProps = {
 
 
 export const ChatInput = (props: ChatInputProps) => {
+    const colors = useThemeColors();
     const insets = useSafeAreaInsets();
     // Add internal state to handle toggle independently
     const [isAttachVisible, setIsAttachVisible] = useState(props.attachVisible || false);
@@ -208,10 +210,10 @@ export const ChatInput = (props: ChatInputProps) => {
                     />
                 </View>
             )}
-            <View style={{ ...shadowPresets.large }} className={` bg-light-secondary  dark:bg-dark-secondary rounded-3xl `}>
+            <View style={{ ...shadowPresets.card }} className={` bg-light-secondary  dark:bg-dark-secondary rounded-3xl `}>
                 <TextInput
                     placeholder='Ask me anything...'
-                    placeholderTextColor="white"
+                    placeholderTextColor={colors.text}
                     className='text-black dark:text-white px-6 py-5'
                     value={inputText}
                     onChangeText={setInputText}
@@ -220,7 +222,7 @@ export const ChatInput = (props: ChatInputProps) => {
                     }}
                     onContentSizeChange={handleContentSizeChange}
                 />
-                <View className='flex-row bg-black/10 dark:bg-black/30 justify-between p-2 rounded-b-3xl'>
+                <View className='flex-row bg-neutral-200/50 dark:bg-black/30 justify-between p-2 rounded-b-3xl'>
                     <View className='flex-row gap-x-2'>
                         <Pressable onPress={handleToggle} className='items-center justify-center w-10 h-10 rounded-full'>
                             <Animated.View style={iconStyle}>
@@ -240,8 +242,8 @@ export const ChatInput = (props: ChatInputProps) => {
                         </Pressable>
                         <Pressable
                             onPress={handleSendMessage}
-                            className='items-center justify-center w-10 h-10 bg-dark-primary dark:bg-white rounded-full'>
-                            <Icon name='ArrowUp' size={22} color="black" />
+                            className='items-center flex justify-center w-10 h-10 bg-dark-primary dark:bg-white rounded-full'>
+                            <Icon name='Send' size={17} color={colors.invert} />
                         </Pressable>
                     </View>
                 </View>

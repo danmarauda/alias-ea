@@ -35,7 +35,7 @@ export const BotSwitch = () => {
     return (
         <>
             <Pressable 
-                className="pl-3 pr-2 py-1 rounded-full flex-row bg-light-secondary dark:bg-dark-secondary"
+                className="pl-3 pr-2 py-1 rounded-full flex-row bg-white border border-neutral-300 dark:border-transparent dark:bg-dark-secondary"
                 onPress={openModelSelector}
             >
                 <ThemedText className="mr-1">{selectedModel}</ThemedText>

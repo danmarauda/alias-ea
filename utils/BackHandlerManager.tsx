@@ -5,6 +5,7 @@ class BackHandlerManager {
   private static instance: BackHandlerManager;
   private handlers: Map<string, () => boolean> = new Map();
   private activeHandlerId: string | null = null;
+  private backHandlerSubscription: any = null;
 
   private constructor() {
     // Private constructor to enforce singleton pattern
@@ -43,15 +44,13 @@ class BackHandlerManager {
     console.log(`BackHandlerManager: Setting active handler to ID: ${id}`);
     
     // Remove any existing global handler first
-    if (this.activeHandlerId) {
-      BackHandler.removeEventListener('hardwareBackPress', this.mainHandler);
-    }
+    this.removeCurrentSubscription();
     
     // Set this as the active handler
     this.activeHandlerId = id;
     
     // Add the main handler function to the back button
-    BackHandler.addEventListener('hardwareBackPress', this.mainHandler);
+    this.backHandlerSubscription = BackHandler.addEventListener('hardwareBackPress', this.mainHandler);
   }
 
   // Unregister a handler by ID
@@ -66,7 +65,7 @@ class BackHandlerManager {
     // If this was the active handler, remove the global listener
     if (this.activeHandlerId === id) {
       console.log(`BackHandlerManager: Removing active handler: ${id}`);
-      BackHandler.removeEventListener('hardwareBackPress', this.mainHandler);
+      this.removeCurrentSubscription();
       this.activeHandlerId = null;
       
       // Find another handler to make active, if any exist
@@ -87,13 +86,19 @@ class BackHandlerManager {
     console.log('BackHandlerManager: Resetting all handlers');
     
     // Remove the global listener
-    if (this.activeHandlerId) {
-      BackHandler.removeEventListener('hardwareBackPress', this.mainHandler);
-    }
+    this.removeCurrentSubscription();
     
     // Clear all handlers
     this.handlers.clear();
     this.activeHandlerId = null;
+  }
+
+  // Helper to remove current subscription
+  private removeCurrentSubscription(): void {
+    if (this.backHandlerSubscription) {
+      this.backHandlerSubscription.remove();
+      this.backHandlerSubscription = null;
+    }
   }
 
   // The main handler function that gets attached to the back button

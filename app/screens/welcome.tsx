@@ -9,6 +9,7 @@ import { router } from 'expo-router';
 import React from 'react';
 import Icon from '@/components/Icon';
 import LottieView from 'lottie-react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const { width } = Dimensions.get('window');
 const windowWidth = Dimensions.get('window').width;
 
@@ -37,17 +38,17 @@ export default function OnboardingScreen() {
     const colors = useThemeColors();
     const [currentIndex, setCurrentIndex] = useState(0);
     const flatListRef = useRef(null);
-
+    const insets = useSafeAreaInsets();
     const handleScroll = (event: { nativeEvent: { contentOffset: { x: number; }; }; }) => {
         const index = Math.round(event.nativeEvent.contentOffset.x / width);
         setCurrentIndex(index);
     };
 
     return (
-        <SafeAreaView className='flex-1 bg-light-primary dark:bg-dark-primary'>
+        <SafeAreaView className='flex-1 bg-light-primary dark:bg-dark-primary' style={{ paddingTop: insets.top }}>
 
             <View className="flex-1 relative bg-light-primary dark:bg-dark-primary">
-                <View className='absolute top-global right-global z-50'>
+                <View className='w-full items-end justify-end pr-6 pt-6'>
                     <ThemeToggle />
                 </View>
                 <FlatList
@@ -88,11 +89,11 @@ export default function OnboardingScreen() {
 
                     <View className='flex flex-row flex-wrap items-center justify-center gap-2'>
                         <View className='w-full flex-row gap-2'>
-                            <Pressable onPress={() => router.push('/(drawer)/(tabs)')} className='flex-1 border border-black dark:border-white rounded-full flex flex-row items-center justify-center py-4'>
+                            <Pressable onPress={() => router.push('/(drawer)/')} className='flex-1 border border-black dark:border-white rounded-full flex flex-row items-center justify-center py-4'>
                                 <AntDesign name="google" size={22} color={colors.text} />
                                 <ThemedText className='text-sm ml-2'>Google</ThemedText>
                             </Pressable>
-                            <Pressable onPress={() => router.push('/(drawer)/(tabs)')} className='flex-1 border border-black dark:border-white rounded-full flex flex-row items-center justify-center py-4'>
+                            <Pressable onPress={() => router.push('/(drawer)/')} className='flex-1 border border-black dark:border-white rounded-full flex flex-row items-center justify-center py-4'>
                                 <AntDesign name="apple1" size={22} color={colors.text} />
                                 <ThemedText className='text-sm ml-2'>Apple</ThemedText>
                             </Pressable>

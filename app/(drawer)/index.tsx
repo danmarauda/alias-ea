@@ -33,14 +33,15 @@ const HomeScreen = () => {
                         title=""
                         leftComponent={leftComponent}
                         rightComponents={rightComponents} />
-                    <View className='flex-1 items-center justify-center relative' />
-
+                    <View className='flex-1 items-center justify-center relative'>
+                        <AiCircle />
+                    </View>
                     <ChatInput />
 
 
                 </View>
                 <View className='absolute h-screen w-screen right-0 top-0 items-center justify-center'>
-                    <AiCircle />
+
                 </View>
             </KeyboardAvoidingView>
         </View>

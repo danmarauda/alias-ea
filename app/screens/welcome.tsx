@@ -94,7 +94,7 @@ export default function OnboardingScreen() {
                                 <ThemedText className='text-sm ml-2'>Google</ThemedText>
                             </Pressable>
                             <Pressable onPress={() => router.push('/(drawer)/')} className='flex-1 border border-black dark:border-white rounded-full flex flex-row items-center justify-center py-4'>
-                                <AntDesign name="apple1" size={22} color={colors.text} />
+                                <AntDesign name="apple" size={22} color={colors.text} />
                                 <ThemedText className='text-sm ml-2'>Apple</ThemedText>
                             </Pressable>
 

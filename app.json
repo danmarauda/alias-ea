@@ -6,12 +6,11 @@
     "version": "1.0.0",
     "runtimeVersion": "1.0.0",
     "scheme": "luna",
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
+   
     "experiments": {
       "tsconfigPaths": true
     },
+    "platforms": ["ios", "android"],
     "plugins": [
       "expo-router",
       "expo-font"
@@ -36,6 +35,10 @@
         "backgroundColor": "#ffffff"
       },
       "softwareKeyboardLayoutMode": "pan",
+      "predictiveBackGestureEnabled": false,
+      "config": {
+        "enableOnBackInvokedCallback": false
+      },
       "navigationBarColor": "transparent",
       "navigationBarHidden": true
     },

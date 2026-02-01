@@ -2,7 +2,7 @@ import Header, { HeaderIcon } from '@/components/Header';
 import ThemeScroller from '@/components/ThemeScroller';
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, Pressable, Image, KeyboardAvoidingView, Platform } from 'react-native';
-import Icon, { IconName } from '@/components/Icon';
+import Icon from '@/components/Icon';
 import ThemedText from '@/components/ThemedText';
 import DrawerButton from '@/components/DrawerButton';
 import { ChatInput } from '@/components/ChatInput';
@@ -26,8 +26,8 @@ const HomeScreen = () => {
         <View className="flex-1 bg-background relative">
             <LinearGradient style={{ width: '100%', display: 'flex', flex: 1, flexDirection: 'column' }} colors={['transparent', 'transparent', colors.gradient]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}>
                 <KeyboardAvoidingView
-                    behavior="padding"
-                    keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+                    behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+                    keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
                     style={{ flex: 1 }}
                 >
                     <View style={{ flex: 1 }}>
@@ -36,14 +36,7 @@ const HomeScreen = () => {
                             leftComponent={leftComponent}
                             rightComponents={rightComponents} />
                         <View className='flex-1 items-center justify-center relative'>
-                            <ThemedText className='text-4xl font-outfit-bold'>Welcome John<Text className='text-sky-500'>.</Text></ThemedText>
-                            <ThemedText className='text-sm text-gray-500 mt-2'>What can I help you with today?</ThemedText>
-                            <View className='flex-row gap-x-2 flex-wrap items-center justify-center mt-8 px-10'>
-                                <TipCard title="Make a recipe" icon="Cookie" />
-                                <TipCard title="Generate image" icon="Image" />
-                                <TipCard title="Generate text" icon="Text" />
-                                <TipCard title="Generate code" icon="Code" />
-                            </View>
+                            <AiCircle />
                         </View>
                         <ChatInput />
 
@@ -53,15 +46,6 @@ const HomeScreen = () => {
                 </KeyboardAvoidingView>
             </LinearGradient>
         </View>
-    );
-};
-
-const TipCard = ({ title, icon }: { title: string, icon: string }) => {
-    return (
-        <Pressable className='p-3 mb-2 bg-background border border-border flex flex-row items-center rounded-xl'>
-            <Icon name={icon as IconName} size={15} className=' rounded-xl' />
-            <ThemedText className='text-sm font-semibold ml-2'>{title}</ThemedText>
-        </Pressable>
     );
 };
 

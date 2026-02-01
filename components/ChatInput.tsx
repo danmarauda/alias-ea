@@ -226,7 +226,7 @@ export const ChatInput = (props: ChatInputProps) => {
     };
 
     return (
-        <View style={{ paddingBottom: insets.bottom }} className="px-global w-full">
+        <View style={{ paddingBottom: insets.bottom + 0 }} className="px-global w-full">
             {selectedImages.length > 0 && (
                 <View className="mb-0">
                     <ScrollableImageList
@@ -264,7 +264,8 @@ export const ChatInput = (props: ChatInputProps) => {
                                 className='text-text px-6 py-5'
                                 value={inputText}
                                 onChangeText={setInputText}
-                                style={{ height: 60 }}
+                                style={{ minHeight: 60 }}
+                                multiline={true}
                             />
                         </Animated.View>
                     </View>
@@ -315,7 +316,9 @@ export const ChatInput = (props: ChatInputProps) => {
                         <View className='flex-row gap-x-2 items-center'>
                             {/* Mic + AudioLines - fade out when playing */}
                             <Animated.View style={audioButtonsStyle} className='flex-row gap-x-2'>
-                                <Pressable className='items-center justify-center w-10 h-10 rounded-full'>
+                                <Pressable 
+                                onPress={handlePlayToggle}
+                                className='items-center justify-center w-10 h-10 rounded-full'>
                                     <Icon name='Mic' size={20} />
                                 </Pressable>
                                 <Pressable

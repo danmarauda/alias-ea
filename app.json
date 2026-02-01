@@ -6,11 +6,13 @@
     "version": "1.0.0",
     "runtimeVersion": "1.0.0",
     "scheme": "luna",
-   
     "experiments": {
       "tsconfigPaths": true
     },
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "plugins": [
       "expo-router",
       "expo-font"
@@ -34,13 +36,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "softwareKeyboardLayoutMode": "pan",
+      "softwareKeyboardLayoutMode": "resize",
       "predictiveBackGestureEnabled": false,
       "config": {
         "enableOnBackInvokedCallback": false
       },
       "navigationBarColor": "transparent",
-      "navigationBarHidden": true
+      "navigationBarHidden": true,
+      "package": "com.thomino.luna"
     },
     "extra": {
       "router": {

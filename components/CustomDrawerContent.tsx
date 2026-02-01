@@ -15,6 +15,7 @@ const History = [
     { label: 'Chat with suggestions', href: '/(drawer)/suggestions' },
     { label: 'Lottie animation', href: '/(drawer)/lottie' },
     { label: 'Chat with results', href: '/(drawer)/results' },
+    { label: 'Microphone centered', href: '/(drawer)/mic-animation' },
 ];
 
 

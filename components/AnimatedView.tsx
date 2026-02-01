@@ -248,7 +248,7 @@ function AnimatedViewComponent({
                     transform: [{
                         scale: animatedValue.interpolate({
                             inputRange: [0, 1],
-                            outputRange: [0.95, 1]
+                            outputRange: [0.8, 1]
                         })
                     }]
                 };

@@ -77,7 +77,7 @@ export const VoiceSelectCard = (props: VoiceItemProps) => {
                     start={{ x: 0, y: 0 }} 
                     end={{ x: 1, y: 1 }} 
                     colors={['#FD984D', '#F77B79', '#F265D6']} 
-                    className='w-full h-full' 
+                    style={{ width: '100%', height: '100%' }}
                 />
             </Animated.View>
             <Pressable

@@ -10,8 +10,10 @@ import { shadowPresets } from '@/utils/useShadow';
 import { Divider } from '@/components/layout/Divider';
 import { useFocusEffect } from 'expo-router';
 import { useCallback } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const ResultsScreen = () => {
+    const insets = useSafeAreaInsets();
     const [liked, setLiked] = useState(false);
     const [liked2, setLiked2] = useState(false);
     const scrollViewRef = useRef<ScrollView>(null);
@@ -41,7 +43,7 @@ const ResultsScreen = () => {
                 keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 180}
                 style={{ flex: 1 }}
             >
-                <View className='flex-1 '>
+                <View className='flex-1 ' style={{ paddingBottom: insets.bottom + 130 }}>
                     <Header
                         title=""
                         leftComponent={leftComponent}

@@ -1,19 +1,17 @@
 import Header, { HeaderIcon } from '@/components/Header';
-import ThemeScroller from '@/components/ThemeScroller';
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Pressable, Image, KeyboardAvoidingView, Platform } from 'react-native';
-import Icon from '@/components/Icon';
-import ThemedText from '@/components/ThemedText';
+import React from 'react';
+import { View, KeyboardAvoidingView, Platform } from 'react-native';
 import DrawerButton from '@/components/DrawerButton';
 import { ChatInput } from '@/components/ChatInput';
-import { BotSwitch } from '@/components/BotSwitch';
+import { BotSwitch } from '@/components/BotSwitch'; 
 import { AiCircle } from '@/components/AiCircle';
-import NewChatInput from '@/components/NewChatInput';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useThemeColors } from '@/app/contexts/ThemeColors';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const HomeScreen = () => {
     const colors = useThemeColors();
+    const insets = useSafeAreaInsets();
     const rightComponents = [
         <BotSwitch />
     ];
@@ -30,7 +28,7 @@ const HomeScreen = () => {
                     keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
                     style={{ flex: 1 }}
                 >
-                    <View style={{ flex: 1 }}>
+                    <View className='flex-1' style={{ paddingBottom: insets.bottom + 130 }}>
                         <Header
                             title=""
                             leftComponent={leftComponent}

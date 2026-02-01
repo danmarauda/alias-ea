@@ -1,5 +1,5 @@
 import Header, { HeaderIcon } from '@/components/Header';
-import ThemeScroller from '@/components/ThemeScroller';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, Pressable, Image, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import Icon from '@/components/Icon';
@@ -30,6 +30,7 @@ const HomeScreen = () => {
     const leftComponent = [
         <DrawerButton key="drawer-button" />
     ];
+    const insets = useSafeAreaInsets();
 
 
     return (
@@ -39,7 +40,7 @@ const HomeScreen = () => {
                 keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 180}
                 style={{ flex: 1 }}
             >
-                <View className='flex-1 '>
+                <View className='flex-1 '  style={{ paddingBottom: insets.bottom + 130 }}>
                     <Header
                         title=""
                         leftComponent={leftComponent}
@@ -69,7 +70,7 @@ const SuggestionCard = (props: any) => {
     return (
         <TouchableOpacity
             activeOpacity={0.8}
-            className='p-4 bg-secondary w-[270px] flex flex-row items-center rounded-2xl border border-border'>
+            className='p-4 bg-secondary w-[270px] flex flex-row items-center rounded-3xl border border-border'>
             <Icon name={props.icon} size={20} className='bg-background rounded-2xl w-14 h-14' />
             <View className='ml-4 flex-1'>
                 <ThemedText className='text-lg font-semibold'>{props.title}</ThemedText>

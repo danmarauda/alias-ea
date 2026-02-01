@@ -9,14 +9,8 @@ import { BotSwitch } from '@/components/BotSwitch';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useThemeColors } from '@/app/contexts/ThemeColors';
 import { useFocusEffect } from 'expo-router';
-import { MockConversation } from '@/components/MockConversation';
-
-type Message = {
-    id: string;
-    type: 'user' | 'assistant';
-    content: string;
-    timestamp: Date;
-};
+import { Conversation, Message } from '@/components/Conversation';
+import { streamMessage, isConfigured, AIMessage } from '@/services/ai';
 
 const HomeScreen = () => {
     const colors = useThemeColors();
@@ -34,7 +28,7 @@ const HomeScreen = () => {
         }, [])
     );
 
-    const handleSendMessage = (text: string, images?: string[]) => {
+    const handleSendMessage = async (text: string, images?: string[]) => {
         // Add user message
         const userMessage: Message = {
             id: Date.now().toString(),
@@ -44,20 +38,82 @@ const HomeScreen = () => {
         };
         setMessages(prev => [...prev, userMessage]);
 
+        // Check if AI is configured
+        if (!isConfigured()) {
+            // Show mock response if no API key
+            setIsTyping(true);
+            setTimeout(() => {
+                setIsTyping(false);
+                const assistantMessage: Message = {
+                    id: (Date.now() + 1).toString(),
+                    type: 'assistant',
+                    content: 'To get real AI responses, add your API key to the .env file. Luna supports OpenAI (ChatGPT), Google Gemini, and Anthropic Claude.\n\nCopy .env.example to .env and add your key to get started!',
+                    timestamp: new Date(),
+                };
+                setMessages(prev => [...prev, assistantMessage]);
+            }, 1000);
+            return;
+        }
+
         // Show typing indicator
         setIsTyping(true);
 
-        // Simulate AI response after delay
-        setTimeout(() => {
+        // Create assistant message for streaming
+        const assistantId = (Date.now() + 1).toString();
+        const assistantMessage: Message = {
+            id: assistantId,
+            type: 'assistant',
+            content: '',
+            timestamp: new Date(),
+            isStreaming: true,
+        };
+
+        // Build conversation history for context
+        const aiMessages: AIMessage[] = [
+            ...messages.map(m => ({
+                role: m.type as 'user' | 'assistant',
+                content: m.content,
+            })),
+            { role: 'user' as const, content: text },
+        ];
+
+        try {
             setIsTyping(false);
-            const assistantMessage: Message = {
-                id: (Date.now() + 1).toString(),
+            setMessages(prev => [...prev, assistantMessage]);
+
+            // Stream the response
+            await streamMessage(aiMessages, (chunk) => {
+                setMessages(prev =>
+                    prev.map(m =>
+                        m.id === assistantId
+                            ? { ...m, content: m.content + chunk }
+                            : m
+                    )
+                );
+            });
+
+            // Mark streaming as complete
+            setMessages(prev =>
+                prev.map(m =>
+                    m.id === assistantId
+                        ? { ...m, isStreaming: false }
+                        : m
+                )
+            );
+        } catch (error) {
+            setIsTyping(false);
+            const errorMessage: Message = {
+                id: (Date.now() + 2).toString(),
                 type: 'assistant',
-                content: 'mock',
+                content: `Error: ${error instanceof Error ? error.message : 'Something went wrong'}`,
                 timestamp: new Date(),
             };
-            setMessages(prev => [...prev, assistantMessage]);
-        }, 1500);
+            setMessages(prev => {
+                // Remove the empty streaming message if it exists
+                const filtered = prev.filter(m => m.id !== assistantId || m.content !== '');
+                return [...filtered, errorMessage];
+            });
+        }
     };
 
     const rightComponents = [
@@ -85,7 +141,7 @@ const HomeScreen = () => {
                             leftComponent={leftComponent}
                             rightComponents={rightComponents} />
                         {hasMessages ? (
-                            <MockConversation messages={messages} isTyping={isTyping} />
+                            <Conversation messages={messages} isTyping={isTyping} />
                         ) : (
                             <ScrollView
                                 ref={scrollViewRef}

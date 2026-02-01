@@ -4,19 +4,22 @@ import { View } from "react-native";
 import AnimatedView from "./AnimatedView";
 import LottieView from 'lottie-react-native';
 import { useState } from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 
 export const Sphere = () => {
+    const insets = useSafeAreaInsets();
     const [isSpeaking, setIsSpeaking] = useState(false);
     const toggleSpeaking = () => {
         setIsSpeaking(prev => !prev);
     };
     return (
-        <View className='flex-1 items-center justify-center'>
+        <View className='flex-1 items-center justify-center' style={{ paddingTop: insets.bottom + 140 }}>
             <AnimatedView
                 animation='scaleIn'
                 duration={200}
                 shouldResetAnimation={true}
+                className="flex-1"
             >
                 <TouchableOpacity 
                 //activeOpacity={0.5}

@@ -66,9 +66,9 @@ export const BotSwitch = () => {
                     
                     <Pressable 
                         onPress={() => actionSheetRef.current?.hide()}
-                        className="mt-4 py-3 bg-background rounded-lg items-center"
+                        className="mt-4 py-3 bg-text rounded-full items-center"
                     >
-                        <ThemedText className="font-semibold">Cancel</ThemedText>
+                        <ThemedText className="font-semibold !text-invert">Cancel</ThemedText>
                     </Pressable>
                 </View>
             </ActionSheetThemed>

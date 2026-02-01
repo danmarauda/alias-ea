@@ -1,4 +1,4 @@
-import { Pressable, Image, View, Alert, Text } from "react-native";
+import { Pressable, Image, View, Alert, Text, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TextInput } from "react-native-gesture-handler";
 import Icon from "./Icon";
@@ -312,32 +312,32 @@ export const ChatInput = (props: ChatInputProps) => {
 
                                 {/* Attachment buttons */}
                                 <Animated.View style={attachButtonStyle}>
-                                    <Pressable onPress={pickImage} className='items-center justify-center w-10 h-10 rounded-full'>
+                                    <TouchableOpacity activeOpacity={0.8} onPress={pickImage} className='items-center justify-center w-10 h-10 rounded-full'>
                                         <Icon name="Image" size={20} />
-                                    </Pressable>
+                                    </TouchableOpacity>
                                 </Animated.View>
                                 <Animated.View style={attachButtonStyle}>
-                                    <Pressable className='items-center justify-center w-10 h-10 rounded-full'>
+                                    <TouchableOpacity activeOpacity={0.8} className='items-center justify-center w-10 h-10 rounded-full'>
                                         <Icon name="Camera" size={20} />
-                                    </Pressable>
+                                    </TouchableOpacity>
                                 </Animated.View>
                                 <Animated.View style={attachButtonStyle}>
-                                    <Pressable className='items-center justify-center w-10 h-10 rounded-full'>
+                                    <TouchableOpacity activeOpacity={0.8} className='items-center justify-center w-10 h-10 rounded-full'>
                                         <Icon name="File" size={20} />
-                                    </Pressable>
+                                    </TouchableOpacity>
                                 </Animated.View>
                             </Animated.View>
 
                             {/* Globe and Telescope - fade out when expanded */}
                             <Animated.View className="p-1.5" style={secondaryButtonStyle}>
-                                <Pressable className='items-center justify-center w-10 h-10 rounded-full'>
+                                <TouchableOpacity activeOpacity={0.8} className='items-center justify-center w-10 h-10 rounded-full'>
                                     <Icon name='Globe' size={20} />
-                                </Pressable>
+                                </TouchableOpacity>
                             </Animated.View>
                             <Animated.View style={secondaryButtonStyle}>
-                                <Pressable className='items-center justify-center w-10 h-10 rounded-full'>
+                                <TouchableOpacity activeOpacity={0.8} className='items-center justify-center w-10 h-10 rounded-full'>
                                     <Icon name='Telescope' size={20} />
-                                </Pressable>
+                                </TouchableOpacity>
                             </Animated.View>
                         </View>
 

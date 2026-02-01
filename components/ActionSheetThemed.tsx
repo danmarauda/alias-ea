@@ -15,10 +15,10 @@ const ActionSheetThemed = forwardRef<ActionSheetRef, ActionSheetThemedProps>(({ 
             ref={ref}
             containerStyle={{
                 backgroundColor: colors.sheet,
-                borderTopLeftRadius: 20,
-                borderTopRightRadius: 20,
+                borderTopLeftRadius: 40,
+                borderTopRightRadius: 40,
                 ...containerStyle,
-                paddingBottom: insets.bottom
+                paddingBottom: insets.bottom,
             }}
         />
     );

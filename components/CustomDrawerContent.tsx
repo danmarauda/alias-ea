@@ -54,7 +54,7 @@ export default function CustomDrawerContent() {
                 ))}
 
             </ThemedScroller>
-            <TouchableOpacity activeOpacity={0.8} onPress={() => router.push('/screens/profile')} className='flex-row justify-start items-center pt-4 pb-4 border-t border-border'>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => router.push('/screens/profile')} className='bg-background flex-row justify-start items-center pt-4 pb-4 border rounded-3xl px-4 border-border'>
                 <Avatar src={require('@/assets/img/thomino.jpg')} size="md" />
                 <View className='ml-4'>
                     <ThemedText className='text-base font-semibold'>Thomino</ThemedText>

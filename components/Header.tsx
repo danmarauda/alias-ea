@@ -103,7 +103,7 @@ const Header: React.FC<HeaderProps> = ({
         intensity={30}
         tint="light"
         style={[style, containerStyle, { paddingTop: insets.top }]}
-        className={`w-full pt-4  px-global z-50 bg-background/60 ${className}`}
+        className={`w-full pt-4  px-global z-50 bg-background ${className}`}
       >
         <View className="flex-row justify-between">
           <View className='flex-row items-center'>

@@ -55,7 +55,7 @@ export const BotSwitch = () => {
                         <Pressable 
                             key={option.value}
                             onPress={() => handleModelSelect(option.value)}
-                            className={`p-3 mb-2 rounded-lg flex-row justify-between items-center ${selectedModel === option.value ? 'bg-background/10' : ''}`}
+                            className={`p-3 mb-2 rounded-2xl flex-row justify-between items-center ${selectedModel === option.value ? 'bg-background' : ''}`}
                         >
                             <ThemedText className="text-base">{option.label}</ThemedText>
                             {selectedModel === option.value && (

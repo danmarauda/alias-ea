@@ -77,7 +77,7 @@ type NavItemProps = {
 export const NavItem = ({ href, icon, label, description }: NavItemProps) => (
 
         <TouchableOpacity onPress={() => router.push(href)} className={`flex-row items-center py-2`}>
-            <View className='flex-row items-center justify-center w-9 h-9 bg-background rounded-lg'>
+            <View className='flex-row items-center justify-center w-9 h-9 bg-secondary rounded-lg'>
                 <Icon name={icon} size={18} className='' />
             </View>
             <View className='flex-1 ml-4 '>

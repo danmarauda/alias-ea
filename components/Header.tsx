@@ -150,7 +150,7 @@ const Header: React.FC<HeaderProps> = ({
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
       >
-        <View className="flex-row justify-between">
+        <View className="flex-row justify-between px-global">
           <View className='flex-row items-center'>
             {showBackButton && (
               <TouchableOpacity onPress={handleBackPress} className='mr-global relative z-50'>

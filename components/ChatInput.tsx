@@ -226,7 +226,7 @@ export const ChatInput = (props: ChatInputProps) => {
     };
 
     return (
-        <View style={{ paddingBottom: insets.bottom + 0 }} className="px-global w-full">
+        <View style={{ paddingBottom: insets.bottom + 0 }} className="px-global w-full absolute bottom-0 left-0 right-0">
             {selectedImages.length > 0 && (
                 <View className="mb-0">
                     <ScrollableImageList

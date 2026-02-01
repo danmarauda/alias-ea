@@ -5,6 +5,9 @@ import Icon from './Icon';
 import { shadowPresets } from '@/utils/useShadow';
 import { Divider } from './layout/Divider';
 import AnimatedView from './AnimatedView';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useThemeColors } from '@/app/contexts/ThemeColors';
 
 type Message = {
     id: string;
@@ -37,6 +40,7 @@ const mockResponses = [
 ];
 
 export const MockConversation = ({ messages, isTyping }: MockConversationProps) => {
+    const insets = useSafeAreaInsets();
     const scrollViewRef = useRef<ScrollView>(null);
     const [likedMessages, setLikedMessages] = useState<Set<string>>(new Set());
     const [showScrollButton, setShowScrollButton] = useState(false);
@@ -91,12 +95,13 @@ export const MockConversation = ({ messages, isTyping }: MockConversationProps) 
         return null;
     }
 
+    const colors = useThemeColors();
     return (
         <View className="flex-1 relative">
             <ScrollView
                 ref={scrollViewRef}
                 className="flex-1 px-6"
-                contentContainerStyle={{ paddingTop: 20, paddingBottom: 10 }}
+                contentContainerStyle={{ paddingBottom: insets.bottom + 140, paddingTop: insets.top + 80 }}
                 showsVerticalScrollIndicator={false}
                 keyboardShouldPersistTaps="handled"
                 keyboardDismissMode="interactive"
@@ -126,11 +131,11 @@ export const MockConversation = ({ messages, isTyping }: MockConversationProps) 
 
             {/* Floating scroll to bottom button */}
             {showScrollButton && (
-                <View className='absolute pb-4 w-full bottom-0 left-0 items-center justify-center'>
+                <View style={{ bottom: insets.bottom + 130 }} className='absolute pb-4 w-full left-0 items-center justify-center'>
                     <AnimatedView
                         animation="scaleIn"
                         duration={200}
-                        //className="absolute bottom-4 right-4"
+                    //className="absolute bottom-4 right-4"
                     >
                         <Pressable
                             onPress={scrollToBottom}
@@ -142,6 +147,8 @@ export const MockConversation = ({ messages, isTyping }: MockConversationProps) 
                     </AnimatedView>
                 </View>
             )}
+
+            <LinearGradient style={{ position: 'absolute', bottom: 0, left: 0, right: 0, width: '100%', height: insets.bottom + 140 }} colors={['transparent', 'transparent', colors.gradient]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }} />
         </View>
     );
 };

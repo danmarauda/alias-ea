@@ -81,6 +81,7 @@ const HomeScreen = () => {
                     <View style={{ flex: 1 }}>
                         <Header
                             title=""
+                            variant='transparent'
                             leftComponent={leftComponent}
                             rightComponents={rightComponents} />
                         {hasMessages ? (

@@ -154,7 +154,7 @@ const HomeScreen = () => {
                                 <View className='flex-1 items-center justify-center relative'>
                                     <ThemedText className='text-4xl font-outfit-bold'>Welcome John<Text className='text-sky-500'>.</Text></ThemedText>
                                     <ThemedText className='text-sm text-gray-500 mt-2'>What can I help you with today?</ThemedText>
-                                    <View className='flex-row gap-x-4 flex-wrap items-center justify-center mt-8'>
+                                    <View className='flex-row gap-x-2 flex-wrap items-center justify-center mt-8'>
                                         <TipCard title="Make a recipe" icon="Cookie" />
                                         <TipCard title="Generate image" icon="Image" />
                                         <TipCard title="Generate text" icon="Text" />
@@ -173,9 +173,9 @@ const HomeScreen = () => {
 
 const TipCard = ({ title, icon }: { title: string, icon: string }) => {
     return (
-        <Pressable className='p-3 mb-4 bg-background border border-border flex flex-row items-center rounded-3xl'>
+        <Pressable className='p-3 mb-2 bg-background border border-border flex flex-row items-center rounded-3xl'>
             <Icon name={icon as IconName} size={15} className=' rounded-xl' />
-            <ThemedText className='text-sm font-semibold ml-2'>{title}</ThemedText>
+            <ThemedText className='text-sm font-semibold ml-2 mr-1'>{title}</ThemedText>
         </Pressable>
     );
 };

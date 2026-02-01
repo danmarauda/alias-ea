@@ -8,6 +8,7 @@ import AnimatedView from './AnimatedView';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useThemeColors } from '@/app/contexts/ThemeColors';
+import ShimmerText from './ShimmerText';
 
 type Message = {
     id: string;
@@ -124,7 +125,7 @@ export const MockConversation = ({ messages, isTyping }: MockConversationProps) 
 
                 {isTyping && (
                     <AnimatedView animation="fadeIn" duration={300}>
-                        <TypingIndicator />
+                        <ShimmerText text="Luna is thinking..." />
                     </AnimatedView>
                 )}
             </ScrollView>

@@ -1,4 +1,4 @@
-import { Pressable, Image, View, Alert, Text, TouchableOpacity } from "react-native";
+import { Pressable, Image, View, Alert, Text, TouchableOpacity, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TextInput } from "react-native-gesture-handler";
 import Icon from "./Icon";
@@ -12,7 +12,8 @@ import Animated, {
     useSharedValue,
     interpolate,
     Easing,
-    Extrapolation
+    Extrapolation,
+    Keyframe,
 } from "react-native-reanimated";
 import * as ImagePicker from 'expo-image-picker';
 import { CardScroller } from "./CardScroller";
@@ -21,6 +22,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import LottieView from "lottie-react-native";
 import { useRecording } from "@/hooks/useRecording";
 import { ShimmerText } from "./ShimmerText";
+
+// Exit animation for image removal
+const imageExitAnimation = new Keyframe({
+    0: { opacity: 1, transform: [{ scale: 1 }] },
+    100: { opacity: 0, transform: [{ scale: 0.8 }] },
+}).duration(120);
+
 
 
 type ChatInputProps = {
@@ -36,6 +44,7 @@ export const ChatInput = (props: ChatInputProps) => {
     const [selectedImages, setSelectedImages] = useState<string[]>([]);
     const [inputText, setInputText] = useState('');
     const [isRecordingUI, setIsRecordingUI] = useState(false);
+    const [showKeyboardWarning, setShowKeyboardWarning] = useState(true);
     const lottieRef = useRef<LottieView>(null);
 
     // Recording hook
@@ -262,6 +271,16 @@ export const ChatInput = (props: ChatInputProps) => {
                     />
                 </View>
             )}
+            
+            {Platform.OS === 'android' && showKeyboardWarning && (
+                <View className="p-4 mb-3 relative rounded-3xl flex-row items-center gap-x-2 bg-black border border-border">
+                    <Icon name="Keyboard" size={16} color="white" className="bg-white/10 rounded-2xl p-3" />
+                    <Text className="text-white text-xs flex-1 pr-10 ml-2">Keyboard may behave unexpectedly in Expo Go with bottom input. This is a known Expo Go limitation and works correctly in development builds.</Text>
+                    <Pressable onPress={() => setShowKeyboardWarning(false)} className="absolute top-3 right-3">
+                        <Icon name="X" size={16} color="white" />
+                    </Pressable>
+                </View>
+            )}
 
             <View style={{ ...shadowPresets.card }} className="bg-background rounded-[25px] border border-border">
                 <LinearGradient style={{ borderRadius: 25 }} colors={['transparent', 'transparent', 'rgba(255,255,255,0.1)']} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}>
@@ -351,8 +370,8 @@ export const ChatInput = (props: ChatInputProps) => {
                             {/* Mic + AudioLines - fade out when recording */}
                             <Animated.View style={audioButtonsStyle} className='flex-row gap-x-2'>
                                 <Pressable
-                                onPress={handleStartRecording}
-                                className='items-center justify-center w-10 h-10 rounded-full'>
+                                    onPress={handleStartRecording}
+                                    className='items-center justify-center w-10 h-10 rounded-full'>
                                     <Icon name='Mic' size={20} />
                                 </Pressable>
                                 <Pressable
@@ -396,18 +415,24 @@ const ScrollableImageList = ({ images, onRemove }: { images: string[], onRemove:
     return (
         <CardScroller className="mb-2 pb-0" space={5}>
             {images.map((uri, index) => (
-                <AnimatedView key={`${uri}-${index}`} animation="scaleIn" duration={200} delay={200} className="relative">
-                    <Image
-                        source={{ uri }}
-                        className="w-20 h-20 rounded-2xl"
-                    />
-                    <Pressable
-                        onPress={() => onRemove(index)}
-                        className="absolute top-1 right-1 bg-black/50 rounded-full w-6 h-6 items-center justify-center"
-                    >
-                        <Icon name="X" size={12} color="white" />
-                    </Pressable>
-                </AnimatedView>
+                <Animated.View
+                    key={`${uri}-${index}`}
+                    exiting={imageExitAnimation}
+                    className="relative"
+                >
+                    <AnimatedView animation="scaleIn" duration={200} delay={200}>
+                        <Image
+                            source={{ uri }}
+                            className="w-20 h-20 rounded-2xl"
+                        />
+                        <Pressable
+                            onPress={() => onRemove(index)}
+                            className="absolute top-1 right-1 bg-black/50 rounded-full w-6 h-6 items-center justify-center"
+                        >
+                            <Icon name="X" size={12} color="white" />
+                        </Pressable>
+                    </AnimatedView>
+                </Animated.View>
             ))}
         </CardScroller>
     );

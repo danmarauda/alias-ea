@@ -74,8 +74,14 @@ export function useRecording() {
 
     const transcribeAudio = useCallback(async (audioUri: string): Promise<string> => {
         const apiKey = process.env.EXPO_PUBLIC_OPENAI_API_KEY;
+
+        // Return mock transcription for demo when no API key
         if (!apiKey || apiKey === 'your-openai-key-here') {
-            throw new Error('OpenAI API key not configured');
+            setIsTranscribing(true);
+            // Simulate transcription delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            setIsTranscribing(false);
+            return "This is a demo transcription. Add your OpenAI API key to enable real speech-to-text.";
         }
 
         setIsTranscribing(true);

@@ -178,7 +178,7 @@ const SearchScreen = () => {
       </View>
 
       <ThemedScroller className='flex-1 px-0' keyboardShouldPersistTaps='handled'>
-        <View className='mb-4 px-global'>
+        <View className='mb-4'>
           {results.length > 0 ? (
             results.map((item) => (
               <Link key={item.id} href={`/screens/provider`} asChild>

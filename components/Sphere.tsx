@@ -14,12 +14,12 @@ export const Sphere = () => {
         setIsSpeaking(prev => !prev);
     };
     return (
-        <View className='flex-1 items-center justify-center' style={{ paddingTop: insets.bottom + 140 }}>
+        <View className='flex-1 items-center justify-center' style={{ paddingBottom: insets.bottom + 140, paddingTop: insets.top + 0 }}>
             <AnimatedView
                 animation='scaleIn'
                 duration={200}
                 shouldResetAnimation={true}
-                className="flex-1"
+                className="flex-1 items-center justify-center"
             >
                 <TouchableOpacity 
                 //activeOpacity={0.5}

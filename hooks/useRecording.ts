@@ -37,6 +37,9 @@ export function useRecording() {
     }, [recorder]);
 
     const stopRecording = useCallback(async (): Promise<string | null> => {
+        // Show transcribing state immediately
+        setIsTranscribing(true);
+
         try {
             console.log('Stopping, isRecording:', recorder.isRecording);
 
@@ -64,6 +67,7 @@ export function useRecording() {
             return uri;
         } catch (error) {
             console.error('Failed to stop recording:', error);
+            setIsTranscribing(false);
             throw error;
         }
     }, [recorder]);

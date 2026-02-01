@@ -1,84 +1,137 @@
-import Header, { HeaderIcon } from '@/components/Header';
-import ThemeScroller from '@/components/ThemeScroller';
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Pressable, Image, KeyboardAvoidingView, Platform } from 'react-native';
-import Icon from '@/components/Icon';
-import ThemedText from '@/components/ThemedText';
+import Header from '@/components/Header';
+import React, { useState } from 'react';
+import { View, KeyboardAvoidingView, Platform } from 'react-native';
 import DrawerButton from '@/components/DrawerButton';
-import { shadowPresets } from '@/utils/useShadow';
 import { ChatInput } from '@/components/ChatInput';
 import { BotSwitch } from '@/components/BotSwitch';
 import { Sphere } from '@/components/Sphere';
-// Types for the chat messages
-type MessageType = {
-    id: string;
-    text: string;
-    isUser: boolean;
-    timestamp: Date;
-    images?: string[];
-};
+import { LinearGradient } from 'expo-linear-gradient';
+import { useThemeColors } from '@/app/contexts/ThemeColors';
+import { Conversation, Message } from '@/components/Conversation';
+import { streamMessage, isConfigured, AIMessage } from '@/services/ai';
 
 const HomeScreen = () => {
-    const [messages, setMessages] = useState<MessageType[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const colors = useThemeColors();
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [isTyping, setIsTyping] = useState(false);
 
     const rightComponents = [
-        <BotSwitch />
+        <BotSwitch key="bot-switch" />
     ];
 
     const leftComponent = [
         <DrawerButton key="drawer-button" />
     ];
 
-  
+    const handleSendMessage = async (text: string, images?: string[]) => {
+        const userMessage: Message = {
+            id: Date.now().toString(),
+            type: 'user',
+            content: text,
+            timestamp: new Date(),
+        };
+        setMessages(prev => [...prev, userMessage]);
+
+        if (!isConfigured()) {
+            setIsTyping(true);
+            setTimeout(() => {
+                setIsTyping(false);
+                const assistantMessage: Message = {
+                    id: (Date.now() + 1).toString(),
+                    type: 'assistant',
+                    content: 'To get real AI responses, add your API key to the .env file. Luna supports OpenAI (ChatGPT), Google Gemini, and Anthropic Claude.\n\nCopy .env.example to .env and add your key to get started!',
+                    timestamp: new Date(),
+                };
+                setMessages(prev => [...prev, assistantMessage]);
+            }, 1000);
+            return;
+        }
+
+        setIsTyping(true);
+
+        const assistantId = (Date.now() + 1).toString();
+        const assistantMessage: Message = {
+            id: assistantId,
+            type: 'assistant',
+            content: '',
+            timestamp: new Date(),
+            isStreaming: true,
+        };
+
+        const aiMessages: AIMessage[] = [
+            ...messages.map(m => ({
+                role: m.type as 'user' | 'assistant',
+                content: m.content,
+            })),
+            { role: 'user' as const, content: text },
+        ];
+
+        try {
+            setIsTyping(false);
+            setMessages(prev => [...prev, assistantMessage]);
+
+            await streamMessage(aiMessages, (chunk) => {
+                setMessages(prev =>
+                    prev.map(m =>
+                        m.id === assistantId
+                            ? { ...m, content: m.content + chunk }
+                            : m
+                    )
+                );
+            });
+
+            setMessages(prev =>
+                prev.map(m =>
+                    m.id === assistantId
+                        ? { ...m, isStreaming: false }
+                        : m
+                )
+            );
+        } catch (error) {
+            setIsTyping(false);
+            const errorMessage: Message = {
+                id: (Date.now() + 2).toString(),
+                type: 'assistant',
+                content: `Error: ${error instanceof Error ? error.message : 'Something went wrong'}`,
+                timestamp: new Date(),
+            };
+            setMessages(prev => {
+                const filtered = prev.filter(m => m.id !== assistantId || m.content !== '');
+                return [...filtered, errorMessage];
+            });
+        }
+    };
+
+    const hasMessages = messages.length > 0;
 
     return (
         <View className="flex-1 bg-background relative">
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-                keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
-                style={{ flex: 1 }}
-            >
-                {/* Main Content */}
-                <View style={{ flex: 1 }}>
-                    <Header
-                        variant="transparent"
-                        title=""
-                        leftComponent={leftComponent}
-                        rightComponents={rightComponents}
-                    />
+            <LinearGradient style={{ width: '100%', display: 'flex', flex: 1, flexDirection: 'column' }} colors={['transparent', 'transparent', colors.gradient]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}>
+                <KeyboardAvoidingView
+                    behavior="padding"
+                    keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+                    style={{ flex: 1 }}
+                >
+                    <View style={{ flex: 1 }}>
+                        <Header
+                            variant="transparent"
+                            title=""
+                            leftComponent={leftComponent}
+                            rightComponents={rightComponents}
+                        />
 
-                    {messages.length === 0 && !isLoading && (
-                        <Sphere />
-                    )}
+                        {hasMessages ? (
+                            <Conversation messages={messages} isTyping={isTyping} />
+                        ) : (
+                            <Sphere />
+                        )}
 
-                    {(messages.length > 0 || isLoading) && (
-                        <ThemeScroller className="flex-1 px-4 pt-20">
-                          
-
-                            {isLoading && (
-                                <View className="p-4 my-2 rounded-2xl bg-secondary max-w-[80%]">
-                                    <View className="flex-row items-center">
-                                        <View className="w-2 h-2 bg-highlight rounded-full mx-1" />
-                                        <View className="w-2 h-2 bg-highlight rounded-full mx-1" />
-                                        <View className="w-2 h-2 bg-highlight rounded-full mx-1" />
-                                    </View>
-                                </View>
-                            )}
-
-                        </ThemeScroller>
-                    )}
-
-                    <ChatInput  />
-
-
-                </View>
-            </KeyboardAvoidingView>
+                        <ChatInput onSendMessage={handleSendMessage} />
+                    </View>
+                </KeyboardAvoidingView>
+            </LinearGradient>
         </View>
     );
 };
-
-// Helper function to get simulated responses
-
 
 export default HomeScreen;

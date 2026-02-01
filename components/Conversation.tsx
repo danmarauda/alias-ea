@@ -9,6 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useThemeColors } from '@/app/contexts/ThemeColors';
 import Markdown from 'react-native-markdown-display';
+import { ShimmerText } from './ShimmerText';
 
 export type Message = {
     id: string;
@@ -245,7 +246,7 @@ const AssistantMessage = ({ content, isStreaming, isLiked, onLike }: AssistantMe
                     <Markdown style={markdownStyles}>
                         {content}
                     </Markdown>
-                    {isStreaming && <ThemedText className="text-primary">▊</ThemedText>}
+                    {isStreaming && <ShimmerText text="Typing..." />}
                 </View>
                 {!isStreaming && (
                     <>

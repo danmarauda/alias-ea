@@ -144,7 +144,7 @@ const Header: React.FC<HeaderProps> = ({
   if (isTransparent) {
     return (
       <LinearGradient
-        colors={['rgba(0,0,0,0.3)', 'transparent']}
+        colors={['rgba(0,0,0,0.6)', 'rgba(0,0,0,0.3)', 'transparent']}
         style={[style, containerStyle, { paddingTop: insets.top }]}
         className={`w-full pt-4 pb-10 px-global z-50 ${className}`}
         start={{ x: 0, y: 0 }}

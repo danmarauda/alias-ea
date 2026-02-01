@@ -20,6 +20,7 @@ import useThemeColors from "@/app/contexts/ThemeColors";
 import { LinearGradient } from "expo-linear-gradient";
 import LottieView from "lottie-react-native";
 import { useRecording } from "@/hooks/useRecording";
+import { ShimmerText } from "./ShimmerText";
 
 
 type ChatInputProps = {
@@ -285,16 +286,21 @@ export const ChatInput = (props: ChatInputProps) => {
 
                         {/* Text Input */}
                         <Animated.View style={inputStyle} pointerEvents={isRecordingUI ? 'none' : 'auto'}>
-                            <TextInput
-                                placeholder={isTranscribing ? 'Transcribing...' : 'Ask me anything...'}
-                                placeholderTextColor={colors.text}
-                                className='text-text px-6 py-5'
-                                value={inputText}
-                                onChangeText={setInputText}
-                                style={{ minHeight: 60, opacity: isTranscribing ? 0.5 : 1 }}
-                                multiline={true}
-                                editable={!isTranscribing}
-                            />
+                            {isTranscribing ? (
+                                <View className="px-6 py-5" style={{ minHeight: 60, justifyContent: 'center' }}>
+                                    <ShimmerText text="Transcribing..." className="text-base text-text" />
+                                </View>
+                            ) : (
+                                <TextInput
+                                    placeholder="Ask me anything..."
+                                    placeholderTextColor={colors.text}
+                                    className='text-text px-6 py-5'
+                                    value={inputText}
+                                    onChangeText={setInputText}
+                                    style={{ minHeight: 60 }}
+                                    multiline={true}
+                                />
+                            )}
                         </Animated.View>
                     </View>
                     <View className='flex-row justify-between px-4 pt-4 pb-2 rounded-b-3xl'>

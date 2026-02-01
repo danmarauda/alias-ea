@@ -1,68 +1,145 @@
-import Header, { HeaderIcon } from '@/components/Header';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Pressable, Image, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
+import Header from '@/components/Header';
+import React, { useState } from 'react';
+import { View, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import Icon from '@/components/Icon';
 import ThemedText from '@/components/ThemedText';
 import DrawerButton from '@/components/DrawerButton';
-import { shadowPresets } from '@/utils/useShadow';
 import { ChatInput } from '@/components/ChatInput';
 import { BotSwitch } from '@/components/BotSwitch';
 import { CardScroller } from '@/components/CardScroller';
-import Rive from 'rive-react-native';
-
-type MessageType = {
-    id: string;
-    text: string;
-    isUser: boolean;
-    timestamp: Date;
-    images?: string[];
-};
+import { LinearGradient } from 'expo-linear-gradient';
+import { useThemeColors } from '@/app/contexts/ThemeColors';
+import { Conversation, Message } from '@/components/Conversation';
+import { streamMessage, isConfigured, AIMessage } from '@/services/ai';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const HomeScreen = () => {
-    const [messages, setMessages] = useState<MessageType[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-
+    const colors = useThemeColors();
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [isTyping, setIsTyping] = useState(false);
+    const insets = useSafeAreaInsets();
     const rightComponents = [
-        <BotSwitch />
+        <BotSwitch key="bot-switch" />
     ];
 
     const leftComponent = [
         <DrawerButton key="drawer-button" />
     ];
-    const insets = useSafeAreaInsets();
 
+    const handleSendMessage = async (text: string, images?: string[]) => {
+        const userMessage: Message = {
+            id: Date.now().toString(),
+            type: 'user',
+            content: text,
+            timestamp: new Date(),
+        };
+        setMessages(prev => [...prev, userMessage]);
+
+        if (!isConfigured()) {
+            setIsTyping(true);
+            setTimeout(() => {
+                setIsTyping(false);
+                const assistantMessage: Message = {
+                    id: (Date.now() + 1).toString(),
+                    type: 'assistant',
+                    content: 'To get real AI responses, add your API key to the .env file. Luna supports OpenAI (ChatGPT), Google Gemini, and Anthropic Claude.\n\nCopy .env.example to .env and add your key to get started!',
+                    timestamp: new Date(),
+                };
+                setMessages(prev => [...prev, assistantMessage]);
+            }, 1000);
+            return;
+        }
+
+        setIsTyping(true);
+
+        const assistantId = (Date.now() + 1).toString();
+        const assistantMessage: Message = {
+            id: assistantId,
+            type: 'assistant',
+            content: '',
+            timestamp: new Date(),
+            isStreaming: true,
+        };
+
+        const aiMessages: AIMessage[] = [
+            ...messages.map(m => ({
+                role: m.type as 'user' | 'assistant',
+                content: m.content,
+            })),
+            { role: 'user' as const, content: text },
+        ];
+
+        try {
+            setIsTyping(false);
+            setMessages(prev => [...prev, assistantMessage]);
+
+            await streamMessage(aiMessages, (chunk) => {
+                setMessages(prev =>
+                    prev.map(m =>
+                        m.id === assistantId
+                            ? { ...m, content: m.content + chunk }
+                            : m
+                    )
+                );
+            });
+
+            setMessages(prev =>
+                prev.map(m =>
+                    m.id === assistantId
+                        ? { ...m, isStreaming: false }
+                        : m
+                )
+            );
+        } catch (error) {
+            setIsTyping(false);
+            const errorMessage: Message = {
+                id: (Date.now() + 2).toString(),
+                type: 'assistant',
+                content: `Error: ${error instanceof Error ? error.message : 'Something went wrong'}`,
+                timestamp: new Date(),
+            };
+            setMessages(prev => {
+                const filtered = prev.filter(m => m.id !== assistantId || m.content !== '');
+                return [...filtered, errorMessage];
+            });
+        }
+    };
+
+    const hasMessages = messages.length > 0;
 
     return (
         <View className="flex-1 bg-background relative">
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-                keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 180}
-                style={{ flex: 1 }}
-            >
-                <View className='flex-1 '  style={{ paddingBottom: insets.bottom + 130 }}>
-                    <Header
-                        title=""
-                        variant="transparent"
-                        leftComponent={leftComponent}
-                        rightComponents={rightComponents}
-                    />
+            <LinearGradient style={{ width: '100%', display: 'flex', flex: 1, flexDirection: 'column' }} colors={['transparent', 'transparent', colors.gradient]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}>
+                <KeyboardAvoidingView
+                    behavior="padding"
+                    keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+                    style={{ flex: 1 }}
+                >
+                    <View className='flex-1'>
+                        <Header
+                            title=""
+                            variant="transparent"
+                            leftComponent={leftComponent}
+                            rightComponents={rightComponents}
+                        />
 
-                  
+                        {hasMessages ? (
+                            <Conversation messages={messages} isTyping={isTyping} />
+                        ) : (
+                            <View className='flex-1 items-center justify-end pb-36' style={{ paddingBottom: insets.bottom + 130 }}>
+                                <CardScroller className='px-global pb-4'>
+                                    <SuggestionCard title="Make a recipe" description="Find the best recipes" icon="Cookie" />
+                                    <SuggestionCard title="Generate image" description="Use text to generate an image" icon="Image" />
+                                    <SuggestionCard title="Generate text" description="Use an image to generate text" icon="Text" />
+                                    <SuggestionCard title="Generate code" description="Use text to generate code" icon="Code" />
+                                </CardScroller>
+                            </View>
+                        )}
 
-                    <View className='flex-1 items-center justify-end'>
-                        <CardScroller className='px-global pb-4'>
-                            <SuggestionCard title="Make a recipe" description="Find the best recipes" icon="Cookie" />
-                            <SuggestionCard title="Generate image" description="Use text to generate an image" icon="Image" />
-                            <SuggestionCard title="Generate text" description="Use an image to generate text" icon="Text" />
-                            <SuggestionCard title="Generate code" description="Use text to generate code" icon="Code" />
-                        </CardScroller>
+                        <ChatInput onSendMessage={handleSendMessage} />
                     </View>
-                    <ChatInput />
-
-
-                </View>
-            </KeyboardAvoidingView>
+                </KeyboardAvoidingView>
+            </LinearGradient>
         </View>
     );
 };

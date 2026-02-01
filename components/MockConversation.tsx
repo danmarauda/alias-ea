@@ -194,17 +194,12 @@ const AssistantMessage = ({ response, isLiked, onLike }: AssistantMessageProps) 
                         color={isLiked ? "#E57DDF" : undefined}
                         fill={isLiked ? "#E57DDF" : "none"}
                     />
-                    <ThemedText className="ml-2 text-sm">
-                        {isLiked ? "Liked" : "Like"}
-                    </ThemedText>
                 </Pressable>
                 <Pressable className="flex-row items-center mr-6">
                     <Icon name="Copy" size={18} />
-                    <ThemedText className="ml-2 text-sm">Copy</ThemedText>
                 </Pressable>
                 <Pressable className="flex-row items-center">
                     <Icon name="Share2" size={18} />
-                    <ThemedText className="ml-2 text-sm">Share</ThemedText>
                 </Pressable>
             </View>
         </View>

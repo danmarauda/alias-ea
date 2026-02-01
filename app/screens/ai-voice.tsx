@@ -27,7 +27,7 @@ export default function AiVoiceScreen() {
   };
 
   return (
-    <View className="flex-1 bg-light-primary dark:bg-dark-primary">
+    <View className="flex-1 bg-background">
       <Header showBackButton
         rightComponents={[
           <Button title="Save" />
@@ -148,13 +148,13 @@ const VoiceItem = (props: VoiceItemProps) => {
   return (
     <View className='relative mb-3'>
       <Pressable
-        className={`w-full relative z-50 flex-row items-center p-global rounded-2xl ${props.isSelected ? 'bg-teal-300' : 'bg-light-secondary dark:bg-dark-secondary'}`}
+        className={`w-full relative z-50 flex-row items-center p-global rounded-2xl ${props.isSelected ? 'bg-teal-300' : 'bg-secondary'}`}
         onPress={toggleVisibility}
         style={{ ...shadowPresets.card }}
       >
         <View>
-          <Text className={`text-xl font-outfit-bold ${props.isSelected ? 'text-black dark:text-black' : 'text-black dark:text-white'}`}>{props.name}</Text>
-          <Text className={`text-sm opacity-70 ${props.isSelected ? 'text-black dark:text-black' : 'text-black dark:text-white'}`}>{props.description}</Text>
+          <Text className={`text-xl font-outfit-bold ${props.isSelected ? 'text-black text-primary' : 'text-primary'}`}>{props.name}</Text>
+          <Text className={`text-sm opacity-70 ${props.isSelected ? 'text-black text-primary' : 'text-primary'}`}>{props.description}</Text>
         </View>
         <View className='items-center justify-center ml-auto'>
           <Icon name={isVisible ? "Play" : "Pause"} size={20} color={isSelected ? colors.invert : colors.icon} />
@@ -162,7 +162,7 @@ const VoiceItem = (props: VoiceItemProps) => {
       </Pressable>
       <Animated.View
         style={{ marginTop: slideAnim }}
-        className='w-full relative pb-3 px-0 pt-8 flex-row items-end overflow-hidden rounded-2xl bg-light-secondary dark:bg-dark-darker'
+        className='w-full relative pb-3 px-0 pt-8 flex-row items-end overflow-hidden rounded-2xl bg-darker'
       >
         <LottieView
           autoPlay
@@ -178,8 +178,8 @@ const VoiceItem = (props: VoiceItemProps) => {
           <Button
             title="Use"
             size='small'
-            className='bg-dark-primary dark:bg-light-primary'
-            textClassName='text-white dark:text-black'
+            className='bg-invert'
+            textClassName='text-invert'
             variant='secondary'
             onPress={handleUse}
           />

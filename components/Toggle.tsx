@@ -44,7 +44,7 @@ const Toggle: React.FC<ToggleProps> = ({
       className={`w-12 h-7 rounded-full ${disabled ? 'opacity-50' : ''} ${className}`}
     >
       <View
-        className={`w-full h-full rounded-full absolute ${isOn ? 'bg-highlight' : 'bg-light-secondary dark:bg-dark-secondary'}`}
+        className={`w-full h-full rounded-full absolute ${isOn ? 'bg-highlight' : 'bg-secondary'}`}
       />
       <Animated.View
         style={{

@@ -44,7 +44,7 @@ const ListLink: React.FC<ListLinkProps> = ({
       <View className="flex-1">
         <ThemedText className="text-base font-medium">{title}</ThemedText>
         {description && (
-          <ThemedText className="text-xs text-light-subtext dark:text-dark-subtext">
+          <ThemedText className="text-xs text-subtext">
             {description}
           </ThemedText>
         )}
@@ -64,7 +64,7 @@ const ListLink: React.FC<ListLinkProps> = ({
   if (href && !disabled) {
     return (
       <Link href={href} asChild >
-        <Pressable className={` ${hasBorder ? 'border-b border-light-primary dark:border-dark-primary' : ''}`}>
+        <Pressable className={` ${hasBorder ? 'border-b border-background' : ''}`}>
           <Content />
         </Pressable>
       </Link>
@@ -74,7 +74,7 @@ const ListLink: React.FC<ListLinkProps> = ({
   return (
     <Pressable
       onPress={disabled ? undefined : onPress}
-      className={` ${hasBorder ? ' border-b border-light-primary dark:border-dark-primary' : ''}`}
+      className={` ${hasBorder ? ' border-b border-background' : ''}`}
     >
       <Content />
     </Pressable>

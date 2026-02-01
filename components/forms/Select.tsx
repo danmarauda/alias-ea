@@ -155,7 +155,7 @@ const Select: React.FC<SelectProps> = ({
                     <Pressable
                         key={option.value}
                         onPress={() => handleSelect(option)}
-                        className={`py-3 px-4 rounded-lg mb-2 ${selectedOption?.value === option.value ? 'bg-light-secondary dark:bg-dark-secondary' : ''}`}
+                        className={`py-3 px-4 rounded-lg mb-2 ${selectedOption?.value === option.value ? 'bg-secondary' : ''}`}
                     >
                         <ThemedText>
                             {option.label}
@@ -176,11 +176,11 @@ const Select: React.FC<SelectProps> = ({
                 <View className="relative">
                     <TouchableOpacity
                         onPress={handlePress}
-                        className={`w-full bg-transparent border rounded-lg px-4 py-3 h-14 flex-row justify-between items-center 
-                            ${isFocused ? 'border-black dark:border-white' : 'border-black/60 dark:border-white/60'}
+                        className={`w-full bg-transparent border rounded-lg px-4 py-3 h-14 flex-row justify-between items-center
+                            ${isFocused ? 'border-border' : 'border-border'}
                             ${error ? 'border-red-500' : ''}`}
                     >
-                        <ThemedText className={selectedOption ? '' : 'text-light-subtext dark:text-dark-subtext'}>
+                        <ThemedText className={selectedOption ? '' : 'text-subtext'}>
                             {selectedOption ? selectedOption.label : placeholder}
                         </ThemedText>
                         <Icon name="ChevronDown" size={20} />
@@ -199,21 +199,21 @@ const Select: React.FC<SelectProps> = ({
         return (
             <View className={`mb-4 ${className || ''}`} style={style}>
                 <View className="relative">
-                    <Pressable className='px-0 bg-light-primary dark:bg-dark-primary z-40' onPress={handlePress}>
-                        <Animated.Text 
-                            style={[underlinedLabelStyle]} 
-                            className="absolute z-50 bg-light-primary dark:bg-dark-primary text-black dark:text-white"
+                    <Pressable className='px-0 bg-background z-40' onPress={handlePress}>
+                        <Animated.Text
+                            style={[underlinedLabelStyle]}
+                            className="absolute z-50 bg-background text-primary"
                         >
                             {label}
                         </Animated.Text>
                     </Pressable>
                     <TouchableOpacity
                         onPress={handlePress}
-                        className={`w-full bg-transparent border-b-2 border-t-0 border-l-0 border-r-0 px-0 py-3 h-14 flex-row justify-between items-center 
-                            ${isFocused ? 'border-black dark:border-white' : 'border-black/60 dark:border-white/60'}
+                        className={`w-full bg-transparent border-b-2 border-t-0 border-l-0 border-r-0 px-0 py-3 h-14 flex-row justify-between items-center
+                            ${isFocused ? 'border-border' : 'border-border'}
                             ${error ? 'border-red-500' : ''}`}
                     >
-                        <ThemedText className={selectedOption ? '' : 'text-light-subtext dark:text-dark-subtext'}>
+                        <ThemedText className={selectedOption ? '' : 'text-subtext'}>
                             {selectedOption ? selectedOption.label : ''}
                         </ThemedText>
                         <Icon name="ChevronDown" size={20} />
@@ -231,21 +231,21 @@ const Select: React.FC<SelectProps> = ({
     return (
         <View className={`mb-4 ${className || ''}`} style={style}>
             <View className="relative">
-                <Pressable className='px-1 bg-light-primary dark:bg-dark-primary z-40' onPress={handlePress}>
-                    <Animated.Text 
-                        style={[labelStyle]} 
-                        className="absolute z-50 px-1 bg-light-primary dark:bg-dark-primary text-black dark:text-white"
+                <Pressable className='px-1 bg-background z-40' onPress={handlePress}>
+                    <Animated.Text
+                        style={[labelStyle]}
+                        className="absolute z-50 px-1 bg-background text-primary"
                     >
                         {label}
                     </Animated.Text>
                 </Pressable>
                 <TouchableOpacity
                     onPress={handlePress}
-                    className={`w-full bg-transparent border rounded-lg px-4 py-3 h-14 flex-row justify-between items-center 
-                        ${isFocused ? 'border-black dark:border-white' : 'border-black/60 dark:border-white/60'}
+                    className={`w-full bg-transparent border rounded-lg px-4 py-3 h-14 flex-row justify-between items-center
+                        ${isFocused ? 'border-border' : 'border-border'}
                         ${error ? 'border-red-500' : ''}`}
                 >
-                    <ThemedText className={selectedOption ? '' : 'text-light-subtext dark:text-dark-subtext'}>
+                    <ThemedText className={selectedOption ? '' : 'text-subtext'}>
                         {selectedOption ? selectedOption.label : placeholder}
                     </ThemedText>
                     <Icon name="ChevronDown" size={20} />

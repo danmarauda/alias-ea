@@ -103,7 +103,7 @@ const Header: React.FC<HeaderProps> = ({
         intensity={30}
         tint="light"
         style={[style, containerStyle, { paddingTop: insets.top }]}
-        className={`w-full pt-4  px-global z-50 bg-light-primary/60 dark:bg-dark-primary/80 ${className}`}
+        className={`w-full pt-4  px-global z-50 bg-background/60 ${className}`}
       >
         <View className="flex-row justify-between">
           <View className='flex-row items-center'>
@@ -194,9 +194,9 @@ const Header: React.FC<HeaderProps> = ({
         style,
         containerStyle
       ]}
-      className={`w-full flex-row justify-between px-global pb-3 bg-light-primary dark:bg-dark-primary relative z-50 ${className}`}
+      className={`w-full flex-row justify-between px-global pb-3 bg-background relative z-50 ${className}`}
     >
-      
+
       {(showBackButton || leftComponent || title) && (
         <View className='flex-row items-center flex-1'>
           {showBackButton && (
@@ -210,7 +210,7 @@ const Header: React.FC<HeaderProps> = ({
               {leftComponent}
 
               {title && (
-                <Text className='dark:text-white text-lg font-bold'>{title}</Text>
+                <Text className='text-primary text-lg font-bold'>{title}</Text>
               )}
             </View>
           )}
@@ -254,7 +254,7 @@ export const HeaderIcon = ({ href, icon, hasBadge, onPress, className = '', isWh
       <TouchableOpacity onPress={onPress} className='overflow-visible'>
         <View className={`flex-row items-center justify-center relative overflow-visible h-7 w-7 ${className}`}>
           {hasBadge && (
-            <View className='w-4 h-4 border-2 border-light-primary dark:border-dark-primary z-30 absolute -top-0 -right-0 bg-red-500 rounded-full' />
+            <View className='w-4 h-4 border-2 border-background z-30 absolute -top-0 -right-0 bg-red-500 rounded-full' />
           )}
           {isWhite ? (
             <Icon name={icon} size={25} color="white" />
@@ -268,7 +268,7 @@ export const HeaderIcon = ({ href, icon, hasBadge, onPress, className = '', isWh
         <TouchableOpacity className='overflow-visible'>
           <View className={`flex-row items-center justify-center relative overflow-visible h-7 w-7 ${className}`}>
             {hasBadge && (
-              <View className='w-4 h-4 border-2 border-light-primary dark:border-dark-primary z-30 absolute -top-0 -right-[3px] bg-red-500 rounded-full' />
+              <View className='w-4 h-4 border-2 border-background z-30 absolute -top-0 -right-[3px] bg-red-500 rounded-full' />
             )}
             {isWhite ? (
               <Icon name={icon} size={25} color="white" />

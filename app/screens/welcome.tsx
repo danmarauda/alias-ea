@@ -45,9 +45,9 @@ export default function OnboardingScreen() {
     };
 
     return (
-        <SafeAreaView className='flex-1 bg-light-primary dark:bg-dark-primary' style={{ paddingTop: insets.top }}>
+        <SafeAreaView className='flex-1 bg-background' style={{ paddingTop: insets.top }}>
 
-            <View className="flex-1 relative bg-light-primary dark:bg-dark-primary">
+            <View className="flex-1 relative bg-background">
                 <View className='w-full items-end justify-end pr-6 pt-6'>
                     <ThemeToggle />
                 </View>
@@ -65,7 +65,7 @@ export default function OnboardingScreen() {
                         <View style={{ width: windowWidth }} className="items-center justify-center p-6">
                             <LottieView source={item.image} autoPlay loop style={{ width: windowWidth, height: 300 }} />
                             <ThemedText className="text-2xl mt-4 font-outfit-bold">{item.title}</ThemedText>
-                            <Text className="text-center text-light-subtext dark:text-dark-subtext mt-2">{item.description}</Text>
+                            <Text className="text-center text-subtext mt-2">{item.description}</Text>
                         </View>
                     )}
                     ListFooterComponent={() => (
@@ -78,7 +78,7 @@ export default function OnboardingScreen() {
                     {slides.map((_, index) => (
                         <View
                             key={index}
-                            className={`h-2 mx-1 rounded-full ${index === currentIndex ? 'bg-highlight w-2' : 'bg-light-secondary dark:bg-dark-secondary w-2'}`}
+                            className={`h-2 mx-1 rounded-full ${index === currentIndex ? 'bg-highlight w-2' : 'bg-secondary w-2'}`}
                         />
                     ))}
                 </View>
@@ -88,21 +88,21 @@ export default function OnboardingScreen() {
                 <View className="w-full px-6 mb-global flex flex-col space-y-2">
 
                     <View className='flex flex-row flex-wrap items-center justify-center gap-2'>
-                        <View className='w-full flex-row gap-2'>
-                            <Pressable onPress={() => router.push('/(drawer)/')} className='flex-1 border border-black dark:border-white rounded-full flex flex-row items-center justify-center py-4'>
+                        <View className='w-full flex-row gap-2 mb-4'>
+                            <Pressable onPress={() => router.push('/(drawer)/')} className='flex-1 border border-border rounded-full flex flex-row items-center justify-center py-4'>
                                 <AntDesign name="google" size={22} color={colors.text} />
                                 <ThemedText className='text-sm ml-2'>Google</ThemedText>
                             </Pressable>
-                            <Pressable onPress={() => router.push('/(drawer)/')} className='flex-1 border border-black dark:border-white rounded-full flex flex-row items-center justify-center py-4'>
+                            <Pressable onPress={() => router.push('/(drawer)/')} className='flex-1 border border-border rounded-full flex flex-row items-center justify-center py-4'>
                                 <AntDesign name="apple" size={22} color={colors.text} />
                                 <ThemedText className='text-sm ml-2'>Apple</ThemedText>
                             </Pressable>
 
                         </View>
-                        <Pressable onPress={() => router.push('/screens/signup')} className='flex-1 w-1/4 bg-black dark:bg-white rounded-full flex flex-row items-center justify-center py-4'>
+                        <Pressable onPress={() => router.push('/screens/signup')} className='flex-1 w-1/4 bg-text rounded-full flex flex-row items-center justify-center py-4'>
 
                             <Icon name="Mail" size={20} color={colors.invert} />
-                            <ThemedText className='text-sm text-white dark:text-black ml-2'>Email</ThemedText>
+                            <ThemedText className='text-sm !text-invert ml-2'>Email</ThemedText>
                         </Pressable>
 
                     </View>

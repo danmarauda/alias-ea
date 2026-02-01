@@ -224,7 +224,7 @@ const Slider = ({
         <View className="flex-row justify-between mb-2">
           <ThemedText className={currentSize.labelText}>{label}</ThemedText>
           <Animated.Text 
-            className={`text-light-text dark:text-dark-text ${currentSize.valueText}`}
+            className={`text-text ${currentSize.valueText}`}
           >
             {formatValue.value}
           </Animated.Text>

@@ -120,7 +120,7 @@ export default function SignupScreen() {
   };
   const insets = useSafeAreaInsets();
   return (
-    <View style={{paddingTop: insets.top }} className="flex-1 bg-light-primary dark:bg-dark-primary p-6">
+    <View style={{paddingTop: insets.top }} className="flex-1 bg-background p-10">
      
       
       <View className="mt-8">
@@ -130,7 +130,7 @@ export default function SignupScreen() {
         <Input
           label="Email"
           //leftIcon="mail"
-          variant="underlined"
+          variant="classic"
           value={email}
           onChangeText={(text) => {
             setEmail(text);
@@ -144,7 +144,7 @@ export default function SignupScreen() {
         
         <Input
           label="Password"
-          variant="underlined"
+          variant="classic"
           value={password}
           onChangeText={(text) => {
             setPassword(text);
@@ -158,7 +158,7 @@ export default function SignupScreen() {
        
         <Input
           label="Confirm password"
-          variant="underlined"
+          variant="classic"
           value={confirmPassword}
           onChangeText={(text) => {
             setConfirmPassword(text);
@@ -170,13 +170,13 @@ export default function SignupScreen() {
         />
          {password.length > 0 && (
           <View className="mb-4">
-            <View className="w-full h-1 bg-light-secondary dark:bg-dark-secondary rounded-full overflow-hidden">
+            <View className="w-full h-1 bg-secondary rounded-full overflow-hidden">
               <View 
                 className={`h-full rounded-full ${passwordStrength >= 75 ? 'bg-green-500' : passwordStrength >= 50 ? 'bg-yellow-500' : 'bg-red-500'}`}
                 style={{ width: `${passwordStrength}%` }}
               />
             </View>
-            <ThemedText className="text-xs mt-1 text-light-subtext dark:text-dark-subtext">
+            <ThemedText className="text-xs mt-1 text-subtext">
               {strengthText}
             </ThemedText>
           </View>
@@ -189,12 +189,13 @@ export default function SignupScreen() {
           loading={isLoading}
           size="large"
           className="mb-6"
+          rounded="full"
         />
         
        
         
         <View className="flex-row justify-center">
-          <ThemedText className="text-light-subtext dark:text-dark-subtext">Already have an account? </ThemedText>
+          <ThemedText className="text-subtext">Already have an account? </ThemedText>
           <Link href="/screens/login" asChild>
             <Pressable>
               <ThemedText className="underline">Log in</ThemedText>

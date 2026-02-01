@@ -119,8 +119,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           onBackdropPress={hideDatePicker}
           style={{ margin: 0, justifyContent: 'flex-end' }}
         >
-          <View className="bg-light-primary dark:bg-dark-primary rounded-t-xl items-center justify-center w-full">
-            <View className="flex-row justify-between items-center p-4 border-b border-light-secondary dark:border-dark-secondary w-full">
+          <View className="bg-background rounded-t-xl items-center justify-center w-full">
+            <View className="flex-row justify-between items-center p-4 border-b border-secondary w-full">
               <Button
                 title="Cancel"
                 variant="ghost"
@@ -174,8 +174,8 @@ export const DatePicker: React.FC<DatePickerProps> = ({
         <View className="relative">
           <TouchableOpacity
             onPress={showDatePicker}
-            className={`border rounded-lg py-4 px-3 h-14 pr-10 text-black dark:text-white bg-transparent
-              ${isFocused ? 'border-black dark:border-white' : 'border-black/60 dark:border-white/60'}
+            className={`border rounded-lg py-4 px-3 h-14 pr-10 text-primary bg-transparent
+              ${isFocused ? 'border-border' : 'border-border'}
               ${error ? 'border-red-500' : ''}`}
           >
             <ThemedText className={value ? 'text-base' : 'text-base text-gray-500'}>
@@ -199,18 +199,18 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     return (
       <View className={`mb-global ${containerClassName}`}>
         <View className="relative">
-          <Pressable className='px-0 bg-light-primary dark:bg-dark-primary z-40' onPress={showDatePicker}>
+          <Pressable className='px-0 bg-background z-40' onPress={showDatePicker}>
             <Animated.Text 
               style={[underlinedLabelStyle]} 
-              className="absolute z-50 bg-light-primary dark:bg-dark-primary text-black dark:text-white"
+              className="absolute z-50 bg-background text-primary"
             >
               {label}
             </Animated.Text>
           </Pressable>
           <TouchableOpacity
             onPress={showDatePicker}
-            className={`border-b-2 py-4 px-0 h-14 pr-10 text-black dark:text-white bg-transparent border-t-0 border-l-0 border-r-0
-              ${isFocused ? 'border-black dark:border-white' : 'border-black/60 dark:border-white/60'}
+            className={`border-b-2 py-4 px-0 h-14 pr-10 text-primary bg-transparent border-t-0 border-l-0 border-r-0
+              ${isFocused ? 'border-border' : 'border-border'}
               ${error ? 'border-red-500' : ''}`}
           >
             <ThemedText className={value ? 'text-base' : 'text-base text-gray-500'}>
@@ -233,18 +233,18 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   return (
     <View className={`mb-global ${containerClassName}`}>
       <View className="relative">
-        <Pressable className='px-1 bg-light-primary dark:bg-dark-primary z-40' onPress={showDatePicker}>
+        <Pressable className='px-1 bg-background z-40' onPress={showDatePicker}>
           <Animated.Text 
             style={[labelStyle]} 
-            className="absolute z-50 px-1 bg-light-primary dark:bg-dark-primary text-black dark:text-white"
+            className="absolute z-50 px-1 bg-background text-primary"
           >
             {label}
           </Animated.Text>
         </Pressable>
         <TouchableOpacity
           onPress={showDatePicker}
-          className={`border rounded-lg py-4 px-3 h-14 pr-10 text-black dark:text-white bg-transparent
-            ${isFocused ? 'border-black dark:border-white' : 'border-black/60 dark:border-white/60'}
+          className={`border rounded-lg py-4 px-3 h-14 pr-10 text-primary bg-transparent
+            ${isFocused ? 'border-border' : 'border-border'}
             ${error ? 'border-red-500' : ''}`}
         >
           <ThemedText className={value ? 'text-base' : 'text-base text-gray-500'}>

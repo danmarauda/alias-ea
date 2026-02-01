@@ -95,7 +95,7 @@ const ListItem = forwardRef<View, ListItemProps>((props, ref) => {
                     title
                 )}
                 {subtitle && (
-                    <ThemedText className="text-sm text-light-subtext dark:text-dark-subtext">
+                    <ThemedText className="text-sm text-subtext">
                         {subtitle}
                     </ThemedText>
                 )}
@@ -115,7 +115,7 @@ const ListItem = forwardRef<View, ListItemProps>((props, ref) => {
             <Link href={href} asChild>
                 <Pressable
                     ref={ref}
-                    className={`active:bg-light-secondary/10 dark:active:bg-dark-secondary/10`}
+                    className={`active:bg-secondary/10`}
                     {...rest}
                 >
                     {itemContent}
@@ -130,7 +130,7 @@ const ListItem = forwardRef<View, ListItemProps>((props, ref) => {
             ref={ref}
             onPress={disabled ? undefined : onPress}
             className={`
-                ${onPress ? 'active:bg-light-secondary/10 dark:active:bg-dark-secondary/10' : ''}
+                ${onPress ? 'active:bg-secondary/10' : ''}
             `}
             {...rest}
         >

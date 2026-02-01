@@ -69,7 +69,7 @@ const contactInfo = [
 
 export default function HelpScreen() {
   return (
-    <View className="flex-1 bg-light-primary dark:bg-dark-primary">
+    <View className="flex-1 bg-background">
       <Header title="Help & Support" showBackButton />
       
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -88,7 +88,7 @@ export default function HelpScreen() {
                 title={faq.question}
                 className="py-1"
               >
-                <ThemedText className="text-light-text dark:text-dark-text leading-6">
+                <ThemedText className="text-text leading-6">
                   {faq.answer}
                 </ThemedText>
               </Expandable>
@@ -111,13 +111,13 @@ export default function HelpScreen() {
                 key={contact.id}
                 onPress={contact.action}
                 disabled={!contact.action}
-                className="flex-row items-center py-4 border-b border-light-secondary dark:border-dark-secondary"
+                className="flex-row items-center py-4 border-b border-secondary"
               >
-                <View className="w-10 h-10 rounded-full bg-light-secondary dark:bg-dark-secondary items-center justify-center mr-4">
+                <View className="w-10 h-10 rounded-full bg-secondary items-center justify-center mr-4">
                   <Icon name={contact.icon} size={20} />
                 </View>
                 <View>
-                  <ThemedText className="text-sm text-light-subtext dark:text-dark-subtext">
+                  <ThemedText className="text-sm text-subtext">
                     {contact.type}
                   </ThemedText>
                   <ThemedText className="font-medium">
@@ -125,7 +125,7 @@ export default function HelpScreen() {
                   </ThemedText>
                 </View>
                 {contact.action && (
-                  <Icon name="ChevronRight" size={20} className="ml-auto text-light-subtext dark:text-dark-subtext" />
+                  <Icon name="ChevronRight" size={20} className="ml-auto text-subtext" />
                 )}
               </TouchableOpacity>
             ))}

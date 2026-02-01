@@ -115,7 +115,7 @@ const ProductVariantCreator: React.FC<ProductVariantCreatorProps> = ({ hasStock 
                         </View>
                         <View className="flex-row flex-wrap gap-1 mt-1">
                             {option.values.map((value, i) => (
-                                <View key={i} className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-lg text-sm">
+                                <View key={i} className="px-3 py-1 bg-secondary rounded-lg text-sm">
                                     <ThemedText key={i} className="text-sm">{value}</ThemedText>
                                 </View>
                             ))}
@@ -130,18 +130,18 @@ const ProductVariantCreator: React.FC<ProductVariantCreatorProps> = ({ hasStock 
                     className=" py-3 px-4 rounded-lg border border-neutral-400 items-center flex-row justify-center relative z-50"
                 >
                     <Icon name="Plus" size={20} />
-                    <Text className="dark:text-white ml-2">Add option </Text>
+                    <Text className="text-primary ml-2">Add option </Text>
                 </Pressable>
             )
                 :
                 <View className=" py-3 px-4 rounded-lg bg-neutral-100 items-center flex-row justify-center relative z-50">
-                    <Text className="dark:text-white text-neutral-400">You've reached 3 options limit </Text>
+                    <Text className="text-primary text-neutral-400">You've reached 3 options limit </Text>
                 </View>
             }
 
             {variants.length > 0 && (
                 <View className="mt-4">
-                    <Text className="dark:text-white text-xl font-medium mt-0 mb-2">Variants</Text>
+                    <Text className="text-primary text-xl font-medium mt-0 mb-2">Variants</Text>
                     {variants.map((variant, index) => (
                         <View key={index} className="border border-neutral-400 p-2 rounded-lg mb-2">
 
@@ -189,8 +189,8 @@ const ProductVariantCreator: React.FC<ProductVariantCreatorProps> = ({ hasStock 
             )}
 
             <Modal visible={modalVisible} transparent animationType="slide">
-                <SafeAreaView className='flex-1 bg-light-primary dark:bg-dark-primary'>
-                    <View className='flex-1 w-full bg-light-primary dark:bg-dark-primary'>
+                <SafeAreaView className='flex-1 bg-background'>
+                    <View className='flex-1 w-full bg-background'>
                         <View className='flex-row w-full justify-between px-4'>
 
 
@@ -214,7 +214,7 @@ const ProductVariantCreator: React.FC<ProductVariantCreatorProps> = ({ hasStock 
                             
                                 <Icon name="Trash" size={18} />
                             </Pressable>
-                            <Button onPress={handleSaveOption} title="Save" size="medium" className='bg-black dark:bg-white px-6  items-center ml-2 justify-center'></Button>
+                            <Button onPress={handleSaveOption} title="Save" size="medium" className='bg-primary px-6  items-center ml-2 justify-center'></Button>
                         </View>
                     </View>
                     <View className="flex-1 mt-8">
@@ -223,7 +223,7 @@ const ProductVariantCreator: React.FC<ProductVariantCreatorProps> = ({ hasStock 
                             <ThemedText className='text-sm w-full mb-4'>Sizes, colors, duration</ThemedText>
                             <Input label="Name" value={currentOption.name} onChangeText={(text) => setCurrentOption({ ...currentOption, name: text })} />
                             <ThemedText className='text-xl font-medium mt-8'>Values</ThemedText>
-                            <ThemedText className='text-light-subtext dark:text-dark-subtext text-sm w-full'>Black, large, hours, etc</ThemedText>
+                            <ThemedText className='text-subtext text-sm w-full'>Black, large, hours, etc</ThemedText>
                             <FlatList
                                 className='mt-4 border border-neutral-500 rounded-lg relative'
                                 data={currentOption.values}
@@ -231,7 +231,7 @@ const ProductVariantCreator: React.FC<ProductVariantCreatorProps> = ({ hasStock 
                                 renderItem={({ item, index }) => (
                                     <View className="flex-row items-center border-b border-neutral-500">
                                         <TextInput
-                                            className="flex-1 py-3 px-4 dark:text-white dark:placeholder:text-white"
+                                            className="flex-1 py-3 px-4 text-primary placeholder:text-primary"
                                             placeholder="Enter value"
                                             placeholderTextColor={colors.placeholder}
                                             value={item}

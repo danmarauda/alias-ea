@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { View, TouchableWithoutFeedback, ViewStyle, TextStyle, Dimensions, LayoutChangeEvent } from 'react-native';
-import { styled } from 'nativewind';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -12,9 +11,6 @@ import Animated, {
 import Icon, { IconName } from './Icon';
 import useThemeColors from '@/app/contexts/ThemeColors';
 
-const StyledAnimatedView = styled(Animated.View);
-const StyledView = styled(View);
-const StyledTouchableWithoutFeedback = styled(TouchableWithoutFeedback);
 const { width: windowWidth } = Dimensions.get('window');
 type AnimatedFabProps = {
   icon: IconName;
@@ -208,7 +204,7 @@ const AnimatedFab: React.FC<AnimatedFabProps> = ({
   return (
     <>
       {/* Hidden content measure view */}
-      <StyledView 
+      <View
         className="absolute opacity-0 pointer-events-none left-[-9999px]"
         style={{ width: windowWidth - 30 }}
         ref={contentMeasureRef}
@@ -216,12 +212,12 @@ const AnimatedFab: React.FC<AnimatedFabProps> = ({
         <View className="pb-10">
           {children}
         </View>
-      </StyledView>
-    
+      </View>
+
       <TouchableWithoutFeedback>
-        <StyledAnimatedView
+        <Animated.View
           className={
-            `absolute items-center justify-center z-10 shadow-md shadow-black/30 bg-black dark:bg-white
+            `absolute items-center justify-center z-10 shadow-md shadow-black/30 bg-primary
             ${getPositionClasses()}
             ${className}`
           }
@@ -231,7 +227,7 @@ const AnimatedFab: React.FC<AnimatedFabProps> = ({
           ]}
         >
           <TouchableWithoutFeedback onPress={toggleOpen}>
-            <StyledAnimatedView 
+            <Animated.View
               className={`absolute items-center justify-center z-20 ${iconClassName}`}
               style={[iconAnimatedStyle, style]}
             >
@@ -240,18 +236,18 @@ const AnimatedFab: React.FC<AnimatedFabProps> = ({
               size={iconSize}
                 color={iconColor || 'white'}
               />
-            </StyledAnimatedView>
+            </Animated.View>
           </TouchableWithoutFeedback>
 
           {/**THIS IS CONTENT OF THE FAB */}
-          <StyledAnimatedView 
+          <Animated.View
             className={`absolute w-full h-full p-6 pb-0 items-start justify-start z-10 ${contentClassName}`}
             style={[contentAnimatedStyle, style]}
           >
             <Icon name="X" size={24} color="white" className='absolute top-2 right-2 z-50'  onPress={toggleOpen} />
             {children}
-          </StyledAnimatedView>
-        </StyledAnimatedView>
+          </Animated.View>
+        </Animated.View>
       </TouchableWithoutFeedback>
     </>
   );

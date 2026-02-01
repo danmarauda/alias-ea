@@ -86,14 +86,14 @@ export const Section: React.FC<SectionProps> = ({
                                             {title}
                                         </ThemedText>
                                         {link && (
-                                            <Link href={link} className={`${linkClassName} text-black dark:text-white underline`}>
+                                            <Link href={link} className={`${linkClassName} text-primary underline`}>
                                                 {linkText}
                                             </Link>
                                         )}
                                     </View>
                                 )}
                                 {subtitle && (
-                                    <ThemedText className={` text-light-subtext dark:text-dark-subtext`}>
+                                    <ThemedText className={` text-subtext`}>
                                         {subtitle}
                                     </ThemedText>
                                 )}

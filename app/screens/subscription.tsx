@@ -42,7 +42,7 @@ const Subscription = () => {
       ) : (
 
         <>
-          <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }} className='bg-light-primary dark:bg-dark-primary flex-1 h-full  py-4 flex-1'>
+          <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }} className='bg-background flex-1 h-full  py-4 flex-1'>
             <View className='w-full justify-between flex-row items-center px-4'>
               <View className='flex-row items-center'>
                 <ThemedText className='text-3xl font-outfit-bold'>Luna</ThemedText>
@@ -52,7 +52,7 @@ const Subscription = () => {
                 </View>
               </View>
               <View className=''>
-                <Pressable onPress={() => router.dismiss()} className='w-12 h-12 bg-light-secondary dark:bg-dark-secondary rounded-full items-center justify-center'>
+                <Pressable onPress={() => router.dismiss()} className='w-12 h-12 bg-secondary rounded-full items-center justify-center'>
                   <Icon name="X" size={25} />
                 </Pressable>
               </View>
@@ -70,13 +70,13 @@ const Subscription = () => {
               <RowItem isPro label="Code Explanation & Generation" />
               <RowItem isPro label="API Access" />
             </ThemedScroller>
-            <View className='px-4 pt-4 w-full items-center justify-center bg-light-primary dark:bg-dark-primary border-t border-light-secondary dark:border-dark-secondary'>
+            <View className='px-4 pt-4 w-full items-center justify-center bg-background border-t border-secondary'>
               <Pressable
                 onPress={() => actionSheetRef.current?.show()}
                 className='w-full items-center bg-sky-500 rounded-lg justify-center py-4'>
                 <Text className='text-white text-base'>Start free trial</Text>
               </Pressable>
-              <Text className='dark:text-dark-subtext mt-3'>Recurring billing. Cancel anytime</Text>
+              <Text className='text-subtext mt-3'>Recurring billing. Cancel anytime</Text>
             </View>
           </View>
 
@@ -120,17 +120,17 @@ const SelectPlan = (props: { badge: any; save: any; price: any; period: any; isS
   const { badge, save, price, period, isSelected, onSelect } = props
 
   return (
-    <Pressable onPress={onSelect} className={`flex-row justify-between items-center p-4 rounded-lg  mb-4 border  ${isSelected ? 'border-highlight' : 'border-light-secondary dark:border-dark-secondary'}`}>
+    <Pressable onPress={onSelect} className={`flex-row justify-between items-center p-4 rounded-lg  mb-4 border  ${isSelected ? 'border-highlight' : 'border-secondary'}`}>
       <View>
         <View className='flex-row items-center mb-2'>
-          <Text className='text-lg font-semibold dark:text-white'>{period}</Text>
+          <Text className='text-lg font-semibold text-primary'>{period}</Text>
           {badge &&
             <View className='px-1 py-1 ml-2 bg-highlight rounded-md'><Text className='text-xs text-white'>{badge}</Text></View>
           }
         </View>
-        <Text className='text-sm dark:text-white'>{price} {save && <Text className='text-highlight text-xs'>{save}</Text>}</Text>
+        <Text className='text-sm text-primary'>{price} {save && <Text className='text-highlight text-xs'>{save}</Text>}</Text>
       </View>
-      <View className={`w-6 h-6 items-center justify-center border rounded-full bg-light-secondary dark:bg-dark-secondary ${isSelected ? 'border-sky-500' : 'border-transparent'}`}>
+      <View className={`w-6 h-6 items-center justify-center border rounded-full bg-secondary ${isSelected ? 'border-sky-500' : 'border-transparent'}`}>
         <View className={`w-4 h-4 items-center justify-center border rounded-full  ${isSelected ? 'bg-sky-500 border-sky-500' : 'bg-transparent border-transparent'}`} />
       </View>
     </Pressable>
@@ -141,7 +141,7 @@ const SelectPlan = (props: { badge: any; save: any; price: any; period: any; isS
 const RowItem = (props: { label: any; isFree?: any; isPro?: any; }) => {
   const { label, isFree, isPro } = props
   return (
-    <View className='w-full flex-row border-b border-light-secondary dark:border-dark-secondary'>
+    <View className='w-full flex-row border-b border-secondary'>
       <View className='flex-1 py-6'>
         <ThemedText className='text-base'>{label}</ThemedText>
       </View>

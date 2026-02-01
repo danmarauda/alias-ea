@@ -29,13 +29,13 @@ export const CardScroller = ({
   return (
     <View className={`w-full flex flex-col  ${title ? 'pt-global' : 'pt-0'} ${className}`} style={style}>
       <View className={`w-full flex flex-row justify-between items-center ${title ? 'mb-2' : 'mb-0'}`}>
-        {title && <ThemedText className='text-base dark:text-white font-bold'>{title}</ThemedText>}
+        {title && <ThemedText className='text-base font-bold'>{title}</ThemedText>}
         {allUrl && (
           <View className='flex flex-col'>
-            <Link href={allUrl} className='dark:text-white'>
+            <Link href={allUrl} className='text-primary'>
               See all
             </Link>
-            <View className='h-px w-full bg-black dark:bg-white mt-[1px]' />
+            <View className='h-px w-full bg-primary mt-[1px]' />
           </View>
         )}
       </View>

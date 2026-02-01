@@ -79,7 +79,7 @@ const ThemeTabs: React.FC<ThemeTabsProps> = ({
     const stickyHeaderIndices = headerComponent ? [1] : [0];
 
     return (
-        <View className="flex-1 bg-light-primary dark:bg-dark-primary">
+        <View className="flex-1 bg-background">
             <ScrollView
                 ref={mainScrollRef}
                 stickyHeaderIndices={stickyHeaderIndices}
@@ -95,10 +95,10 @@ const ThemeTabs: React.FC<ThemeTabsProps> = ({
                 {/* Tab Bar - This will be sticky */}
                 <View className="z-10">
                     {type === 'scrollview' ? (
-                        <ScrollView 
-                            showsHorizontalScrollIndicator={false} 
-                            horizontal 
-                            className='flex-row h-[48px] bg-light-primary dark:bg-dark-primary border-b border-light-secondary dark:border-white/20'
+                        <ScrollView
+                            showsHorizontalScrollIndicator={false}
+                            horizontal
+                            className='flex-row h-[48px] bg-background border-b border-secondary'
                         >
                             {tabs.map((tab, index) => {
                                 if (!React.isValidElement(tab)) return null;
@@ -123,7 +123,7 @@ const ThemeTabs: React.FC<ThemeTabsProps> = ({
                             })}
                         </ScrollView>
                     ) : (
-                        <View className='flex-row h-[48px] bg-light-primary dark:bg-dark-primary border-b border-light-secondary dark:border-white/20'>
+                        <View className='flex-row h-[48px] bg-background border-b border-secondary'>
                             {tabs.map((tab, index) => {
                                 if (!React.isValidElement(tab)) return null;
                                 return (

@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, TextInput as RNTextInput, Animated, Pressable, TextInputProps } from 'react-native';
-import { styled } from 'nativewind';
 import Icon from '../Icon';
 
 import ThemedText from '../ThemedText';
@@ -15,8 +14,6 @@ interface CustomTextInputProps extends TextInputProps {
   className?: string;
   containerClassName?: string;
 }
-
-const StyledTextInput = styled(RNTextInput);
 
 const TextInput: React.FC<CustomTextInputProps> = ({
   label,
@@ -96,20 +93,20 @@ const TextInput: React.FC<CustomTextInputProps> = ({
   return (
     <View className={`mb-global ${containerClassName}`}>
       <View className="relative">
-        <Pressable className='px-1 bg-light-primary dark:bg-dark-primary z-40' onPress={() => inputRef.current?.focus()}>
+        <Pressable className='px-1 bg-background z-40' onPress={() => inputRef.current?.focus()}>
           <Animated.Text 
             style={[labelStyle]} 
-            className="absolute z-50 px-1 bg-light-primary dark:bg-dark-primary text-black dark:text-white"
+            className="absolute z-50 px-1 bg-background text-primary"
           >
             {label}
           </Animated.Text>
         </Pressable>
         
-        <StyledTextInput
+        <RNTextInput
           ref={inputRef}
-          className={`border rounded-lg py-3 px-3 h-14 ${(isPassword || rightIcon) ? 'pr-10' : ''} 
-            text-black dark:text-white bg-transparent
-            ${isFocused ? 'border-black dark:border-white' : 'border-black/40 dark:border-white/40'}
+          className={`border rounded-lg py-3 px-3 h-14 ${(isPassword || rightIcon) ? 'pr-10' : ''}
+            text-primary bg-transparent
+            ${isFocused ? 'border-border' : 'border-border/40'}
             ${error ? 'border-red-500' : ''}
             ${className}`}
           onFocus={() => setIsFocused(true)}

@@ -23,7 +23,7 @@ export const Sphere = () => {
                 className='relative w-[250px] h-[250px] items-center justify-center' onPress={toggleSpeaking}>
                     <View 
                     style={shadowPresets.large}
-                    className='w-[140px] relative z-[9999] h-[140px] rounded-full bg-light-secondary dark:bg-dark-primary items-center justify-center'>
+                    className='w-[140px] relative z-[9999] h-[140px] rounded-full bg-secondary items-center justify-center'>
                         <LottieView
                             autoPlay
                             style={{

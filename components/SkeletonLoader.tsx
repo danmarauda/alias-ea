@@ -163,7 +163,7 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({ variant, count = 1, cla
     };
 
     return (
-        <View className={`flex-1 bg-light-primary dark:bg-dark-primary ${className}`}>
+        <View className={`flex-1 bg-background ${className}`}>
             {renderContent()}
         </View>
     );

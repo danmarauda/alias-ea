@@ -28,13 +28,12 @@ const HomeScreen = () => {
     ];
 
     const leftComponent = [
-        <DrawerButton key="drawer-button" />,
-        <ThemedText key="app-title" className='text-2xl font-outfit-bold ml-4'>Luna<Text className="text-highlight">.</Text></ThemedText>
+        <DrawerButton key="drawer-button" />
     ];
 
 
     return (
-        <View className="flex-1 bg-light-primary dark:bg-dark-primary relative">
+        <View className="flex-1 bg-background relative">
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : undefined}
                 keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 180}
@@ -50,8 +49,8 @@ const HomeScreen = () => {
                   
 
                     <View className='flex-1 items-center justify-end'>
-                        <CardScroller className='px-global pb-2'>
-                            <SuggestionCard title="Make a recipe" description="Find the best recipes for a healthy diet" icon="Cookie" />
+                        <CardScroller className='px-global pb-4'>
+                            <SuggestionCard title="Make a recipe" description="Find the best recipes" icon="Cookie" />
                             <SuggestionCard title="Generate image" description="Use text to generate an image" icon="Image" />
                             <SuggestionCard title="Generate text" description="Use an image to generate text" icon="Text" />
                             <SuggestionCard title="Generate code" description="Use text to generate code" icon="Code" />
@@ -70,12 +69,11 @@ const SuggestionCard = (props: any) => {
     return (
         <TouchableOpacity
             activeOpacity={0.8}
-            style={{ ...shadowPresets.card }}
-            className='p-4 bg-light-primary dark:bg-dark-primary w-[270px] flex flex-row items-center rounded-2xl border border-light-secondary dark:border-dark-secondary'>
-            <Icon name={props.icon} size={20} className='bg-light-secondary dark:bg-dark-secondary rounded-full w-12 h-12' />
+            className='p-4 bg-secondary w-[270px] flex flex-row items-center rounded-2xl border border-border'>
+            <Icon name={props.icon} size={20} className='bg-background rounded-2xl w-14 h-14' />
             <View className='ml-4 flex-1'>
                 <ThemedText className='text-lg font-semibold'>{props.title}</ThemedText>
-                <ThemedText className='text-sm'>{props.description}</ThemedText>
+                <ThemedText className='text-xs'>{props.description}</ThemedText>
             </View>
         </TouchableOpacity>
     );

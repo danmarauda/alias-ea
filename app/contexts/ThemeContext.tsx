@@ -1,42 +1,50 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { useColorScheme } from 'nativewind';
+import React, { createContext, useContext, useState } from "react";
+import { View } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { colorScheme } from "nativewind";
+import { themes } from "@/utils/color-theme";
+
+interface ThemeProviderProps {
+    children: React.ReactNode;
+}
 
 type ThemeContextType = {
-  isDark: boolean;
-  toggleTheme: () => void;
+    theme: "light" | "dark";
+    isDark: boolean;
+    toggleTheme: () => void;
 };
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextType>({
+    theme: "dark",
+    isDark: true,
+    toggleTheme: () => { },
+});
 
-export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const { colorScheme, toggleColorScheme, setColorScheme } = useColorScheme();
-  const [isDark, setIsDark] = useState(false);
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
+    const [currentTheme, setCurrentTheme] = useState<"light" | "dark">("dark");
 
-  useEffect(() => {
-    // 👇 Force dark mode on initial load
-    setColorScheme('dark');
-    setIsDark(true);
-  }, []);
+    const toggleTheme = () => {
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+        setCurrentTheme(newTheme);
+        colorScheme.set(newTheme);
+    };
 
-  const toggleTheme = () => {
-    const next = isDark ? 'light' : 'dark';
-    setColorScheme(next);
-    setIsDark(!isDark);
-  };
-
-  return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+    return (
+        <ThemeContext.Provider value={{ theme: currentTheme, isDark: currentTheme === "dark", toggleTheme }}>
+            <StatusBar backgroundColor="transparent" translucent={true} style={currentTheme === "dark" ? "light" : "dark"} />
+            <View style={themes[currentTheme]} className="flex-1 bg-background">
+                {children}
+            </View>
+        </ThemeContext.Provider>
+    );
 };
 
 export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
+    const context = useContext(ThemeContext);
+    if (!context) {
+        throw new Error('useTheme must be used within a ThemeProvider');
+    }
+    return context;
 };
 
-export default ThemeContext;
+export default ThemeProvider;

@@ -54,10 +54,10 @@ export default function Counter({
     <View className={`w-full ${className}`} style={style}>
       <View className="w-full flex-row items-center justify-between">
         <ThemedText className="text-base flex-1">{label}</ThemedText>
-        <View className="flex-row min-w-[140px] justify-between p-1 items-center bg-light-secondary dark:bg-dark-secondary rounded-full  overflow-hidden">
+        <View className="flex-row min-w-[140px] justify-between p-1 items-center bg-secondary rounded-full  overflow-hidden">
           <Pressable 
             onPress={decrement}
-            className="w-8 h-8 bg-light-primary dark:bg-dark-primary rounded-full items-center justify-center"
+            className="w-8 h-8 bg-background rounded-full items-center justify-center"
           >
             <ThemedText className="text-lg">-</ThemedText>
           </Pressable>
@@ -70,7 +70,7 @@ export default function Counter({
 
           <Pressable 
             onPress={increment}
-            className="w-8 h-8 bg-light-primary dark:bg-dark-primary rounded-full items-center justify-center"
+            className="w-8 h-8 bg-background rounded-full items-center justify-center"
           >
             <ThemedText className="text-lg">+</ThemedText>
           </Pressable>

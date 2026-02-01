@@ -65,8 +65,9 @@ export const shadowPresets = {
   
   large: useShadow({
     elevation: 15,
-    shadowRadius: 10.84,
-    shadowOffset: { width: 0, height: 10 }
+    shadowRadius: 20.84,
+    shadowColor: 'rgba(0, 0, 0, 0.2)',
+    shadowOffset: { width: 0, height:5 }
   }),
   
   card: useShadow({

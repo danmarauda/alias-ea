@@ -201,7 +201,7 @@ export default function MultiStep({
   };
 
   return (
-    <View className={`flex-1 bg-light-primary dark:bg-dark-primary ${className}`}>
+    <View className={`flex-1 bg-background ${className}`}>
       {showHeader && (
         <Header
           rightComponents={[
@@ -209,13 +209,13 @@ export default function MultiStep({
               <Pressable
                 key="close"
                 onPress={onClose}
-                className="p-2 rounded-full active:bg-light-secondary dark:active:bg-dark-secondary"
+                className="p-2 rounded-full active:bg-secondary"
                 hitSlop={8}
               >
                 <Icon
                   name="X"
                   size={24}
-                  className="text-light-text dark:text-dark-text"
+                  className="text-text"
                 />
               </Pressable>
             ) : undefined
@@ -235,7 +235,7 @@ export default function MultiStep({
                 name="ArrowLeft"
                 key="back"
                 size={24}
-                className="text-light-text dark:text-dark-text"
+                className="text-text"
                 onPress={handleBack}
               />
             ),
@@ -250,9 +250,9 @@ export default function MultiStep({
             {steps.map((step, index) => (
               <React.Fragment key={step.key}>
                 <View className="flex items-center flex-1 mx-px">
-                  <View className='h-1 w-full bg-light-secondary dark:bg-dark-secondary'>
+                  <View className='h-1 w-full bg-secondary'>
                     <Animated.View
-                      className="h-1 bg-black dark:bg-white absolute top-0 left-0"
+                      className="h-1 bg-primary absolute top-0 left-0"
                       style={{
                         width: progressAnims[index].interpolate({
                           inputRange: [0, 1],

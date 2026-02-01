@@ -28,7 +28,7 @@ interface CardProps {
     iconColor?: string;
     imageHeight?: number;
     showOverlay?: boolean;
-    hasFavorite?: boolean;  
+    hasFavorite?: boolean;
     overlayGradient?: readonly [string, string];
     width?: any;
     rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
@@ -105,17 +105,17 @@ const Card: React.FC<CardProps> = ({
     const renderPrice = () => {
         if (!price) return null;
         return (
-            <ThemedText className={`text-sm font-bold  ${variant === 'overlay' ? 'text-white' : 'text-dark-primary dark:text-white'}`}>{price}</ThemedText>
+            <ThemedText className={`text-sm font-bold ${variant === 'overlay' ? 'text-white' : 'text-invert'}`}>{price}</ThemedText>
         );
     };
 
     const renderContent = () => {
         const cardContent = (
-            <View 
-            
-            className={`flex-1 bg-light-secondary dark:bg-dark-secondary ${getRoundedClass()} ${className}`} 
+            <View
+
+            className={`flex-1 bg-secondary ${getRoundedClass()} ${className}`}
             style={[
-                hasShadow && { 
+                hasShadow && {
                     ...shadowPresets.card
                 },
                 style
@@ -173,7 +173,7 @@ const Card: React.FC<CardProps> = ({
                         <ThemedText className="text-sm font-semibold mb-2">{title}</ThemedText>
 
                         {description && (
-                            <ThemedText numberOfLines={1} className="text-xs text-gray-600 dark:text-gray-300">
+                            <ThemedText numberOfLines={1} className="text-xs text-subtext">
                                 {description}
                             </ThemedText>
                         )}

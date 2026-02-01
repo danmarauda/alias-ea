@@ -51,11 +51,11 @@ export const MultipleImagePicker: React.FC<MultipleImagePickerProps> = ({ onImag
 
     return (
         <>
-            <Text className='text-sm dark:text-white'>Images</Text>
+            <Text className='text-sm text-primary'>Images</Text>
             <CardScroller>
                 {mainImage ? (
                     <View className='relative'>
-                        <Pressable onPress={() => pickImage(true)} className='w-28 overflow-hidden relative h-28 border border-black dark:border-white rounded-xl flex flex-col items-center justify-center' android_ripple={{ color: 'rgba(0,0,0,0.3)', borderless: false }}>
+                        <Pressable onPress={() => pickImage(true)} className='w-28 overflow-hidden relative h-28 border border-border rounded-xl flex flex-col items-center justify-center' android_ripple={{ color: 'rgba(0,0,0,0.3)', borderless: false }}>
                             <Image className="w-full h-full" source={{ uri: mainImage }} />
                         </Pressable>
                         <Pressable onPress={() => handleDelete()} className='w-7 h-7 items-center justify-center absolute top-2 right-2 bg-white rounded-lg'>
@@ -64,9 +64,9 @@ export const MultipleImagePicker: React.FC<MultipleImagePickerProps> = ({ onImag
                     </View>
                 ) : (
                     hasMainImage && (
-                        <Pressable onPress={() => pickImage(true)} className='w-28 relative h-28 border border-black dark:border-white rounded-xl p-4 flex flex-col items-center justify-center' android_ripple={{ color: 'rgba(0,0,0,0.3)', borderless: false }}>
+                        <Pressable onPress={() => pickImage(true)} className='w-28 relative h-28 border border-border rounded-xl p-4 flex flex-col items-center justify-center' android_ripple={{ color: 'rgba(0,0,0,0.3)', borderless: false }}>
                             <Icon name="Camera" size={24}  />
-                        <Text className='text-black dark:text-white text-xs w-full text-center absolute bottom-4'>Main photo</Text>
+                        <Text className='text-black text-primary text-xs w-full text-center absolute bottom-4'>Main photo</Text>
                     </Pressable>
                     )
                 )}
@@ -76,7 +76,7 @@ export const MultipleImagePicker: React.FC<MultipleImagePickerProps> = ({ onImag
                         <View key={index} className='relative'>
                             {image ? (
                                 <>
-                                    <Pressable onPress={() => pickImage(false)} className='w-28 overflow-hidden relative h-28 border border-black dark:border-white rounded-xl flex flex-col items-center justify-center' android_ripple={{ color: 'rgba(0,0,0,0.3)', borderless: false }}>
+                                    <Pressable onPress={() => pickImage(false)} className='w-28 overflow-hidden relative h-28 border border-border rounded-xl flex flex-col items-center justify-center' android_ripple={{ color: 'rgba(0,0,0,0.3)', borderless: false }}>
                                         <Image className="w-full h-full" source={{ uri: image }} />
                                     </Pressable>
                                     <Pressable onPress={() => handleDelete(index)} className='w-7 h-7 items-center justify-center absolute top-2 right-2 bg-white rounded-lg'>
@@ -84,7 +84,7 @@ export const MultipleImagePicker: React.FC<MultipleImagePickerProps> = ({ onImag
                                     </Pressable>
                                 </>
                             ) : (
-                                <Pressable onPress={() => pickImage(false)} className='w-28 h-28 opacity-40 border border-black dark:border-white rounded-xl p-4 flex flex-col items-center justify-center' android_ripple={{ color: 'rgba(0,0,0,0.3)', borderless: false }}>
+                                <Pressable onPress={() => pickImage(false)} className='w-28 h-28 opacity-40 border border-border rounded-xl p-4 flex flex-col items-center justify-center' android_ripple={{ color: 'rgba(0,0,0,0.3)', borderless: false }}>
                                     <Icon name="Plus" size={24} />
                                 </Pressable>
                             )}

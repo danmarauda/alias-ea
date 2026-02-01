@@ -22,14 +22,14 @@ export default function CustomDrawerContent() {
     const insets = useSafeAreaInsets();
     const colors = useThemeColors();
     return (
-        <View className="flex-1 px-global bg-white dark:bg-dark-primary" style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
-            <ThemedScroller className='flex-1 px-0 bg-white dark:bg-dark-primary'>
+        <View className="flex-1 px-global bg-background" style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+            <ThemedScroller className='flex-1 px-0 '>
                 <View className='flex-row justify-between items-center mt-4'>
                     <View
-                        className='bg-light-primary dark:bg-white/20 rounded-full relative flex-1 mr-4'>
-                        <Icon name="Search" className="absolute top-3.5 left-4 z-50" size={20} />
+                        className='bg-secondary rounded-full relative flex-1 mr-4'>
+                        <Icon name="Search" className="absolute top-4 left-4 z-50" size={20} />
                         <TextInput
-                            className='h-[47px] pl-12 pr-3 rounded-lg text-black dark:text-white'
+                            className='h-[47px] pl-12 pr-3 rounded-lg bg-transparent text-primary'
                             placeholder='Search'
                             placeholderTextColor={colors.placeholder}
                             returnKeyType="done"
@@ -40,19 +40,19 @@ export default function CustomDrawerContent() {
                 </View>
 
 
-                <View className='flex-col pb-4 mb-4 mt-4 border-b border-neutral-200 dark:border-dark-secondary'>
+                <View className='flex-col pb-4 mb-4 mt-4 border-b border-secondary'>
                     <NavItem href="/" icon="Plus" label="New chat" />
                     <NavItem href="/screens/search-form" icon="LayoutGrid" label="Explore" />
                 </View>
 
                 {History.map((item, index) => (
-                    <Link className='text-black dark:text-white text-base font-semibold py-3' key={index} href={item.href}>
+                    <Link className='text-primary text-base font-semibold py-3' key={index} href={item.href}>
                         {item.label}
                     </Link>
                 ))}
 
             </ThemedScroller>
-            <TouchableOpacity activeOpacity={0.8} onPress={() => router.push('/screens/profile')} className='flex-row justify-start items-center pt-4 pb-4  border-t border-neutral-200 dark:border-dark-secondary'>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => router.push('/screens/profile')} className='flex-row justify-start items-center pt-4 pb-4 border-t border-secondary'>
                 <Avatar src={require('@/assets/img/thomino.jpg')} size="md" />
                 <View className='ml-4'>
                     <ThemedText className='text-base font-semibold'>Thomino</ThemedText>
@@ -76,12 +76,12 @@ type NavItemProps = {
 export const NavItem = ({ href, icon, label, description }: NavItemProps) => (
 
         <TouchableOpacity onPress={() => router.push(href)} className={`flex-row items-center py-2`}>
-            <View className='flex-row items-center justify-center w-9 h-9 bg-light-primary dark:bg-dark-secondary rounded-lg'>
+            <View className='flex-row items-center justify-center w-9 h-9 bg-background rounded-lg'>
                 <Icon name={icon} size={18} className='' />
             </View>
             <View className='flex-1 ml-4 '>
                 {label &&
-                    <ThemedText className="text-base font-bold text-gray-800 dark:text-gray-200">{label}</ThemedText>
+                    <ThemedText className="text-base font-bold">{label}</ThemedText>
                 }
                 {description &&
                     <ThemedText className='opacity-50 text-xs'>{description}</ThemedText>
@@ -91,5 +91,3 @@ export const NavItem = ({ href, icon, label, description }: NavItemProps) => (
         </TouchableOpacity>
 
 );
-
-

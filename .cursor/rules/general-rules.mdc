@@ -23,9 +23,14 @@ Always prefer existing components over creating new ones. Follow these principle
 
 - **Use className:** Always use Tailwind-style className for styling
 - **Avoid inline:** Never use inline styles except for shadows/complex effects
-- **Theme Support:** Always include light/dark variants:
-  - `bg-light-primary dark:bg-dark-primary`
-  - `text-light-subtext dark:text-dark-subtext`
+- **Theme Support:** Use CSS variable-based colors (no dark: prefix needed):
+  - `bg-background` for main background
+  - `bg-secondary` for card/container backgrounds
+  - `bg-primary` for inverted elements (black in light, white in dark)
+  - `text-primary` for main text
+  - `text-subtext` for secondary/muted text
+  - `text-invert` for inverted text
+  - `border-border`, `border-secondary` for borders
 - **Spacing:**
   - Use `p-global` for consistent outer padding
   - Use standard spacing units (p-2, p-4, etc.)

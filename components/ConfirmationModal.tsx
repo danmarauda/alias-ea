@@ -66,12 +66,12 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         >
             <View className="p-8 pb-14">
                 <ThemedText className="text-xl font-bold mb-2">{title}</ThemedText>
-                <ThemedText className="text-light-subtext dark:text-dark-subtext mb-6">{message}</ThemedText>
+                <ThemedText className="text-subtext mb-6">{message}</ThemedText>
                 
                 <View className="flex-row justify-between space-x-3">
                     <Pressable
                         onPress={handleCancel}
-                        className="px-4 py-3 flex-1 rounded-lg items-center bg-light-secondary dark:bg-dark-secondary"
+                        className="px-4 py-3 flex-1 rounded-lg items-center bg-secondary"
                     >
                         <ThemedText>{cancelText}</ThemedText>
                     </Pressable>

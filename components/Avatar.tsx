@@ -20,7 +20,7 @@ const Avatar: React.FC<AvatarProps> = ({
   src,
   name,
   border = false,
-  bgColor = 'bg-light-secondary dark:bg-dark-secondary',
+  bgColor = 'bg-secondary',
   onPress,
   link,
   className,
@@ -38,7 +38,7 @@ const Avatar: React.FC<AvatarProps> = ({
   };
 
   // Define border size and color if enabled
-  const borderStyle = border ? 'border-2 border-light-secondary dark:border-dark-secondary' : '';
+  const borderStyle = border ? 'border-2 border-secondary' : '';
 
   // Component for initials if image is not provided
   const renderInitials = () => {
@@ -56,12 +56,12 @@ const Avatar: React.FC<AvatarProps> = ({
       // Return a transparent 1x1 pixel as fallback instead of null
       return { uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=' };
     }
-    
+
     // If src is a string (URL), return it as a uri object
     if (typeof src === 'string') {
       return { uri: src };
     }
-    
+
     // Otherwise it's already a required image or other valid source
     return src;
   };

@@ -27,14 +27,13 @@ const HomeScreen = () => {
     ];
 
     const leftComponent = [
-        <DrawerButton key="drawer-button" />,
-        <ThemedText key="app-title" className='text-2xl font-outfit-bold ml-4'>Luna<Text className="text-highlight">.</Text></ThemedText>
+        <DrawerButton key="drawer-button" />
     ];
 
   
 
     return (
-        <View className="flex-1 bg-light-primary dark:bg-dark-primary relative">
+        <View className="flex-1 bg-background relative">
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : undefined}
                 keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
@@ -57,7 +56,7 @@ const HomeScreen = () => {
                           
 
                             {isLoading && (
-                                <View className="p-4 my-2 rounded-2xl bg-light-secondary dark:bg-dark-secondary max-w-[80%]">
+                                <View className="p-4 my-2 rounded-2xl bg-secondary max-w-[80%]">
                                     <View className="flex-row items-center">
                                         <View className="w-2 h-2 bg-highlight rounded-full mx-1" />
                                         <View className="w-2 h-2 bg-highlight rounded-full mx-1" />

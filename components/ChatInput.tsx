@@ -12,6 +12,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { CardScroller } from "./CardScroller";
 import { AnimationType } from './AnimatedView';
 import useThemeColors from "@/app/contexts/ThemeColors";
+import { LinearGradient } from "expo-linear-gradient";
 
 
 type ChatInputProps = {
@@ -210,44 +211,47 @@ export const ChatInput = (props: ChatInputProps) => {
                     />
                 </View>
             )}
-            <View style={{ ...shadowPresets.card }} className={` bg-light-secondary  dark:bg-dark-secondary rounded-3xl `}>
-                <TextInput
-                    placeholder='Ask me anything...'
-                    placeholderTextColor={colors.text}
-                    className='text-black dark:text-white px-6 py-5'
-                    value={inputText}
-                    onChangeText={setInputText}
-                    style={{
-                        height: 60,
-                    }}
-                    onContentSizeChange={handleContentSizeChange}
-                />
-                <View className='flex-row bg-neutral-200/50 dark:bg-black/30 justify-between p-2 rounded-b-3xl'>
-                    <View className='flex-row gap-x-2'>
-                        <Pressable onPress={handleToggle} className='items-center justify-center w-10 h-10 rounded-full'>
-                            <Animated.View style={iconStyle}>
-                                <Icon name="Plus" size={18} />
-                            </Animated.View>
-                        </Pressable>
-                        <Pressable className='items-center justify-center w-10 h-10 rounded-full'>
-                            <Icon name='Globe' size={18} />
-                        </Pressable>
-                        <Pressable className='items-center justify-center w-10 h-10 rounded-full'>
-                            <Icon name='Telescope' size={18} />
-                        </Pressable>
+            <View style={{ ...shadowPresets.card }} className={`bg-background rounded-[25px] border border-border`}>
+                <LinearGradient style={{ borderRadius: 25}} colors={['transparent', 'transparent',  'rgba(255,255,255,0.1)']} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}>
+                    <TextInput
+                        placeholder='Ask me anything...'
+                        placeholderTextColor={colors.text}
+                        className='text-text px-6 py-5'
+                        value={inputText}
+                        onChangeText={setInputText}
+                        style={{
+                            height: 60,
+                        }}
+                        onContentSizeChange={handleContentSizeChange}
+                    />
+                    <View className='flex-row justify-between p-4 rounded-b-3xl'>
+                        <View className='flex-row gap-x-4'>
+                            <Pressable onPress={handleToggle} className='items-center justify-center w-10 h-10 rounded-full'>
+                                <Animated.View style={iconStyle}>
+                                    <Icon name="Plus" size={20} />
+                                </Animated.View>
+                            </Pressable>
+                            <Pressable className='items-center justify-center w-10 h-10 rounded-full'>
+                                <Icon name='Globe' size={20} />
+                            </Pressable>
+                            <Pressable className='items-center justify-center w-10 h-10 rounded-full'>
+                                <Icon name='Telescope' size={20} />
+                            </Pressable>
+                        </View>
+                        <Animated.View className='flex-row gap-x-2'>
+                            <Pressable className='items-center justify-center w-10 h-10 rounded-full'>
+                                <Icon name='Mic' size={20} />
+                            </Pressable>
+                            <Pressable
+                                onPress={handleSendMessage}
+                                className='items-center flex justify-center w-10 h-10 bg-primary rounded-full'>
+                                <Icon name='AudioLines' size={18} color={colors.invert} />
+                            </Pressable>
+                        </Animated.View>
                     </View>
-                    <View className='flex-row gap-x-2'>
-                        <Pressable className='items-center justify-center w-10 h-10 rounded-full'>
-                            <Icon name='Mic' size={18} />
-                        </Pressable>
-                        <Pressable
-                            onPress={handleSendMessage}
-                            className='items-center flex justify-center w-10 h-10 bg-dark-primary dark:bg-white rounded-full'>
-                            <Icon name='Send' size={17} color={colors.invert} />
-                        </Pressable>
-                    </View>
-                </View>
+                </LinearGradient>
             </View>
+
         </View>
     );
 }
@@ -292,7 +296,7 @@ const AnimatedPickerItem = (props: {
         >
             <TouchableOpacity
                 style={{ ...shadowPresets.large }}
-                className='items-center justify-center rounded-2xl flex-row p-4 bg-light-secondary dark:bg-dark-secondary'
+                className='items-center justify-center rounded-2xl flex-row p-4 bg-secondary'
                 onPress={props.onPress}
             >
                 <Icon name={props.icon} size={18} />

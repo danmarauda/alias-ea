@@ -29,7 +29,7 @@ export default function TabScreenWrapper({
     }, [isFocused]);
 
     return (
-        <View className='bg-light-primary dark:bg-dark-primary flex-1'>
+        <View className='bg-background flex-1'>
             <AnimatedView
                 style={{ flex: 1 }}
                 key={key}

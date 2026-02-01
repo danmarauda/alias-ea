@@ -16,7 +16,7 @@ export default function SafeWrapper({ children }: { children: React.ReactNode })
 
   return (
     <SafeAreaView
-      className="flex-1 bg-light-primary dark:bg-dark-primary"
+      className="flex-1 bg-background"
       edges={shouldBypass ? [] : undefined}
     >
       {children}

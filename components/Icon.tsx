@@ -63,16 +63,16 @@ const Icon: React.FC<IconProps> = ({
     const getVariantClass = () => {
         switch (variant) {
             case 'bordered':
-                return 'border border-light-secondary dark:border-dark-secondary rounded-full items-center justify-center';
+                return 'border border-secondary rounded-full items-center justify-center';
             case 'contained':
-                return 'bg-light-secondary dark:bg-dark-secondary rounded-full items-center justify-center';
+                return 'bg-secondary rounded-full items-center justify-center';
             default:
                 return '';
         }
     };
 
     const { container, icon } = getSize();
-    
+
     const classes = [
         'items-center justify-center',
         (variant !== 'plain' && container) ? container : '',

@@ -21,8 +21,7 @@ const ResultsScreen = () => {
     ];
 
     const leftComponent = [
-        <DrawerButton key="drawer-button" />,
-        <ThemedText key="app-title" className='text-2xl font-outfit-bold ml-4'>Luna<Text className="text-highlight">.</Text></ThemedText>
+        <DrawerButton key="drawer-button" />
     ];
 
     useFocusEffect(
@@ -36,7 +35,7 @@ const ResultsScreen = () => {
     );
 
     return (
-        <View className="flex-1 bg-light-primary dark:bg-dark-primary relative">
+        <View className="flex-1 bg-background relative">
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : undefined}
                 keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 180}
@@ -51,7 +50,7 @@ const ResultsScreen = () => {
 
                     <ScrollView
                         ref={scrollViewRef}
-                        className='bg-light-primary dark:bg-dark-primary flex-1 px-8 pt-10 pb-10'
+                        className='bg-background flex-1 px-8 pt-10 pb-10'
                         contentContainerStyle={{ flexGrow: 1, justifyContent: 'flex-end', paddingBottom: 20 }}
                         showsVerticalScrollIndicator={false}
                         bounces={false}
@@ -61,7 +60,7 @@ const ResultsScreen = () => {
                             <View className="mb-16">
                                 <View
                                     style={shadowPresets.small}
-                                    className="bg-light-secondary dark:bg-dark-secondary rounded-xl p-global mb-6">
+                                    className="bg-secondary rounded-3xl p-global mb-6">
                                     <ThemedText className="text-base">
                                         How does Luna compare to other templates?
                                     </ThemedText>
@@ -106,7 +105,7 @@ const ResultsScreen = () => {
                             <View>
                                 <View
                                     style={shadowPresets.small}
-                                    className="bg-light-secondary dark:bg-dark-secondary rounded-xl p-global mb-6">
+                                    className="bg-secondary rounded-3xl p-global mb-6">
                                     <ThemedText className="text-base">
                                         Why should I choose the Luna template for my startup?
                                     </ThemedText>
@@ -135,13 +134,13 @@ const ResultsScreen = () => {
                                             color={liked ? "#E57DDF" : undefined}
                                             fill={liked ? "#E57DDF" : "none"}
                                         />
-                                        <ThemedText className="ml-2 text-light-subtext dark:text-dark-subtext">
+                                        <ThemedText className="ml-2 text-subtext">
                                             {liked ? "Liked" : "Like"}
                                         </ThemedText>
                                     </Pressable>
                                     <Pressable className="flex-row items-center">
                                         <Icon name="Share2" size={20} />
-                                        <ThemedText className="ml-2 text-light-subtext dark:text-dark-subtext">
+                                        <ThemedText className="ml-2 text-subtext">
                                             Share
                                         </ThemedText>
                                     </Pressable>

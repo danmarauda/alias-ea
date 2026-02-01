@@ -74,7 +74,7 @@ const Switch: React.FC<SwitchProps> = ({
           <ThemedText className="font-medium text-base">{label}</ThemedText>
         )}
         {description && (
-          <ThemedText className="text-sm text-light-subtext dark:text-dark-subtext">
+          <ThemedText className="text-sm text-subtext">
             {description}
           </ThemedText>
         )}
@@ -83,7 +83,7 @@ const Switch: React.FC<SwitchProps> = ({
 
         <View className="w-10 h-6 rounded-full">
           <View
-            className={`w-full h-full rounded-full absolute ${switchValue ? 'bg-highlight' : 'bg-light-secondary dark:bg-white/40'}`}
+            className={`w-full h-full rounded-full absolute ${switchValue ? 'bg-highlight' : 'bg-secondary'}`}
           />
           <Animated.View
             style={{
@@ -94,7 +94,7 @@ const Switch: React.FC<SwitchProps> = ({
                 })
               }]
             }}
-            className="w-5 h-5 bg-white dark:bg-white rounded-full shadow-sm my-0.5"
+            className="w-5 h-5 bg-white rounded-full shadow-sm my-0.5"
           />
         </View>
     </TouchableOpacity>

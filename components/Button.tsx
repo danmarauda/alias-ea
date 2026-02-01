@@ -43,18 +43,18 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const buttonStyles = {
-    primary: 'bg-black dark:bg-white',
-    secondary: 'bg-light-secondary dark:bg-dark-secondary',
-    outline: 'border border-black dark:border-white bg-transparent',
+    primary: 'bg-primary',
+    secondary: 'bg-secondary',
+    outline: 'border border-border bg-transparent',
     ghost: 'bg-transparent',
   };
-  
+
   const buttonSize = {
     small: 'py-2',
     medium: 'py-3',
     large: 'py-5',
   };
-  
+
   const roundedStyles = {
     none: 'rounded-none',
     xs: 'rounded-xs',
@@ -64,14 +64,14 @@ export const Button: React.FC<ButtonProps> = ({
     xl: 'rounded-xl',
     full: 'rounded-full',
   };
-  
-  const textColor = variant === 'outline' || variant === 'secondary' || variant === 'ghost' ? 'text-black dark:text-white' : 'text-white dark:text-black';
+
+  const textColor = variant === 'outline' || variant === 'secondary' || variant === 'ghost' ? 'text-primary' : 'text-invert';
   const disabledStyle = disabled ? 'opacity-50' : '';
 
   // Default icon sizes based on button size
   const getIconSize = () => {
     if (iconSize) return iconSize;
-    
+
     switch (size) {
       case 'small': return 16;
       case 'medium': return 18;
@@ -83,8 +83,8 @@ export const Button: React.FC<ButtonProps> = ({
   // Default icon color based on variant
   const getIconColor = () => {
     if (iconColor) return iconColor;
-    
-    // return variant === 'outline' || variant === 'secondary' || variant === 'ghost' 
+
+    // return variant === 'outline' || variant === 'secondary' || variant === 'ghost'
     //   ? '#000000' // highlight color
     //   : '#FFFFFF'; // white
   };
@@ -96,22 +96,22 @@ export const Button: React.FC<ButtonProps> = ({
       ) : (
         <View className="flex-row items-center justify-center">
           {iconStart && (
-            <Icon 
-              name={iconStart} 
-              size={getIconSize()} 
-              color={getIconColor()} 
-              className={`mr-2 ${iconClassName} `} 
+            <Icon
+              name={iconStart}
+              size={getIconSize()}
+              color={getIconColor()}
+              className={`mr-2 ${iconClassName} `}
             />
           )}
-          
+
           <Text className={`${textColor} font-medium ${textClassName}`}>{title}</Text>
-          
+
           {iconEnd && (
-            <Icon 
-              name={iconEnd} 
-              size={getIconSize()} 
-              color={getIconColor()} 
-              className={`ml-2 ${iconClassName}`} 
+            <Icon
+              name={iconEnd}
+              size={getIconSize()}
+              color={getIconColor()}
+              className={`ml-2 ${iconClassName}`}
             />
           )}
         </View>
@@ -124,7 +124,7 @@ export const Button: React.FC<ButtonProps> = ({
       <TouchableOpacity
         disabled={loading || disabled}
         activeOpacity={0.8}
-        className={`px-4 relative ${buttonStyles[variant]} ${buttonSize[size]} ${roundedStyles[rounded]} items-center justify-center ${disabledStyle} ${className}`} 
+        className={`px-4 relative ${buttonStyles[variant]} ${buttonSize[size]} ${roundedStyles[rounded]} items-center justify-center ${disabledStyle} ${className}`}
         {...props}
         onPress={() => {
           router.push(href);
@@ -140,7 +140,7 @@ export const Button: React.FC<ButtonProps> = ({
       onPress={onPress}
       disabled={loading || disabled}
       activeOpacity={0.8}
-      className={`px-4 relative ${buttonStyles[variant]} ${buttonSize[size]} ${roundedStyles[rounded]} items-center justify-center ${disabledStyle} ${className}`} 
+      className={`px-4 relative ${buttonStyles[variant]} ${buttonSize[size]} ${roundedStyles[rounded]} items-center justify-center ${disabledStyle} ${className}`}
       {...props}
     >
       {ButtonContent}

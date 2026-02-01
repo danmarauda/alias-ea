@@ -109,12 +109,12 @@ const CustomCard: React.FC<CustomCardProps> = ({
 
     const getBorderClass = () => {
         if (!border) return '';
-        return borderColor ? `border border-[${borderColor}]` : 'border border-black/10 dark:border-white/10';
+        return borderColor ? `border border-[${borderColor}]` : 'border border-border/10';
     };
 
     const getBackgroundClass = () => {
         if (!background) return '';
-        return 'bg-light-primary dark:bg-dark-primary';
+        return 'bg-background';
     };
 
     // Render the card with or without background image

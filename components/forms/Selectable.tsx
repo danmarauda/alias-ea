@@ -40,15 +40,15 @@ const Selectable: React.FC<SelectableProps> = ({
         onPress={onPress}
         style={style}
         className={`
-          border border-transparent rounded-lg p-4 active:opacity-70 bg-light-secondary dark:bg-dark-secondary/50
-          ${selected ? ' bg-light-subtext/20 dark:bg-dark-secondary' : 'border-transparent'}
+          border border-transparent rounded-lg p-4 active:opacity-70 bg-secondary/50
+          ${selected ? ' bg-secondary' : 'border-transparent'}
           ${error ? 'border-red-500' : ''}
           ${className}
         `}
       >
         <View className="flex-row items-center">
           {icon && (
-            <View className={`mr-4 h-12 w-12 rounded-xl items-center justify-center bg-white dark:bg-white/10 ${selected ? 'bg-highlight' : ''}`}>
+            <View className={`mr-4 h-12 w-12 rounded-xl items-center justify-center bg-secondary ${selected ? 'bg-highlight' : ''}`}>
               <Icon 
                 name={icon} 
                 size={20} 
@@ -58,7 +58,7 @@ const Selectable: React.FC<SelectableProps> = ({
             </View>
           )}
           {customIcon && (
-            <View className="mr-4 h-12 w-12 rounded-xl items-center justify-center bg-light-secondary dark:bg-dark-secondary">
+            <View className="mr-4 h-12 w-12 rounded-xl items-center justify-center bg-secondary">
               {customIcon}
             </View>
           )}
@@ -67,7 +67,7 @@ const Selectable: React.FC<SelectableProps> = ({
               {title}
             </ThemedText>
             {description && (
-              <ThemedText className="text-sm text-light-subtext dark:text-dark-subtext mt-0">
+              <ThemedText className="text-sm text-subtext mt-0">
                 {description}
               </ThemedText>
             )}

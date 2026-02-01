@@ -22,7 +22,7 @@ export const List: React.FC<ListProps> = ({
     const getVariantClass = () => {
         switch (variant) {
             case 'separated': return 'divide-y-0';
-            case 'divided': return 'divide-y divide-black/10 dark:divide-white/10';
+            case 'divided': return 'divide-y divide-primary/10';
             default: return '';
         }
     };

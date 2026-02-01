@@ -81,7 +81,7 @@ export const VoiceSelectCard = (props: VoiceItemProps) => {
                 />
             </Animated.View>
             <Pressable
-                className={`w-full relative z-50 flex flex-col items-start ${props.isSelected ? 'bg-light-secondary dark:bg-dark-secondary' : 'bg-light-secondary dark:bg-dark-secondary'}`}
+                className={`w-full relative z-50 flex flex-col items-start ${props.isSelected ? 'bg-secondary' : 'bg-secondary'}`}
                 onPress={() => {
                     toggleVisibility();
                     toggleScale();

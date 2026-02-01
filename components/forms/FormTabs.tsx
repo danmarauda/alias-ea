@@ -14,12 +14,12 @@ export function FormTab({ title, isActive, onPress }: FormTabProps) {
     <Pressable
       onPress={onPress}
       className={
-        `flex-1 py-2.5 px-4 rounded-xl ${isActive ? "bg-light-primary dark:bg-light-primary shadow-lg" : "bg-transparent"}`
+        `flex-1 py-2.5 px-4 rounded-xl ${isActive ? "bg-background shadow-lg" : "bg-transparent"}`
       }
     >
       <ThemedText
         className={
-          `text-center text-sm font-medium ${isActive ? "text-black dark:text-black" : "text-black dark:text-white"}`
+          `text-center text-sm font-medium ${isActive ? "text-primary" : "text-primary"}`
         }
       >
         {title}
@@ -42,7 +42,7 @@ export default function FormTabs({ children, defaultActiveTab, style, onChange, 
 
   return (
 
-    <View className={`flex-row p-1 bg-light-secondary dark:bg-dark-secondary rounded-xl overflow-hidden ${className}`} style={style}>
+    <View className={`flex-row p-1 bg-secondary rounded-xl overflow-hidden ${className}`} style={style}>
         {React.Children.map(children, (child) => {
           return React.cloneElement(child, {
             isActive: activeTab === child.props.title,

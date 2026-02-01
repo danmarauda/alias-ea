@@ -46,12 +46,12 @@ export default function ForgotPasswordScreen() {
   };
 
   return (
-    <View style={{paddingTop: insets.top }} className="flex-1 bg-light-primary dark:bg-dark-primary p-6">
+    <View style={{paddingTop: insets.top }} className="flex-1 bg-background p-10">
      
       
       <View className="mt-8">
         <ThemedText className="text-3xl font-bold mb-1 mt-10">Reset Password</ThemedText>
-        <ThemedText className="text-light-subtext dark:text-dark-subtext mb-14">
+        <ThemedText className="text-subtext mb-14">
           Enter your email address and we'll send you a link to reset your password
         </ThemedText>
         
@@ -75,10 +75,11 @@ export default function ForgotPasswordScreen() {
           loading={isLoading}
           size="large"
           className="mb-6 mt-4"
+          rounded="full"
         />
         
         <View className="flex-row justify-center mt-8">
-          <ThemedText className="text-light-subtext dark:text-dark-subtext">Remember your password? </ThemedText>
+          <ThemedText className="text-subtext">Remember your password? </ThemedText>
           <Link href="/screens/login" asChild>
             <Pressable>
               <ThemedText className="underline">Log in</ThemedText>

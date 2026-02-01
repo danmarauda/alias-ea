@@ -34,7 +34,7 @@ const SliderCard = ({
     const images = Array.isArray(image) ? image : [image];
 
     return (
-        <View className={`p-global mb-0 bg-light-primary dark:bg-dark-primary w-full ${className}`} {...props}>
+        <View className={`p-global mb-0 bg-background w-full ${className}`} {...props}>
             <View className="w-full relative">
                 <ImageCarousel
                     images={images}
@@ -55,7 +55,7 @@ const SliderCard = ({
                             </View>
                         }
                     </View>
-                    <Text className="text-sm text-light-subtext dark:text-dark-subtext">{distance} miles away</Text>
+                    <Text className="text-sm text-subtext">{distance} miles away</Text>
                     <ThemedText className="text-base font-bold mt-2">
                         {price} <ThemedText className="font-normal">night</ThemedText>
                     </ThemedText>

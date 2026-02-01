@@ -55,17 +55,17 @@ export default function EditProfileScreen() {
             {profileImage ? (
               <Image
                 source={{ uri: profileImage }}
-                className="w-28 h-28 rounded-full border border-light-primary dark:border-dark-primary"
+                className="w-28 h-28 rounded-full border border-background"
               />
             ) : (
-              <View className="w-24 h-24 rounded-full bg-light-secondary dark:bg-dark-secondary items-center justify-center">
-                <Icon name="Plus" size={25} className="text-light-subtext dark:text-dark-subtext" />
+              <View className="w-24 h-24 rounded-full bg-secondary items-center justify-center">
+                <Icon name="Plus" size={25} className="text-subtext" />
               </View>
             )}
 
           </TouchableOpacity>
           <View className="mt-4">
-            <Button variant='ghost' title={profileImage ? 'Change photo' : 'Upload photo'} className="text-sm bg-light-secondary dark:bg-dark-secondary" onPress={pickImage} />
+            <Button variant='ghost' title={profileImage ? 'Change photo' : 'Upload photo'} className="text-sm bg-secondary" onPress={pickImage} />
 
             {profileImage && (
               <Button
@@ -77,7 +77,7 @@ export default function EditProfileScreen() {
             )}
           </View>
         </View>
-        <View className='p-global bg-light-secondary dark:bg-dark-secondary/50 rounded-2xl'>
+        <View className='p-global bg-secondary/50 rounded-2xl'>
           <Section titleSize='xl' className='pt-0 pb-8' title="Personal information" subtitle="Manage your personal information" />
           <Input
             label="First Name"

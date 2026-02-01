@@ -68,7 +68,7 @@ const Review: React.FC<ReviewProps> = ({
           )}
           <View className="flex-row justify-between items-center mb-2">
             {renderStars()}
-            <ThemedText className="text-sm text-light-subtext dark:text-dark-subtext">{date}</ThemedText>
+            <ThemedText className="text-sm text-subtext">{date}</ThemedText>
           </View>
           <ThemedText className="text-sm">{description}</ThemedText>
         </View>

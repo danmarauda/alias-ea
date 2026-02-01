@@ -12,26 +12,26 @@ const ProviderScreen = () => {
     <>
       <Header showBackButton />
       <ThemedScroller>
-        <View className='flex-1 items-center justify-center bg-light-primary dark:bg-dark-primary p-6'>
-          <View className='w-24 h-24 rounded-2xl items-center justify-center bg-light-secondary dark:bg-dark-secondary mb-4'>
+        <View className='flex-1 items-center justify-center bg-background p-6'>
+          <View className='w-24 h-24 rounded-2xl items-center justify-center bg-secondary mb-4'>
             <Image source={require('@/assets/img/logo-3.png')} className='w-14 h-14' />
           </View>
           <ThemedText className='text-2xl font-bold'>Gemini Pro</ThemedText>
-          <ThemedText className='text-sm text-light-subtext dark:text-dark-subtext'>by Google</ThemedText>
+          <ThemedText className='text-sm text-subtext'>by Google</ThemedText>
           <ThemedText className='text-base my-4 text-center'>Multimodal AI for creative and technical tasks. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</ThemedText>
         </View>
-        <View className="w-full flex-row justify-between py-7 border-y border-neutral-200 dark:border-dark-secondary">
+        <View className="w-full flex-row justify-between py-7 border-y border-secondary">
           <View className='flex-1 items-center justify-normal'>
             <ShowRating rating={4.5} size='lg' />
-            <ThemedText className='text-sm mt-1 text-light-subtext dark:text-dark-subtext'>1k+ Reviews</ThemedText>
+            <ThemedText className='text-sm mt-1 text-subtext'>1k+ Reviews</ThemedText>
           </View>
           <View className='flex-1 items-center justify-normal'>
             <ThemedText className='text-lg font-bold'>#1</ThemedText>
-            <ThemedText className='text-sm mt-1 text-light-subtext dark:text-dark-subtext'>in Lifestyle</ThemedText>
+            <ThemedText className='text-sm mt-1 text-subtext'>in Lifestyle</ThemedText>
           </View>
           <View className='flex-1 items-center justify-normal'>
             <ThemedText className='text-lg font-bold'>5M+</ThemedText>
-            <ThemedText className='text-sm mt-1 text-light-subtext dark:text-dark-subtext'>Conversations</ThemedText>
+            <ThemedText className='text-sm mt-1 text-subtext'>Conversations</ThemedText>
           </View>
         </View>
         <ThemedText className='text-lg font-bold my-4'>Ratings</ThemedText>
@@ -52,8 +52,8 @@ const RatingProgress = (props: any) => {
   return (
     <View className='flex-row items-center justify-center w-full my-2'>
       <ShowRating rating={props.rating} size='md' />
-      <View className="flex-1 h-1 bg-neutral-200 dark:bg-dark-secondary rounded-full ml-4">
-        <View className="h-1 bg-black dark:bg-white rounded-full" style={{ width: `${props.progress}%` }} />
+      <View className="flex-1 h-1 bg-secondary rounded-full ml-4">
+        <View className="h-1 bg-primary rounded-full" style={{ width: `${props.progress}%` }} />
       </View>
     </View>
   );

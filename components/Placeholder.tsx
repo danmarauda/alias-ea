@@ -24,9 +24,9 @@ export function Placeholder({
     style
 }: PlaceholderProps) {
     return (
-        <View className={`bg-light-primary dark:bg-dark-primary items-center justify-center p-4 ${className}`} style={style}>
-            <View className='w-20 h-20 border border-light-secondary dark:border-dark-secondary rounded-full items-center justify-center mb-4'>
-                <Icon name={icon} size={30} className="text-light-tertiary dark:text-dark-tertiary" />
+        <View className={`bg-background items-center justify-center p-4 ${className}`} style={style}>
+            <View className='w-20 h-20 border border-secondary rounded-full items-center justify-center mb-4'>
+                <Icon name={icon} size={30} />
             </View>
 
             <ThemedText className="text-xl font-bold text-center">
@@ -34,7 +34,7 @@ export function Placeholder({
             </ThemedText>
 
             {subtitle && (
-                <ThemedText className="text-light-subtext dark:text-dark-subtext text-center mb-4">
+                <ThemedText className="text-subtext text-center mb-4">
                     {subtitle}
                 </ThemedText>
             )}

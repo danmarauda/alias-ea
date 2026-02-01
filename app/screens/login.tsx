@@ -63,17 +63,17 @@ export default function LoginScreen() {
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={{paddingTop: insets.top }} className="flex-1 bg-light-primary pt-20 dark:bg-dark-primary p-6">
+    <View style={{paddingTop: insets.top }} className="flex-1 bg-background pt-20  p-10">
      
       
       <View className="mt-8">
       <ThemedText className="text-4xl font-outfit-bold mb-14">Luna.</ThemedText>
         <ThemedText className="text-3xl font-bold mb-1">Welcome back</ThemedText>
-        <ThemedText className="text-light-subtext dark:text-dark-subtext mb-14">Sign in to your account</ThemedText>
+        <ThemedText className="text-subtext mb-14">Sign in to your account</ThemedText>
         
         <Input
           label="Email"
-          variant="underlined"
+          variant="classic"
           value={email}
           onChangeText={(text) => {
             setEmail(text);
@@ -87,7 +87,7 @@ export default function LoginScreen() {
         
         <Input
           label="Password"
-          variant="underlined"
+          variant="classic"
           value={password}
           onChangeText={(text) => {
             setPassword(text);
@@ -98,7 +98,7 @@ export default function LoginScreen() {
           autoCapitalize="none"
         />
         
-        <Link className='underline text-black dark:text-white text-sm mb-4' href="/screens/forgot-password">
+        <Link className='underline text-primary text-sm mb-4' href="/screens/forgot-password">
             Forgot Password?
         </Link>
        
@@ -109,10 +109,11 @@ export default function LoginScreen() {
           loading={isLoading}
           size="large"
           className="mb-6"
+          rounded="full"
         />
         
         <View className="flex-row justify-center">
-          <ThemedText className="text-light-subtext dark:text-dark-subtext">Don't have an account? </ThemedText>
+          <ThemedText className="text-subtext">Don't have an account? </ThemedText>
           <Link href="/screens/signup" asChild>
             <Pressable>
               <ThemedText className="underline">Sign up</ThemedText>

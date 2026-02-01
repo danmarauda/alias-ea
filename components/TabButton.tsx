@@ -56,12 +56,12 @@ export const TabButton = forwardRef<View, TabButtonProps>(
           <View className="relative">
             <View className={`w-full relative ${isFocused ? 'opacity-100' : 'opacity-40'}`}>
               {/*isFocused && (
-                <AnimatedView animation='scaleIn' duration={200} className='absolute border-4 rounded-full border-light-primary dark:border-dark-primary -top-1 -left-1/3  w-full h-8  bg-highlight/20' ></AnimatedView>
+                <AnimatedView animation='scaleIn' duration={200} className='absolute border-4 rounded-full border-background -top-1 -left-1/3  w-full h-8  bg-highlight/20' ></AnimatedView>
               )}*/}
               <Icon name={icon} size={24} strokeWidth={isFocused ? 2.5 : 2} color={isFocused ? colors.highlight : colors.icon} />
             </View>
             {hasBadge && (
-              <View className="absolute w-3 h-3 border border-light-primary dark:border-dark-primary rounded-full bg-red-500 -top-1 -right-1.5" />
+              <View className="absolute w-3 h-3 border border-background rounded-full bg-red-500 -top-1 -right-1.5" />
             )}
           </View>
         );
@@ -83,7 +83,7 @@ export const TabButton = forwardRef<View, TabButtonProps>(
         {...props}
         onPress={onPress}>
         <View className="flex-col items-center justify-center pt-4 pb-0 w-full relative">
-          {/*<Animated.View className="absolute w-full h-[2px] bg-black dark:bg-white left-0 top-0"
+          {/*<Animated.View className="absolute w-full h-[2px] bg-primary left-0 top-0"
             style={{
               opacity: lineScale,
               transform: [{ scaleX: lineScale }],

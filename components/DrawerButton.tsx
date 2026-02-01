@@ -40,6 +40,7 @@ export default function DrawerButton({
       <Pressable
         onPress={handlePress}
         style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+        className='rounded-full p-3'
       >
         {isAvatar ? (
           <Avatar

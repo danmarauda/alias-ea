@@ -54,7 +54,7 @@ const Expandable: React.FC<ExpandableProps> = ({
   };
 
   return (
-    <View className={`border-b border-light-secondary dark:border-dark-secondary ${className}`} style={style}>
+    <View className={`border-b border-secondary ${className}`} style={style}>
       <Pressable
         onPress={toggleExpand}
         className="flex-row items-center py-5"
@@ -67,7 +67,7 @@ const Expandable: React.FC<ExpandableProps> = ({
         <View className="flex-1">
           <ThemedText className="text-base font-medium">{title}</ThemedText>
           {description && (
-            <ThemedText className="text-sm text-light-subtext dark:text-dark-subtext">
+            <ThemedText className="text-sm text-subtext">
               {description}
             </ThemedText>
           )}

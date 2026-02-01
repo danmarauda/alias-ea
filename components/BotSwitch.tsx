@@ -4,16 +4,16 @@ import ThemedText from "./ThemedText";
 import Icon from "./Icon";
 import ActionSheetThemed from "./ActionSheetThemed";
 import { ActionSheetRef } from "react-native-actions-sheet";
+import { useThemeColors } from "@/app/contexts/ThemeColors";
 
 export const BotSwitch = () => {
-    const [selectedModel, setSelectedModel] = useState('GPT-4o');
+    const [selectedModel, setSelectedModel] = useState('ChatGPT');
     const actionSheetRef = useRef<ActionSheetRef>(null);
     
     // AI model options
     const modelOptions = [
-        { label: 'GPT-4o', value: 'GPT-4o' },
-        { label: 'Claude 3', value: 'Claude 3' },
-        { label: 'Llama 3', value: 'Llama 3' },
+        { label: 'ChatGPT', value: 'ChatGPT' },
+        { label: 'Claude', value: 'Claude' },
         { label: 'Gemini', value: 'Gemini' }
     ];
     
@@ -31,30 +31,31 @@ export const BotSwitch = () => {
             actionSheetRef.current.hide();
         }
     };
-    
+
+    const colors = useThemeColors();
     return (
         <>
             <Pressable 
-                className="pl-3 pr-2 py-1 rounded-full flex-row bg-white border border-neutral-300 dark:border-transparent dark:bg-dark-secondary"
+                className="pl-3 pr-2 py-1 rounded-full flex-row bg-text border border-neutral-300 bg-secondary border-transparent"
                 onPress={openModelSelector}
             >
-                <ThemedText className="mr-1">{selectedModel}</ThemedText>
-                <Icon name="ChevronDown" size={16} className="opacity-50" />
+                <ThemedText className="mr-1 !text-invert">{selectedModel}</ThemedText>
+                <Icon name="ChevronDown" size={16} className="opacity-50" color={colors.invert} />
             </Pressable>
             
             {/* ActionSheet for model selection */}
             <ActionSheetThemed ref={actionSheetRef}>
-                <View className="p-4">
+                <View className="px-10 py-10">
                     <View className="mb-4">
                         <ThemedText className="text-xl font-semibold mb-2">Select AI Model</ThemedText>
-                        <ThemedText className="text-light-subtext dark:text-dark-subtext">Choose the AI model to chat with</ThemedText>
+                        <ThemedText className="text-subtext">Choose the AI model to chat with</ThemedText>
                     </View>
                     
                     {modelOptions.map((option) => (
                         <Pressable 
                             key={option.value}
                             onPress={() => handleModelSelect(option.value)}
-                            className={`p-3 mb-2 rounded-lg flex-row justify-between items-center ${selectedModel === option.value ? 'bg-light-primary/10 dark:bg-dark-primary' : ''}`}
+                            className={`p-3 mb-2 rounded-lg flex-row justify-between items-center ${selectedModel === option.value ? 'bg-background/10' : ''}`}
                         >
                             <ThemedText className="text-base">{option.label}</ThemedText>
                             {selectedModel === option.value && (
@@ -65,7 +66,7 @@ export const BotSwitch = () => {
                     
                     <Pressable 
                         onPress={() => actionSheetRef.current?.hide()}
-                        className="mt-4 py-3 bg-light-primary dark:bg-dark-primary rounded-lg items-center"
+                        className="mt-4 py-3 bg-background rounded-lg items-center"
                     >
                         <ThemedText className="font-semibold">Cancel</ThemedText>
                     </Pressable>

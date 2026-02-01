@@ -34,7 +34,7 @@ export const AiCircle = () => {
                             style={{ ...shadowPresets.large, width: 128, height: 128, borderRadius: 140, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         >
                             <TouchableOpacity activeOpacity={0.7} onPress={toggleSpeaking} className="w-[120px] h-[120px] rounded-full bg-background items-center justify-center">
-                                <LinearGradient style={{ borderRadius: "100%", width: 120, height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center' }} colors={['transparent', 'rgba(255,255,255,0.1)']} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}>
+                                <LinearGradient style={{ borderRadius: 120, width: 120, height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center' }} colors={['transparent', 'rgba(255,255,255,0.1)']} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}>
                                     <Icon name={isSpeaking ? "Pause" : "Mic"} size={34} strokeWidth={1.2} />
                                 </LinearGradient>
                             </TouchableOpacity>

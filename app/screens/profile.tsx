@@ -25,7 +25,7 @@ export default function ProfileScreen() {
                     </View>
                 </View>
 
-                <View style={shadowPresets.medium} className='bg-secondary/50 rounded-2xl  '>
+                <View style={shadowPresets.medium} className='bg-secondary rounded-2xl  '>
                     <ListLink className='px-5' hasBorder title="Settings"  icon="Settings" href="/screens/edit-profile" />
                     <ListLink className='px-5' hasBorder title="Upgrade to plus" icon="MapPin" href="/screens/subscription" />
                     <ListLink className='px-5' hasBorder title="Ai Voice"    icon="MicVocal" href="/screens/ai-voice" />

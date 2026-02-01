@@ -1,5 +1,6 @@
 import { Link, router } from 'expo-router';
-import { View, Text, Pressable, TouchableOpacity, TextInput, Touchable } from 'react-native';
+import { View, TouchableOpacity, TextInput, Touchable } from 'react-native';
+import { shadowPresets } from '@/utils/useShadow';
 import ThemedText from './ThemedText';
 import Icon, { IconName } from './Icon';
 import useThemeColors from '@/app/contexts/ThemeColors';
@@ -27,7 +28,7 @@ export default function CustomDrawerContent() {
             <ThemedScroller className='flex-1 px-0 '>
                 <View className='flex-row justify-between items-center mt-4'>
                     <View
-                        className='bg-secondary rounded-full relative flex-1 mr-4'>
+                        className='bg-secondary rounded-full relative flex-1 mr-4' style={shadowPresets.medium}>
                         <Icon name="Search" className="absolute top-4 left-4 z-50" size={20} />
                         <TextInput
                             className='h-[47px] pl-12 pr-3 rounded-lg bg-transparent text-primary'
@@ -41,7 +42,7 @@ export default function CustomDrawerContent() {
                 </View>
 
 
-                <View className='flex-col pb-4 mb-4 mt-4 border-b border-secondary'>
+                <View className='flex-col pb-4 mb-4 mt-4 border-b border-border'>
                     <NavItem href="/" icon="Plus" label="New chat" />
                     <NavItem href="/screens/search-form" icon="LayoutGrid" label="Explore" />
                 </View>
@@ -53,7 +54,7 @@ export default function CustomDrawerContent() {
                 ))}
 
             </ThemedScroller>
-            <TouchableOpacity activeOpacity={0.8} onPress={() => router.push('/screens/profile')} className='flex-row justify-start items-center pt-4 pb-4 border-t border-secondary'>
+            <TouchableOpacity activeOpacity={0.8} onPress={() => router.push('/screens/profile')} className='flex-row justify-start items-center pt-4 pb-4 border-t border-border'>
                 <Avatar src={require('@/assets/img/thomino.jpg')} size="md" />
                 <View className='ml-4'>
                     <ThemedText className='text-base font-semibold'>Thomino</ThemedText>

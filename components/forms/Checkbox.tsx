@@ -47,7 +47,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
           ${error ? 'border-red-500' : ''}
         `}>
                     {isChecked && (
-                        <View className='w-full h-full bg-highlight rounded border-[2px] border-background items-center justify-center'>
+                        <View className='w-full h-full bg-highlight rounded border-[2px] border-border items-center justify-center'>
                             <Icon name="Check" size={14} color="#fff" />
                         </View>
                     )}

@@ -120,7 +120,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
           style={{ margin: 0, justifyContent: 'flex-end' }}
         >
           <View className="bg-background rounded-t-xl items-center justify-center w-full">
-            <View className="flex-row justify-between items-center p-4 border-b border-secondary w-full">
+            <View className="flex-row justify-between items-center p-4 border-b border-border w-full">
               <Button
                 title="Cancel"
                 variant="ghost"

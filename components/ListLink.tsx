@@ -64,7 +64,7 @@ const ListLink: React.FC<ListLinkProps> = ({
   if (href && !disabled) {
     return (
       <Link href={href} asChild >
-        <Pressable className={` ${hasBorder ? 'border-b border-background' : ''}`}>
+        <Pressable className={` ${hasBorder ? 'border-b border-border' : ''}`}>
           <Content />
         </Pressable>
       </Link>
@@ -74,7 +74,7 @@ const ListLink: React.FC<ListLinkProps> = ({
   return (
     <Pressable
       onPress={disabled ? undefined : onPress}
-      className={` ${hasBorder ? ' border-b border-background' : ''}`}
+      className={` ${hasBorder ? ' border-b border-border' : ''}`}
     >
       <Content />
     </Pressable>

@@ -20,7 +20,7 @@ const ProviderScreen = () => {
           <ThemedText className='text-sm text-subtext'>by Google</ThemedText>
           <ThemedText className='text-base my-4 text-center'>Multimodal AI for creative and technical tasks. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</ThemedText>
         </View>
-        <View className="w-full flex-row justify-between py-7 border-y border-secondary">
+        <View className="w-full flex-row justify-between py-7 border-y border-border">
           <View className='flex-1 items-center justify-normal'>
             <ShowRating rating={4.5} size='lg' />
             <ThemedText className='text-sm mt-1 text-subtext'>1k+ Reviews</ThemedText>

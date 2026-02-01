@@ -3,18 +3,9 @@ import { View, Image, TouchableOpacity } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Header from '@/components/Header';
 import ThemedScroller from '@/components/ThemeScroller';
-import Expandable from '@/components/Expandable';
 import Input from '@/components/forms/Input';
-import ThemeToggle from '@/components/ThemeToggle';
-import Toggle from '@/components/Toggle';
-import ThemedText from '@/components/ThemedText';
-import Select from '@/components/forms/Select';
 import Section from '@/components/layout/Section';
 import { Button } from '@/components/Button';
-import Divider from '@/components/layout/Divider';
-import Checkbox from '@/components/forms/Checkbox';
-import FormTabs, { FormTab } from '@/components/forms/FormTabs';
-import { Chip } from '@/components/Chip';
 import Icon from '@/components/Icon';
 
 export default function EditProfileScreen() {
@@ -40,7 +31,7 @@ export default function EditProfileScreen() {
       title="Profile settings"
       showBackButton
         rightComponents={[
-          <Button title="Save changes" />
+          <Button title="Save changes" rounded="full" />
         ]}
       />
       <ThemedScroller className='px-8'>
@@ -55,7 +46,7 @@ export default function EditProfileScreen() {
             {profileImage ? (
               <Image
                 source={{ uri: profileImage }}
-                className="w-28 h-28 rounded-full border border-background"
+                className="w-28 h-28 rounded-full border border-border"
               />
             ) : (
               <View className="w-24 h-24 rounded-full bg-secondary items-center justify-center">
@@ -77,7 +68,7 @@ export default function EditProfileScreen() {
             )}
           </View>
         </View>
-        <View className='p-global bg-secondary/50 rounded-2xl'>
+        <View className='p-global bg-secondary rounded-2xl'>
           <Section titleSize='xl' className='pt-0 pb-8' title="Personal information" subtitle="Manage your personal information" />
           <Input
             label="First Name"

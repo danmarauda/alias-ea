@@ -63,7 +63,7 @@ const Icon: React.FC<IconProps> = ({
     const getVariantClass = () => {
         switch (variant) {
             case 'bordered':
-                return 'border border-secondary rounded-full items-center justify-center';
+                return 'border border-border rounded-full items-center justify-center';
             case 'contained':
                 return 'bg-secondary rounded-full items-center justify-center';
             default:

@@ -98,7 +98,7 @@ const ThemeTabs: React.FC<ThemeTabsProps> = ({
                         <ScrollView
                             showsHorizontalScrollIndicator={false}
                             horizontal
-                            className='flex-row h-[48px] bg-background border-b border-secondary'
+                            className='flex-row h-[48px] bg-background border-b border-border'
                         >
                             {tabs.map((tab, index) => {
                                 if (!React.isValidElement(tab)) return null;
@@ -123,7 +123,7 @@ const ThemeTabs: React.FC<ThemeTabsProps> = ({
                             })}
                         </ScrollView>
                     ) : (
-                        <View className='flex-row h-[48px] bg-background border-b border-secondary'>
+                        <View className='flex-row h-[48px] bg-background border-b border-border'>
                             {tabs.map((tab, index) => {
                                 if (!React.isValidElement(tab)) return null;
                                 return (

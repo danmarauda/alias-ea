@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
 import { View } from "react-native";
-import { StatusBar } from "expo-status-bar";
 import { colorScheme } from "nativewind";
 import { themes } from "@/utils/color-theme";
 
@@ -31,7 +30,6 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
     return (
         <ThemeContext.Provider value={{ theme: currentTheme, isDark: currentTheme === "dark", toggleTheme }}>
-            <StatusBar backgroundColor="transparent" translucent={true} style={currentTheme === "dark" ? "light" : "dark"} />
             <View style={themes[currentTheme]} className="flex-1 bg-background">
                 {children}
             </View>

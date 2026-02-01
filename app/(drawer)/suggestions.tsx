@@ -43,6 +43,7 @@ const HomeScreen = () => {
                 <View className='flex-1 '  style={{ paddingBottom: insets.bottom + 130 }}>
                     <Header
                         title=""
+                        variant="transparent"
                         leftComponent={leftComponent}
                         rightComponents={rightComponents}
                     />

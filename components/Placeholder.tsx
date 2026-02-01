@@ -25,7 +25,7 @@ export function Placeholder({
 }: PlaceholderProps) {
     return (
         <View className={`bg-background items-center justify-center p-4 ${className}`} style={style}>
-            <View className='w-20 h-20 border border-secondary rounded-full items-center justify-center mb-4'>
+            <View className='w-20 h-20 border border-border rounded-full items-center justify-center mb-4'>
                 <Icon name={icon} size={30} />
             </View>
 

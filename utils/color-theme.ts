@@ -10,7 +10,7 @@ export const themes = {
     "--color-text": "#000000",
     "--color-subtext": "#64748B",
     "--color-highlight": "#0EA5E9",
-    "--color-border": "rgba(0, 0, 0, 0.15)",
+    "--color-border": "rgba(0, 0, 0, 0.1)",
     "--color-gradient": "rgba(0,0,0,0.1)",
   }),
   dark: vars({

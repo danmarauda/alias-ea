@@ -111,7 +111,7 @@ export default function HelpScreen() {
                 key={contact.id}
                 onPress={contact.action}
                 disabled={!contact.action}
-                className="flex-row items-center py-4 border-b border-secondary"
+                className="flex-row items-center py-4 border-b border-border"
               >
                 <View className="w-10 h-10 rounded-full bg-secondary items-center justify-center mr-4">
                   <Icon name={contact.icon} size={20} />

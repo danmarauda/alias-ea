@@ -90,8 +90,8 @@ export const VoiceSelectCard = (props: VoiceItemProps) => {
             >
                 <View className='p-global items-start'>
                     <Icon name={isVisible ? "Pause" : "Play"} fill={colors.icon} size={20} />
-                    <Text className={`text-lg font-outfit-bold text-white mt-16`}>{props.name}</Text>
-                    <Text className={`text-xs opacity-60 text-white -mt-px`}>{props.description}</Text>
+                    <Text className={`text-lg font-outfit-bold text-text mt-16`}>{props.name}</Text>
+                    <Text className={`text-xs opacity-60 text-text -mt-px`}>{props.description}</Text>
                 </View>
                 <Animated.View 
                     style={{ 

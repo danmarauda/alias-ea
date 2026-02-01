@@ -70,7 +70,7 @@ const Subscription = () => {
               <RowItem isPro label="Code Explanation & Generation" />
               <RowItem isPro label="API Access" />
             </ThemedScroller>
-            <View className='px-4 pt-4 w-full items-center justify-center bg-background border-t border-secondary'>
+            <View className='px-4 pt-4 w-full items-center justify-center bg-background border-t border-border'>
               <Pressable
                 onPress={() => actionSheetRef.current?.show()}
                 className='w-full items-center bg-sky-500 rounded-lg justify-center py-4'>
@@ -120,7 +120,7 @@ const SelectPlan = (props: { badge: any; save: any; price: any; period: any; isS
   const { badge, save, price, period, isSelected, onSelect } = props
 
   return (
-    <Pressable onPress={onSelect} className={`flex-row justify-between items-center p-4 rounded-lg  mb-4 border  ${isSelected ? 'border-highlight' : 'border-secondary'}`}>
+    <Pressable onPress={onSelect} className={`flex-row justify-between items-center p-4 rounded-lg  mb-4 border  ${isSelected ? 'border-highlight' : 'border-border'}`}>
       <View>
         <View className='flex-row items-center mb-2'>
           <Text className='text-lg font-semibold text-primary'>{period}</Text>
@@ -141,7 +141,7 @@ const SelectPlan = (props: { badge: any; save: any; price: any; period: any; isS
 const RowItem = (props: { label: any; isFree?: any; isPro?: any; }) => {
   const { label, isFree, isPro } = props
   return (
-    <View className='w-full flex-row border-b border-secondary'>
+    <View className='w-full flex-row border-b border-border'>
       <View className='flex-1 py-6'>
         <ThemedText className='text-base'>{label}</ThemedText>
       </View>

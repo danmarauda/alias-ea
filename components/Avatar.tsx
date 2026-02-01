@@ -38,7 +38,7 @@ const Avatar: React.FC<AvatarProps> = ({
   };
 
   // Define border size and color if enabled
-  const borderStyle = border ? 'border-2 border-secondary' : '';
+  const borderStyle = border ? 'border-2 border-border' : '';
 
   // Component for initials if image is not provided
   const renderInitials = () => {

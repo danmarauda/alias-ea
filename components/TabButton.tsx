@@ -56,12 +56,12 @@ export const TabButton = forwardRef<View, TabButtonProps>(
           <View className="relative">
             <View className={`w-full relative ${isFocused ? 'opacity-100' : 'opacity-40'}`}>
               {/*isFocused && (
-                <AnimatedView animation='scaleIn' duration={200} className='absolute border-4 rounded-full border-background -top-1 -left-1/3  w-full h-8  bg-highlight/20' ></AnimatedView>
+                <AnimatedView animation='scaleIn' duration={200} className='absolute border-4 rounded-full border-border -top-1 -left-1/3  w-full h-8  bg-highlight/20' ></AnimatedView>
               )}*/}
               <Icon name={icon} size={24} strokeWidth={isFocused ? 2.5 : 2} color={isFocused ? colors.highlight : colors.icon} />
             </View>
             {hasBadge && (
-              <View className="absolute w-3 h-3 border border-background rounded-full bg-red-500 -top-1 -right-1.5" />
+              <View className="absolute w-3 h-3 border border-border rounded-full bg-red-500 -top-1 -right-1.5" />
             )}
           </View>
         );

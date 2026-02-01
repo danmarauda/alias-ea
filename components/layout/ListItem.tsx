@@ -115,7 +115,7 @@ const ListItem = forwardRef<View, ListItemProps>((props, ref) => {
             <Link href={href} asChild>
                 <Pressable
                     ref={ref}
-                    className={`active:bg-secondary/10`}
+                    className={`active:bg-secondary`}
                     {...rest}
                 >
                     {itemContent}
@@ -130,7 +130,7 @@ const ListItem = forwardRef<View, ListItemProps>((props, ref) => {
             ref={ref}
             onPress={disabled ? undefined : onPress}
             className={`
-                ${onPress ? 'active:bg-secondary/10' : ''}
+                ${onPress ? 'active:bg-secondary' : ''}
             `}
             {...rest}
         >

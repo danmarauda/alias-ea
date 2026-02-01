@@ -40,7 +40,7 @@ const Selectable: React.FC<SelectableProps> = ({
         onPress={onPress}
         style={style}
         className={`
-          border border-transparent rounded-lg p-4 active:opacity-70 bg-secondary/50
+          border border-transparent rounded-lg p-4 active:opacity-70 bg-secondary
           ${selected ? ' bg-secondary' : 'border-transparent'}
           ${error ? 'border-red-500' : ''}
           ${className}

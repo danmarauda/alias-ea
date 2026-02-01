@@ -144,7 +144,7 @@ const Header: React.FC<HeaderProps> = ({
   if (isTransparent) {
     return (
       <LinearGradient
-        colors={['rgba(0,0,0,0.8)', 'transparent']}
+        colors={['rgba(0,0,0,0.3)', 'transparent']}
         style={[style, containerStyle, { paddingTop: insets.top }]}
         className={`w-full pt-4 pb-10 px-global z-50 ${className}`}
         start={{ x: 0, y: 0 }}
@@ -254,7 +254,7 @@ export const HeaderIcon = ({ href, icon, hasBadge, onPress, className = '', isWh
       <TouchableOpacity onPress={onPress} className='overflow-visible'>
         <View className={`flex-row items-center justify-center relative overflow-visible h-7 w-7 ${className}`}>
           {hasBadge && (
-            <View className='w-4 h-4 border-2 border-background z-30 absolute -top-0 -right-0 bg-red-500 rounded-full' />
+            <View className='w-4 h-4 border-2 border-border z-30 absolute -top-0 -right-0 bg-red-500 rounded-full' />
           )}
           {isWhite ? (
             <Icon name={icon} size={25} color="white" />
@@ -268,7 +268,7 @@ export const HeaderIcon = ({ href, icon, hasBadge, onPress, className = '', isWh
         <TouchableOpacity className='overflow-visible'>
           <View className={`flex-row items-center justify-center relative overflow-visible h-7 w-7 ${className}`}>
             {hasBadge && (
-              <View className='w-4 h-4 border-2 border-background z-30 absolute -top-0 -right-[3px] bg-red-500 rounded-full' />
+              <View className='w-4 h-4 border-2 border-border z-30 absolute -top-0 -right-[3px] bg-red-500 rounded-full' />
             )}
             {isWhite ? (
               <Icon name={icon} size={25} color="white" />

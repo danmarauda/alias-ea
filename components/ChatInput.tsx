@@ -1,10 +1,10 @@
-import { Pressable, Image, View } from "react-native";
+import { Pressable, Image, View, Alert, Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TextInput } from "react-native-gesture-handler";
 import Icon from "./Icon";
 import { shadowPresets } from "@/utils/useShadow";
 import AnimatedView from "./AnimatedView";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Animated, {
     useAnimatedStyle,
     withTiming,
@@ -19,6 +19,7 @@ import { CardScroller } from "./CardScroller";
 import useThemeColors from "@/app/contexts/ThemeColors";
 import { LinearGradient } from "expo-linear-gradient";
 import LottieView from "lottie-react-native";
+import { useRecording } from "@/hooks/useRecording";
 
 
 type ChatInputProps = {
@@ -33,7 +34,11 @@ export const ChatInput = (props: ChatInputProps) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [selectedImages, setSelectedImages] = useState<string[]>([]);
     const [inputText, setInputText] = useState('');
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isRecordingUI, setIsRecordingUI] = useState(false);
+    const lottieRef = useRef<LottieView>(null);
+
+    // Recording hook
+    const { isTranscribing, startRecording, stopRecording, transcribeAudio } = useRecording();
 
     // Animation shared values
     const rotation = useSharedValue(0);
@@ -55,20 +60,20 @@ export const ChatInput = (props: ChatInputProps) => {
     // Watch for text input changes to show/hide send button
     useEffect(() => {
         const hasText = inputText.trim().length > 0;
-        if (hasText && !isPlaying) {
+        if (hasText && !isRecordingUI) {
             // Hide audio buttons, show send
             audioButtonsVisible.value = withSpring(0, { damping: 90, stiffness: 600 });
             setTimeout(() => {
                 sendButtonVisible.value = withSpring(1, { damping: 90, stiffness: 600 });
             }, 100);
-        } else if (!hasText && !isPlaying) {
+        } else if (!hasText && !isRecordingUI) {
             // Show audio buttons, hide send
             sendButtonVisible.value = withSpring(0, { damping: 90, stiffness: 600 });
             setTimeout(() => {
                 audioButtonsVisible.value = withSpring(1, { damping: 90, stiffness: 600 });
             }, 100);
         }
-    }, [inputText, isPlaying]);
+    }, [inputText, isRecordingUI]);
 
     // Toggle expand/collapse
     const handleToggle = () => {
@@ -169,20 +174,13 @@ export const ChatInput = (props: ChatInputProps) => {
         ],
     }));
 
-    // Toggle play/stop
-    const handlePlayToggle = () => {
+    // Start recording
+    const handleStartRecording = async () => {
         const fadeConfig = { duration: 10, easing: Easing.out(Easing.ease) };
 
-        if (isPlaying) {
-            // Show Mic + AudioLines, hide Stop
-            stopButtonVisible.value = withSpring(0, { damping: 200, stiffness: 600 });
-            lottieVisible.value = withTiming(0, fadeConfig);
-            setTimeout(() => {
-                audioButtonsVisible.value = withSpring(1, { damping: 200, stiffness: 600 });
-                inputVisible.value = withTiming(1, fadeConfig);
-            }, 100);
-            setIsPlaying(false);
-        } else {
+        try {
+            await startRecording();
+
             // Hide Mic + AudioLines, show Stop
             audioButtonsVisible.value = withSpring(0, { damping: 100, stiffness: 600 });
             inputVisible.value = withTiming(0, fadeConfig);
@@ -190,7 +188,35 @@ export const ChatInput = (props: ChatInputProps) => {
                 stopButtonVisible.value = withSpring(1, { damping: 100, stiffness: 600 });
                 lottieVisible.value = withTiming(1, fadeConfig);
             }, 100);
-            setIsPlaying(true);
+
+            setIsRecordingUI(true);
+        } catch (error) {
+            Alert.alert('Error', 'Could not start recording. Please check microphone permissions.');
+        }
+    };
+
+    // Stop recording and transcribe
+    const handleStopRecording = async () => {
+        const fadeConfig = { duration: 10, easing: Easing.out(Easing.ease) };
+
+        // Show Mic + AudioLines, hide Stop
+        stopButtonVisible.value = withSpring(0, { damping: 200, stiffness: 600 });
+        lottieVisible.value = withTiming(0, fadeConfig);
+        setTimeout(() => {
+            audioButtonsVisible.value = withSpring(1, { damping: 200, stiffness: 600 });
+            inputVisible.value = withTiming(1, fadeConfig);
+        }, 100);
+
+        setIsRecordingUI(false);
+
+        try {
+            const audioUri = await stopRecording();
+            if (audioUri) {
+                const transcription = await transcribeAudio(audioUri);
+                setInputText(prev => prev ? `${prev} ${transcription}` : transcription);
+            }
+        } catch (error) {
+            Alert.alert('Error', error instanceof Error ? error.message : 'Transcription failed');
         }
     };
 
@@ -240,8 +266,9 @@ export const ChatInput = (props: ChatInputProps) => {
                 <LinearGradient style={{ borderRadius: 25 }} colors={['transparent', 'transparent', 'rgba(255,255,255,0.1)']} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}>
                     <View className="relative min-h-[60px]">
                         {/* Lottie waveform */}
-                        <Animated.View style={[lottieStyle, { position: 'absolute', width: '100%', height: '100%' }]} pointerEvents={isPlaying ? 'auto' : 'none'}>
+                        <Animated.View style={[lottieStyle, { position: 'absolute', width: '100%', height: '100%' }]} pointerEvents={isRecordingUI ? 'auto' : 'none'}>
                             <LottieView
+                                ref={lottieRef}
                                 autoPlay
                                 loop
                                 style={{
@@ -257,15 +284,16 @@ export const ChatInput = (props: ChatInputProps) => {
                         </Animated.View>
 
                         {/* Text Input */}
-                        <Animated.View style={inputStyle} pointerEvents={isPlaying ? 'none' : 'auto'}>
+                        <Animated.View style={inputStyle} pointerEvents={isRecordingUI ? 'none' : 'auto'}>
                             <TextInput
-                                placeholder='Ask me anything...'
+                                placeholder={isTranscribing ? 'Transcribing...' : 'Ask me anything...'}
                                 placeholderTextColor={colors.text}
                                 className='text-text px-6 py-5'
                                 value={inputText}
                                 onChangeText={setInputText}
-                                style={{ minHeight: 60 }}
+                                style={{ minHeight: 60, opacity: isTranscribing ? 0.5 : 1 }}
                                 multiline={true}
+                                editable={!isTranscribing}
                             />
                         </Animated.View>
                     </View>
@@ -314,33 +342,34 @@ export const ChatInput = (props: ChatInputProps) => {
                         </View>
 
                         <View className='flex-row gap-x-2 items-center'>
-                            {/* Mic + AudioLines - fade out when playing */}
+                            {/* Mic + AudioLines - fade out when recording */}
                             <Animated.View style={audioButtonsStyle} className='flex-row gap-x-2'>
-                                <Pressable 
-                                onPress={handlePlayToggle}
+                                <Pressable
+                                onPress={handleStartRecording}
                                 className='items-center justify-center w-10 h-10 rounded-full'>
                                     <Icon name='Mic' size={20} />
                                 </Pressable>
                                 <Pressable
-                                    onPress={handlePlayToggle}
+                                    onPress={handleStartRecording}
                                     className='items-center flex justify-center w-10 h-10 bg-primary rounded-full'>
                                     <Icon name='AudioLines' size={18} color={colors.invert} />
                                 </Pressable>
                             </Animated.View>
 
-                            {/* Stop button - fade in when playing */}
-                            {isPlaying && (
+                            {/* Stop button - fade in when recording */}
+                            {isRecordingUI && (
                                 <Animated.View style={[stopButtonStyle, { position: 'absolute', right: 0 }]}>
                                     <Pressable
-                                        onPress={handlePlayToggle}
-                                        className='items-center flex justify-center w-10 h-10 bg-red-500 rounded-full'>
-                                        <Icon name='Square' size={16} color="white" fill="white" />
+                                        onPress={handleStopRecording}
+                                        className='items-center flex-row justify-center h-10 px-4 bg-sky-500 rounded-full gap-2'>
+                                        <Icon name='Check' size={12} color="white" />
+                                        <Text className='text-white font-semibold text-sm'>Done</Text>
                                     </Pressable>
                                 </Animated.View>
                             )}
 
                             {/* Send button - fade in when typing */}
-                            {!isPlaying && (
+                            {!isRecordingUI && (
                                 <Animated.View style={[sendButtonStyle, { position: 'absolute', right: 0 }]}>
                                     <Pressable
                                         onPress={handleSendMessage}

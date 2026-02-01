@@ -54,7 +54,7 @@ const Expandable: React.FC<ExpandableProps> = ({
   };
 
   return (
-    <View className={`border-b border-secondary ${className}`} style={style}>
+    <View className={`border-b border-border ${className}`} style={style}>
       <Pressable
         onPress={toggleExpand}
         className="flex-row items-center py-5"

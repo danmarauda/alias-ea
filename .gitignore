@@ -11,6 +11,8 @@ web-build/
 *.js.map
 android/
 
+.claude/
+.cursor/
 # OS specific
 .DS_Store
 

@@ -42,6 +42,7 @@ const HomeScreen = () => {
                 {/* Main Content */}
                 <View style={{ flex: 1 }}>
                     <Header
+                        variant="transparent"
                         title=""
                         leftComponent={leftComponent}
                         rightComponents={rightComponents}

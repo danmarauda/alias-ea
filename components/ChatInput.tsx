@@ -1,4 +1,4 @@
-import { Pressable, Image, View, Alert, Text, TouchableOpacity, Platform } from "react-native";
+import { Pressable, Image, View, Alert, Text, TouchableOpacity, Platform, Dimensions, Keyboard } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { TextInput } from "react-native-gesture-handler";
 import Icon from "./Icon";
@@ -44,8 +44,34 @@ export const ChatInput = (props: ChatInputProps) => {
     const [selectedImages, setSelectedImages] = useState<string[]>([]);
     const [inputText, setInputText] = useState('');
     const [isRecordingUI, setIsRecordingUI] = useState(false);
-    const [showKeyboardWarning, setShowKeyboardWarning] = useState(true);
     const lottieRef = useRef<LottieView>(null);
+    const inputRef = useRef<any>(null);
+
+    // Android focus animation values
+    const androidFocusProgress = useSharedValue(0);
+    const overlayOpacity = useSharedValue(0);
+
+    // Listen for keyboard show/hide on Android
+    useEffect(() => {
+        if (Platform.OS !== 'android') return;
+
+        const keyboardShowListener = Keyboard.addListener('keyboardDidShow', () => {
+            // Animate up when keyboard shows
+            overlayOpacity.value = withTiming(1, { duration: 200 });
+            androidFocusProgress.value = withTiming(1, { duration: 300, easing: Easing.out(Easing.cubic) });
+        });
+
+        const keyboardHideListener = Keyboard.addListener('keyboardDidHide', () => {
+            // Animate down when keyboard hides
+            androidFocusProgress.value = withTiming(0, { duration: 250, easing: Easing.in(Easing.cubic) });
+            overlayOpacity.value = withTiming(0, { duration: 200 });
+        });
+
+        return () => {
+            keyboardShowListener.remove();
+            keyboardHideListener.remove();
+        };
+    }, []);
 
     // Recording hook
     const { isTranscribing, startRecording, stopRecording, transcribeAudio } = useRecording();
@@ -184,6 +210,34 @@ export const ChatInput = (props: ChatInputProps) => {
         ],
     }));
 
+    // Android overlay style
+    const androidOverlayStyle = useAnimatedStyle(() => ({
+        opacity: overlayOpacity.value,
+        pointerEvents: overlayOpacity.value > 0 ? 'auto' as const : 'none' as const,
+    }));
+
+    // Android input container position style
+    const screenHeight = Dimensions.get('window').height;
+    const androidInputStyle = useAnimatedStyle(() => {
+        if (Platform.OS !== 'android') return {};
+
+        const translateY = interpolate(
+            androidFocusProgress.value,
+            [0, 1],
+            [0, -(screenHeight * 0.35)],
+            Extrapolation.CLAMP
+        );
+
+        return {
+            transform: [{ translateY }],
+        };
+    });
+
+    // Close Android keyboard when overlay pressed
+    const handleOverlayPress = () => {
+        Keyboard.dismiss();
+    };
+
     // Start recording
     const handleStartRecording = async () => {
         const fadeConfig = { duration: 10, easing: Easing.out(Easing.ease) };
@@ -262,23 +316,29 @@ export const ChatInput = (props: ChatInputProps) => {
     };
 
     return (
-        <View style={{ paddingBottom: insets.bottom + 0 }} className="px-global w-full absolute bottom-0 left-0 right-0">
+        <>
+            {/* Android overlay when focused */}
+            {Platform.OS === 'android' && (
+                <Animated.View
+                    style={[androidOverlayStyle, { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0)', zIndex: 998 }]}
+                >
+                    <Pressable style={{ flex: 1 }} onPress={handleOverlayPress} />
+                </Animated.View>
+            )}
+
+            <Animated.View
+                style={[
+                    { paddingBottom: insets.bottom + 0, zIndex: 999 },
+                    Platform.OS === 'android' ? androidInputStyle : {}
+                ]}
+                className="px-global w-full absolute bottom-0 left-0 right-0"
+            >
             {selectedImages.length > 0 && (
                 <View className="mb-0">
                     <ScrollableImageList
                         images={selectedImages}
                         onRemove={removeImage}
                     />
-                </View>
-            )}
-            
-            {Platform.OS === 'android' && showKeyboardWarning && (
-                <View className="p-4 mb-3 relative rounded-3xl flex-row items-center gap-x-2 bg-black border border-border">
-                    <Icon name="Keyboard" size={16} color="white" className="bg-white/10 rounded-2xl p-3" />
-                    <Text className="text-white text-xs flex-1 pr-10 ml-2">Keyboard may behave unexpectedly in Expo Go with bottom input. This is a known Expo Go limitation and works correctly in development builds.</Text>
-                    <Pressable onPress={() => setShowKeyboardWarning(false)} className="absolute top-3 right-3">
-                        <Icon name="X" size={16} color="white" />
-                    </Pressable>
                 </View>
             )}
 
@@ -311,6 +371,7 @@ export const ChatInput = (props: ChatInputProps) => {
                                 </View>
                             ) : (
                                 <TextInput
+                                    ref={inputRef}
                                     placeholder="Ask me anything..."
                                     placeholderTextColor={colors.text}
                                     className='text-text px-6 py-5'
@@ -407,7 +468,8 @@ export const ChatInput = (props: ChatInputProps) => {
                     </View>
                 </LinearGradient>
             </View>
-        </View>
+        </Animated.View>
+        </>
     );
 }
 

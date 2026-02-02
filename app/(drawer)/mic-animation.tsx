@@ -108,8 +108,8 @@ const HomeScreen = () => {
         <View className="flex-1 bg-background relative">
             <LinearGradient style={{ width: '100%', display: 'flex', flex: 1, flexDirection: 'column' }} colors={['transparent', 'transparent', colors.gradient]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}>
                 <KeyboardAvoidingView
-                    behavior="padding"
-                    keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+                    behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+                    keyboardVerticalOffset={0}
                     style={{ flex: 1 }}
                 >
                     <View style={{ flex: 1 }}>

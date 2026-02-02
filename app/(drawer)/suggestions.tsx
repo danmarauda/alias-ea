@@ -1,6 +1,6 @@
 import Header from '@/components/Header';
 import React, { useState } from 'react';
-import { View, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
+import { View, KeyboardAvoidingView, TouchableOpacity, Platform } from 'react-native';
 import Icon from '@/components/Icon';
 import ThemedText from '@/components/ThemedText';
 import DrawerButton from '@/components/DrawerButton';
@@ -111,8 +111,8 @@ const HomeScreen = () => {
         <View className="flex-1 bg-background relative">
             <LinearGradient style={{ width: '100%', display: 'flex', flex: 1, flexDirection: 'column' }} colors={['transparent', 'transparent', colors.gradient]} start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}>
                 <KeyboardAvoidingView
-                    behavior="padding"
-                    keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+                    behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+                    keyboardVerticalOffset={0}
                     style={{ flex: 1 }}
                 >
                     <View className='flex-1'>

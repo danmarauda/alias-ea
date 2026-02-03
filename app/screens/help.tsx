@@ -12,33 +12,33 @@ import AnimatedView from '@/components/AnimatedView';
 const faqData = [
   {
     id: '1',
-    question: 'How do I start a conversation with Luna?',
-    answer: 'Starting a conversation with Luna is easy. Simply tap on the mic icon to start voice input, or use the text input at the bottom of the screen to type your message. Luna will respond instantly to your queries.'
+    question: 'How do I start a conversation with ALIAS Executive Agent?',
+    answer: 'Starting a conversation with ALIAS Executive Agent is easy. Simply tap on the mic icon to start voice input, or use the text input at the bottom of the screen to type your message. ALIAS Executive Agent will respond instantly to your queries.'
   },
   {
     id: '2',
-    question: 'What can Luna help me with?',
-    answer: 'Luna can assist with a wide range of tasks including answering questions, providing information, generating content, suggesting ideas, translating text, explaining concepts, and having natural conversations. Just ask, and Luna will try to help!'
+    question: 'What can ALIAS Executive Agent help me with?',
+    answer: 'ALIAS Executive Agent can assist with a wide range of tasks including answering questions, providing information, generating content, suggesting ideas, translating text, explaining concepts, and having natural conversations. Just ask, and ALIAS Executive Agent will try to help!'
   },
   {
     id: '3',
-    question: 'Does Luna remember our previous conversations?',
-    answer: 'Yes, Luna maintains context within the same session, so you can refer back to information from earlier in your conversation. For privacy reasons, conversations aren\'t stored permanently unless you explicitly save them.'
+    question: 'Does ALIAS Executive Agent remember our previous conversations?',
+    answer: 'Yes, ALIAS Executive Agent maintains context within the same session, so you can refer back to information from earlier in your conversation. For privacy reasons, conversations aren\'t stored permanently unless you explicitly save them.'
   },
   {
     id: '4',
-    question: 'How accurate is Luna\'s information?',
-    answer: 'Luna strives to provide accurate and helpful information. However, it\'s trained on data with a cutoff date and may not have information about very recent events. Always verify critical information from official sources.'
+    question: 'How accurate is ALIAS Executive Agent\'s information?',
+    answer: 'ALIAS Executive Agent strives to provide accurate and helpful information. However, it\'s trained on data with a cutoff date and may not have information about very recent events. Always verify critical information from official sources.'
   },
   {
     id: '5',
-    question: 'Can I change Luna\'s voice or personality?',
-    answer: 'Yes! You can customize Luna\'s voice by going to Settings > AI Voice and selecting from the available options. Each voice has a unique tone and style to match your preferences.'
+    question: 'Can I change ALIAS Executive Agent\'s voice or personality?',
+    answer: 'Yes! You can customize ALIAS Executive Agent\'s voice by going to Settings > AI Voice and selecting from the available options. Each voice has a unique tone and style to match your preferences.'
   },
   {
     id: '6',
-    question: 'Is my conversation with Luna private?',
-    answer: 'Your privacy is important to us. Conversations with Luna are encrypted and not shared with third parties. We only store conversations temporarily to improve our service, and you can delete your conversation history at any time from Settings.'
+    question: 'Is my conversation with ALIAS Executive Agent private?',
+    answer: 'Your privacy is important to us. Conversations with ALIAS Executive Agent are encrypted and not shared with third parties. We only store conversations temporarily to improve our service, and you can delete your conversation history at any time from Settings.'
   }
 ];
 
@@ -47,16 +47,16 @@ const contactInfo = [
   {
     id: 'email',
     type: 'Email',
-    value: 'support@luna-ai.com',
+    value: 'support@alias-executive-agent.com',
     icon: 'Mail' as const,
-    action: () => Linking.openURL('mailto:support@luna-ai.com')
+    action: () => Linking.openURL('mailto:support@alias-executive-agent.com')
   },
   {
     id: 'phone',
     type: 'Phone',
-    value: '+1 (800) 123-LUNA',
+    value: '+1 (800) ALIAS-1',
     icon: 'Phone' as const,
-    action: () => Linking.openURL('tel:+18001235862')
+    action: () => Linking.openURL('tel:+18002542731')
   },
   {
     id: 'hours',
@@ -134,7 +134,7 @@ export default function HelpScreen() {
               title="Email Us" 
               iconStart="Mail"
               className="mt-8"
-              onPress={() => Linking.openURL('mailto:support@luna-ai.com')}
+              onPress={() => Linking.openURL('mailto:support@alias-executive-agent.com')}
             />
           </View>
         </AnimatedView>

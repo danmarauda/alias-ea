@@ -36,8 +36,11 @@ export const BotSwitch = () => {
     return (
         <>
             <Pressable 
-                className="pl-3 pr-2 py-1 rounded-full flex-row bg-text border border-neutral-300 bg-secondary border-transparent"
+                className="pl-3 pr-2 py-1 rounded-full flex-row bg-text border border-neutral-300 bg-secondary border-transparent active:opacity-80"
                 onPress={openModelSelector}
+                accessibilityLabel={`Current AI model: ${selectedModel}`}
+                accessibilityHint="Double tap to change AI model"
+                accessibilityRole="button"
             >
                 <ThemedText className="mr-1 !text-invert">{selectedModel}</ThemedText>
                 <Icon name="ChevronDown" size={16} className="opacity-50" color={colors.invert} />
@@ -55,7 +58,11 @@ export const BotSwitch = () => {
                         <Pressable 
                             key={option.value}
                             onPress={() => handleModelSelect(option.value)}
-                            className={`p-3 mb-2 rounded-2xl flex-row justify-between items-center ${selectedModel === option.value ? 'bg-background' : ''}`}
+                            className={`p-3 mb-2 rounded-2xl flex-row justify-between items-center active:opacity-70 ${selectedModel === option.value ? 'bg-background' : ''}`}
+                            accessibilityLabel={option.label}
+                            accessibilityHint={`Double tap to select ${option.label} as your AI model`}
+                            accessibilityRole="radio"
+                            accessibilityState={{ selected: selectedModel === option.value }}
                         >
                             <ThemedText className="text-base">{option.label}</ThemedText>
                             {selectedModel === option.value && (
@@ -66,7 +73,10 @@ export const BotSwitch = () => {
                     
                     <Pressable 
                         onPress={() => actionSheetRef.current?.hide()}
-                        className="mt-4 py-3 bg-text rounded-full items-center"
+                        className="mt-4 py-3 bg-text rounded-full items-center active:opacity-80"
+                        accessibilityLabel="Cancel"
+                        accessibilityHint="Double tap to close the model selector"
+                        accessibilityRole="button"
                     >
                         <ThemedText className="font-semibold !text-invert">Cancel</ThemedText>
                     </Pressable>

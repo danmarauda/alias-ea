@@ -33,13 +33,13 @@ export function Placeholder({
                 {title}
             </ThemedText>
 
-            {subtitle && (
+            {subtitle ? (
                 <ThemedText className="text-subtext text-center mb-4">
                     {subtitle}
                 </ThemedText>
-            )}
+            ) : null}
 
-            {button && href && (
+            {button && href ? (
                 <Button
                     className='mt-4'
                     title={button}
@@ -47,7 +47,7 @@ export function Placeholder({
                     href={href}
                     rounded="full"
                 />
-            )}
+            ) : null}
         </View>
     );
 } 

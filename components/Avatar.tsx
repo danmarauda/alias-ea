@@ -1,11 +1,12 @@
 import React from 'react';
-import { Image, Pressable, View, Text, ViewStyle, ImageSourcePropType } from 'react-native';
+import { Pressable, View, ViewStyle } from 'react-native';
+import { Image, ImageSource } from 'expo-image';
 import { Link, router } from 'expo-router';
 import ThemedText from './ThemedText';
 
 type AvatarProps = {
   size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
-  src?: string | ImageSourcePropType; // Can be a URL string or required image
+  src?: string | ImageSource; // Can be a URL string or required image
   name?: string; // for displaying initials if no image
   border?: boolean;
   bgColor?: string; // Optional background color
@@ -51,12 +52,9 @@ const Avatar: React.FC<AvatarProps> = ({
   };
 
   // Convert the src prop to an appropriate Image source prop
-  const getImageSource = (): ImageSourcePropType => {
-    if (!src) {
-      // Return a transparent 1x1 pixel as fallback instead of null
-      return { uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=' };
-    }
-
+  const getImageSource = (): ImageSource | undefined => {
+    if (!src) return undefined;
+    
     // If src is a string (URL), return it as a uri object
     if (typeof src === 'string') {
       return { uri: src };
@@ -74,7 +72,8 @@ const Avatar: React.FC<AvatarProps> = ({
       {src ? (
         <Image
           source={getImageSource()}
-          className="rounded-full w-full h-full object-cover"
+          className="rounded-full w-full h-full"
+          contentFit="cover"
         />
       ) : (
         renderInitials()

@@ -14,7 +14,7 @@ export const useThemeColors = () => {
     lightDark: isDark ? '#262626' : 'white',
     border: isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.1)',
     text: isDark ? 'white' : 'black',
-    placeholder: isDark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.4)',
+    placeholder: isDark ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)',
     switch: isDark ? 'rgba(255,255,255,0.4)' : '#ccc',
     chatBg: isDark ? '#262626' : '#efefef',
     gradient: isDark ? 'rgba(0,0,0,1)' : 'rgba(0,0,0,0.1)',

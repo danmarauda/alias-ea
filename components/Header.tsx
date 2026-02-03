@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Pressable, ViewStyle, Animated, NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ViewStyle, Animated, NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 import { useThemeColors } from 'app/contexts/ThemeColors';
 import { Link } from 'expo-router';
 import Icon, { IconName } from './Icon';
@@ -107,26 +107,32 @@ const Header: React.FC<HeaderProps> = ({
       >
         <View className="flex-row justify-between">
           <View className='flex-row items-center'>
-            {showBackButton && (
-              <TouchableOpacity onPress={handleBackPress} className='mr-global relative z-50'>
+            {showBackButton ? (
+              <Pressable 
+                onPress={handleBackPress} 
+                className='mr-global relative z-50 active:opacity-70'
+                accessibilityLabel="Go back"
+                accessibilityHint="Double tap to go back to the previous screen"
+                accessibilityRole="button"
+              >
                 <Icon name="ArrowLeft" size={24} color="white" />
-              </TouchableOpacity>
-            )}
+              </Pressable>
+            ) : null}
 
             <View className='flex-row items-center relative z-50'>
               {leftComponent}
 
-              {title && (
+              {title ? (
                 <Text className='text-white text-lg font-bold'>{title}</Text>
-              )}
+              ) : null}
             </View>
           </View>
 
-          {middleComponent && (
+          {middleComponent ? (
             <View className='flex-row items-center absolute top-0 left-0 right-0 bottom-0 justify-center'>
               {middleComponent}
             </View>
-          )}
+          ) : null}
 
           <View className='flex-row items-center relative z-50'>
             {rightComponents.map((component, index) => (
@@ -152,26 +158,32 @@ const Header: React.FC<HeaderProps> = ({
       >
         <View className="flex-row justify-between px-global">
           <View className='flex-row items-center'>
-            {showBackButton && (
-              <TouchableOpacity onPress={handleBackPress} className='mr-global relative z-50'>
+            {showBackButton ? (
+              <Pressable 
+                onPress={handleBackPress} 
+                className='mr-global relative z-50 active:opacity-70'
+                accessibilityLabel="Go back"
+                accessibilityHint="Double tap to go back to the previous screen"
+                accessibilityRole="button"
+              >
                 <Icon name="ArrowLeft" size={24} color="white" />
-              </TouchableOpacity>
-            )}
+              </Pressable>
+            ) : null}
 
             <View className='flex-row items-center relative z-50'>
               {leftComponent}
 
-              {title && (
+              {title ? (
                 <Text className='text-white text-lg font-bold'>{title}</Text>
-              )}
+              ) : null}
             </View>
           </View>
 
-          {middleComponent && (
+          {middleComponent ? (
             <View className='flex-row items-center absolute top-0 left-0 right-0 bottom-0 justify-center'>
               {middleComponent}
             </View>
-          )}
+          ) : null}
 
           <View className='flex-row items-center relative z-50'>
             {rightComponents.map((component, index) => (
@@ -199,30 +211,36 @@ const Header: React.FC<HeaderProps> = ({
 
       {(showBackButton || leftComponent || title) && (
         <View className='flex-row items-center flex-1'>
-          {showBackButton && (
-            <TouchableOpacity onPress={handleBackPress} className='mr-global relative z-50 py-4'>
+          {showBackButton ? (
+            <Pressable 
+              onPress={handleBackPress} 
+              className='mr-global relative z-50 py-4 active:opacity-70'
+              accessibilityLabel="Go back"
+              accessibilityHint="Double tap to go back to the previous screen"
+              accessibilityRole="button"
+            >
               <Icon name="ArrowLeft" size={24} color={isTransparent ? 'white' : colors.icon} />
-            </TouchableOpacity>
-          )}
+            </Pressable>
+          ) : null}
 
-          {leftComponent || title && (
+          {(leftComponent || title) ? (
             <View className='flex-row items-center relative z-50 py-4  '>
               {leftComponent}
 
-              {title && (
+              {title ? (
                 <Text className='text-primary text-lg font-bold'>{title}</Text>
-              )}
+              ) : null}
             </View>
-          )}
+          ) : null}
         </View>
       )}
-      {middleComponent && (
+      {middleComponent ? (
         <View className='flex-row items-center justify-center flex-1 py-4 '>
           {middleComponent}
         </View>
-      )}
+      ) : null}
 
-      {rightComponents.length > 0 && (
+      {rightComponents.length > 0 ? (
         <View className='flex-row items-center justify-end relative z-50 flex-1 '>
           {rightComponents.map((component, index) => (
             <View key={index} className="ml-6">
@@ -230,7 +248,7 @@ const Header: React.FC<HeaderProps> = ({
             </View>
           ))}
         </View>
-      )}
+      ) : null}
       {children}
     </AnimatedView>
 
@@ -248,36 +266,52 @@ type HeaderItemProps = {
   isWhite?: boolean;
 };
 
-export const HeaderIcon = ({ href, icon, hasBadge, onPress, className = '', isWhite = false }: HeaderItemProps) => (
-  <>
-    {onPress ? (
-      <TouchableOpacity onPress={onPress} className='overflow-visible'>
-        <View className={`flex-row items-center justify-center relative overflow-visible h-7 w-7 ${className}`}>
-          {hasBadge && (
-            <View className='w-4 h-4 border-2 border-border z-30 absolute -top-0 -right-0 bg-red-500 rounded-full' />
-          )}
-          {isWhite ? (
-            <Icon name={icon} size={25} color="white" />
-          ) : (
-            <Icon name={icon} size={25} />
-          )}
-        </View>
-      </TouchableOpacity>
-    ) : (
-      <Link href={href} asChild>
-        <TouchableOpacity className='overflow-visible'>
+export const HeaderIcon = ({ href, icon, hasBadge, onPress, className = '', isWhite = false }: HeaderItemProps) => {
+  const accessibilityLabel = `${icon} button`;
+  const accessibilityHint = onPress ? 'Double tap to activate' : `Double tap to navigate to ${href}`;
+  
+  return (
+    <>
+      {onPress ? (
+        <Pressable 
+          onPress={onPress} 
+          className='overflow-visible active:opacity-70'
+          accessibilityLabel={accessibilityLabel}
+          accessibilityHint={accessibilityHint}
+          accessibilityRole="button"
+        >
           <View className={`flex-row items-center justify-center relative overflow-visible h-7 w-7 ${className}`}>
-            {hasBadge && (
-              <View className='w-4 h-4 border-2 border-border z-30 absolute -top-0 -right-[3px] bg-red-500 rounded-full' />
-            )}
+            {hasBadge ? (
+              <View className='w-4 h-4 border-2 border-border z-30 absolute -top-0 -right-0 bg-red-500 rounded-full' />
+            ) : null}
             {isWhite ? (
               <Icon name={icon} size={25} color="white" />
             ) : (
               <Icon name={icon} size={25} />
             )}
           </View>
-        </TouchableOpacity>
-      </Link>
-    )}
-  </>
-);
+        </Pressable>
+      ) : (
+        <Link href={href} asChild>
+          <Pressable 
+            className='overflow-visible active:opacity-70'
+            accessibilityLabel={accessibilityLabel}
+            accessibilityHint={accessibilityHint}
+            accessibilityRole="link"
+          >
+            <View className={`flex-row items-center justify-center relative overflow-visible h-7 w-7 ${className}`}>
+              {hasBadge ? (
+                <View className='w-4 h-4 border-2 border-border z-30 absolute -top-0 -right-[3px] bg-red-500 rounded-full' />
+              ) : null}
+              {isWhite ? (
+                <Icon name={icon} size={25} color="white" />
+              ) : (
+                <Icon name={icon} size={25} />
+              )}
+            </View>
+          </Pressable>
+        </Link>
+      )}
+    </>
+  );
+};

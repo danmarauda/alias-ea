@@ -25,12 +25,12 @@ type MockConversationProps = {
 const mockResponses = [
     {
         title: "Connect Your API Key",
-        content: "To get real AI responses, you'll need to connect your own API key. Luna supports both OpenAI (ChatGPT) and Google (Gemini) APIs.",
+        content: "To get real AI responses, you'll need to connect your own API key. ALIAS supports both OpenAI (ChatGPT) and Google (Gemini) APIs.",
         details: "Head to Settings > API Configuration to add your key. Your API key is stored securely on your device and never sent to our servers. This ensures you have full control over your usage and costs."
     },
     {
         title: "Getting Started",
-        content: "This is a demo conversation to showcase Luna's chat interface. The animations, typing indicators, and message bubbles are all ready for your AI integration.",
+        content: "This is a demo conversation to showcase ALIAS's chat interface. The animations, typing indicators, and message bubbles are all ready for your AI integration.",
         details: "Once connected, you can customize the AI's behavior, set system prompts, and adjust response parameters to match your app's needs."
     },
     {
@@ -125,7 +125,7 @@ export const MockConversation = ({ messages, isTyping }: MockConversationProps) 
 
                 {isTyping && (
                     <AnimatedView animation="fadeIn" duration={300}>
-                        <ShimmerText text="Luna is thinking..." />
+                        <ShimmerText text="ALIAS is thinking..." />
                     </AnimatedView>
                 )}
             </ScrollView>
@@ -220,7 +220,7 @@ const TypingIndicator = () => (
                 />
             ))}
         </View>
-        <ThemedText className="ml-3 text-sm text-subtext">Luna is typing...</ThemedText>
+        <ThemedText className="ml-3 text-sm text-subtext">ALIAS is typing...</ThemedText>
     </View>
 );
 

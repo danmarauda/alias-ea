@@ -1,6 +1,6 @@
-# Luna - AI Chat Template
+# ALIAS Executive Agent
 
-A beautiful, production-ready AI chat template built with Expo and React Native.
+An intelligent executive assistant application built with Expo and React Native, designed for professional productivity and AI-powered task management.
 
 ## Features
 
@@ -27,7 +27,7 @@ npx expo start -c
 
 ## Setting Up AI
 
-Luna supports three AI providers. You only need ONE to get started.
+ALIAS Executive Agent supports three AI providers. You only need ONE to get started.
 
 ### 1. Create your `.env` file
 

@@ -1,11 +1,10 @@
 {
   "expo": {
-    "newArchEnabled": true,
-    "name": "Luna",
-    "slug": "luna",
+    "name": "ALIAS Executive Agent",
+    "slug": "alias-executive-agent",
     "version": "1.0.0",
     "runtimeVersion": "1.0.0",
-    "scheme": "luna",
+    "scheme": "alias-executive-agent",
     "experiments": {
       "tsconfigPaths": true
     },
@@ -16,7 +15,15 @@
     "plugins": [
       "expo-router",
       "expo-font",
-      "expo-audio"
+      "expo-audio",
+      "@react-native-community/datetimepicker",
+      "expo-asset",
+      "expo-sharing",
+      "@livekit/react-native-expo-plugin",
+      "./plugins/withDisableBundleSigning.js",
+      "expo-secure-store",
+      "expo-image",
+      "expo-web-browser"
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -31,8 +38,15 @@
     ],
     "ios": {
       "supportsTablet": true,
+      "bundleIdentifier": "ai.aliaslabs.aea",
       "infoPlist": {
         "NSMicrophoneUsageDescription": "This app uses the microphone for speech-to-text functionality."
+      },
+      "entitlements": {
+        "com.apple.security.application-groups": [
+          "group.ai.aliaslabs.aea"
+        ],
+        "aps-environment": "development"
       }
     },
     "android": {
@@ -41,26 +55,45 @@
         "backgroundColor": "#ffffff"
       },
       "softwareKeyboardLayoutMode": "resize",
-      "predictiveBackGestureEnabled": false,
-      "config": {
-        "enableOnBackInvokedCallback": false
-      },
-      "navigationBarColor": "transparent",
-      "navigationBarHidden": true,
-      "package": "com.thomino.luna",
-      "permissions": ["android.permission.RECORD_AUDIO"]
+      "package": "ai.aliaslabs.aea",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
     },
     "extra": {
       "router": {
         "origin": false
       },
       "eas": {
-        "projectId": "a0a0f625-0457-4ab7-a22f-509a24238a11"
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "targetName": "expo-sharing-extension",
+                  "bundleIdentifier": "ai.aliaslabs.aea.expo-sharing-extension",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.ai.aliaslabs.aea"
+                    ]
+                  }
+                },
+                {
+                  "targetName": "expo-sharing-extension",
+                  "bundleIdentifier": "ai.aliaslabs.aea.expo-sharing-extension",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.ai.aliaslabs.aea"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "projectId": "e03210ce-4264-4e68-b7b2-3378bd91e145"
       }
-    },
-    "owner": "thomino",
-    "updates": {
-      "url": "https://u.expo.dev/a0a0f625-0457-4ab7-a22f-509a24238a11"
     }
   }
 }

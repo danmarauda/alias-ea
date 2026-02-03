@@ -1,23 +1,38 @@
 import React, { useState } from 'react';
-import { View, Pressable, StyleSheet } from 'react-native';
+import { View, Pressable, StyleSheet, Alert } from 'react-native';
 import { Link, router } from 'expo-router';
 import Input from '@/components/forms/Input';
 import ThemedText from '@/components/ThemedText';
 import { Button } from '@/components/Button';
 import useThemeColors from '@/app/contexts/ThemeColors';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useAuth } from '@/app/contexts/AuthContext';
 
 export default function SignupScreen() {
   const colors = useThemeColors();
+  const { signup, loginWithGoogle, loginWithApple, isLoading, error, clearError } = useAuth();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [strengthText, setStrengthText] = useState('');
+
+  const validateName = (name: string) => {
+    if (!name.trim()) {
+      setNameError('Name is required');
+      return false;
+    } else if (name.trim().length < 2) {
+      setNameError('Name must be at least 2 characters');
+      return false;
+    }
+    setNameError('');
+    return true;
+  };
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -98,38 +113,74 @@ export default function SignupScreen() {
     return true;
   };
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
+    clearError();
+    const isNameValid = validateName(name);
     const isEmailValid = validateEmail(email);
     const isPasswordValid = validatePassword(password);
     const isConfirmPasswordValid = validateConfirmPassword(confirmPassword);
 
-    if (isEmailValid && isPasswordValid && isConfirmPasswordValid) {
-      setIsLoading(true);
-      // Simulate API call
-      setTimeout(() => {
-        setIsLoading(false);
-        // Navigate to home screen after successful login
-        router.replace('/(drawer)/(tabs)/');
-      }, 1500);
+    if (isNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid) {
+      try {
+        await signup({ email, password, name });
+        // Navigate to home screen after successful signup
+        router.replace('/(drawer)/');
+      } catch (err) {
+        // Error is handled by AuthContext
+        console.error('Signup failed:', err);
+      }
     }
   };
 
-  const handleSocialLogin = (provider: string) => {
-    console.log(`Login with ${provider}`);
-    // Implement social login logic here
+  const handleGoogleLogin = async () => {
+    clearError();
+    try {
+      await loginWithGoogle();
+      router.replace('/(drawer)/');
+    } catch (err) {
+      Alert.alert('Google Login Failed', error || 'Could not sign in with Google');
+    }
   };
+
+  const handleAppleLogin = async () => {
+    clearError();
+    try {
+      await loginWithApple();
+      router.replace('/(drawer)/');
+    } catch (err) {
+      Alert.alert('Apple Login Failed', error || 'Could not sign in with Apple');
+    }
+  };
+
   const insets = useSafeAreaInsets();
+
   return (
     <View style={{paddingTop: insets.top }} className="flex-1 bg-background p-10">
-     
-      
       <View className="mt-8">
-        <ThemedText className="text-4xl font-outfit-bold mb-14">Luna.</ThemedText>
+        <ThemedText className="text-4xl font-outfit-bold mb-14">ALIAS.</ThemedText>
         <ThemedText className="text-xl font-bold mb-10">Create account</ThemedText>
+        
+        {error && (
+          <View className="mb-4 p-3 bg-red-100 border border-red-300 rounded-lg">
+            <ThemedText className="text-red-600 text-sm">{error}</ThemedText>
+          </View>
+        )}
+
+        <Input
+          label="Name"
+          variant="classic"
+          value={name}
+          onChangeText={(text) => {
+            setName(text);
+            if (nameError) validateName(text);
+          }}
+          error={nameError}
+          autoCapitalize="words"
+          editable={!isLoading}
+        />
         
         <Input
           label="Email"
-          //leftIcon="mail"
           variant="classic"
           value={email}
           onChangeText={(text) => {
@@ -140,6 +191,7 @@ export default function SignupScreen() {
           keyboardType="email-address"
           autoCapitalize="none"
           autoComplete="email"
+          editable={!isLoading}
         />
         
         <Input
@@ -154,6 +206,7 @@ export default function SignupScreen() {
           error={passwordError}
           isPassword={true}
           autoCapitalize="none"
+          editable={!isLoading}
         />
        
         <Input
@@ -167,8 +220,10 @@ export default function SignupScreen() {
           error={confirmPasswordError}
           isPassword={true}
           autoCapitalize="none"
+          editable={!isLoading}
         />
-         {password.length > 0 && (
+
+        {password.length > 0 && (
           <View className="mb-4">
             <View className="w-full h-1 bg-secondary rounded-full overflow-hidden">
               <View 
@@ -181,18 +236,44 @@ export default function SignupScreen() {
             </ThemedText>
           </View>
         )}
-        
-        
+
         <Button 
           title="Sign up" 
           onPress={handleSignup} 
           loading={isLoading}
+          disabled={isLoading}
           size="large"
           className="mb-6"
           rounded="full"
         />
-        
-       
+
+        {/* Social Login Options */}
+        <View className="flex-row items-center mb-6">
+          <View className="flex-1 h-px bg-border" />
+          <ThemedText className="mx-4 text-subtext text-sm">or continue with</ThemedText>
+          <View className="flex-1 h-px bg-border" />
+        </View>
+
+        <View className="flex-row gap-3 mb-6">
+          <Button
+            title="Google"
+            variant="outline"
+            onPress={handleGoogleLogin}
+            loading={isLoading}
+            disabled={isLoading}
+            className="flex-1"
+            rounded="full"
+          />
+          <Button
+            title="Apple"
+            variant="outline"
+            onPress={handleAppleLogin}
+            loading={isLoading}
+            disabled={isLoading}
+            className="flex-1"
+            rounded="full"
+          />
+        </View>
         
         <View className="flex-row justify-center">
           <ThemedText className="text-subtext">Already have an account? </ThemedText>

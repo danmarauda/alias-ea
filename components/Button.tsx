@@ -1,6 +1,6 @@
 // components/Button.tsx
 import React from 'react';
-import { Text, ActivityIndicator, TouchableOpacity, View, Pressable } from 'react-native';
+import { Text, ActivityIndicator, View, Pressable } from 'react-native';
 import { Link, router } from 'expo-router';
 import Icon, { IconName } from './Icon';
 
@@ -22,6 +22,9 @@ interface ButtonProps {
   iconSize?: number;
   iconColor?: string;
   iconClassName?: string;
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
+  accessibilityRole?: 'button' | 'link';
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -40,6 +43,9 @@ export const Button: React.FC<ButtonProps> = ({
   iconSize,
   iconColor,
   iconClassName = '',
+  accessibilityLabel,
+  accessibilityHint,
+  accessibilityRole,
   ...props
 }) => {
   const buttonStyles = {
@@ -119,31 +125,22 @@ export const Button: React.FC<ButtonProps> = ({
     </>
   );
 
-  if (href) {
-    return (
-      <TouchableOpacity
-        disabled={loading || disabled}
-        activeOpacity={0.8}
-        className={`px-4 relative ${buttonStyles[variant]} ${buttonSize[size]} ${roundedStyles[rounded]} items-center justify-center ${disabledStyle} ${className}`}
-        {...props}
-        onPress={() => {
-          router.push(href);
-        }}
-      >
-        {ButtonContent}
-      </TouchableOpacity>
-    );
-  }
+  const label = accessibilityLabel || title || 'Button';
+  const hint = accessibilityHint || (href ? 'Double tap to navigate' : 'Double tap to activate');
+  const role = accessibilityRole || (href ? 'link' : 'button');
 
   return (
-    <TouchableOpacity
-      onPress={onPress}
+    <Pressable
+      onPress={href ? () => router.push(href) : onPress}
       disabled={loading || disabled}
-      activeOpacity={0.8}
-      className={`px-4 relative ${buttonStyles[variant]} ${buttonSize[size]} ${roundedStyles[rounded]} items-center justify-center ${disabledStyle} ${className}`}
+      className={`px-4 relative ${buttonStyles[variant]} ${buttonSize[size]} ${roundedStyles[rounded]} items-center justify-center ${disabledStyle} ${className} ${loading || disabled ? '' : 'active:opacity-80'}`}
+      accessibilityLabel={label}
+      accessibilityHint={hint}
+      accessibilityRole={role}
+      accessibilityState={{ disabled: loading || disabled }}
       {...props}
     >
       {ButtonContent}
-    </TouchableOpacity>
+    </Pressable>
   );
 };

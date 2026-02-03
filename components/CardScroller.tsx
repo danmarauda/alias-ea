@@ -29,7 +29,7 @@ export const CardScroller = ({
   return (
     <View className={`w-full flex flex-col  ${title ? 'pt-global' : 'pt-0'} ${className}`} style={style}>
       <View className={`w-full flex flex-row justify-between items-center ${title ? 'mb-2' : 'mb-0'}`}>
-        {title && <ThemedText className='text-base font-bold'>{title}</ThemedText>}
+        {title ? <ThemedText className='text-base font-bold'>{title}</ThemedText> : null}
         {allUrl && (
           <View className='flex flex-col'>
             <Link href={allUrl} className='text-primary'>

@@ -41,6 +41,9 @@ export default function DrawerButton({
         onPress={handlePress}
         style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
         className='rounded-full bg-background border border-border p-3'
+        accessibilityLabel="Open navigation menu"
+        accessibilityHint="Double tap to open the navigation drawer"
+        accessibilityRole="button"
       >
         {isAvatar ? (
           <Avatar

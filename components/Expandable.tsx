@@ -59,18 +59,18 @@ const Expandable: React.FC<ExpandableProps> = ({
         onPress={toggleExpand}
         className="flex-row items-center py-5"
       >
-        {icon && (
+        {icon ? (
           <View className="mr-3">
             <Icon name={icon} size={24} />
           </View>
-        )}
+        ) : null}
         <View className="flex-1">
           <ThemedText className="text-base font-medium">{title}</ThemedText>
-          {description && (
+          {description ? (
             <ThemedText className="text-sm text-subtext">
               {description}
             </ThemedText>
-          )}
+          ) : null}
         </View>
         <Animated.View style={{
           transform: [{

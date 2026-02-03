@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { View, ScrollView, Pressable, Keyboard, Platform, StyleSheet } from 'react-native';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { View, ScrollView, Pressable, Keyboard, Platform, StyleSheet, Alert, ToastAndroid } from 'react-native';
 import ThemedText from './ThemedText';
 import Icon from './Icon';
 import { shadowPresets } from '@/utils/useShadow';
@@ -10,6 +10,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useThemeColors } from '@/app/contexts/ThemeColors';
 import Markdown from 'react-native-markdown-display';
 import { ShimmerText } from './ShimmerText';
+import * as Clipboard from 'expo-clipboard';
+import * as Sharing from 'expo-sharing';
 
 export type Message = {
     id: string;
@@ -50,7 +52,6 @@ export const Conversation = ({ messages, isTyping }: ConversationProps) => {
         return () => keyboardListener.remove();
     }, []);
 
-    // Handle scroll to detect if user is at bottom
     const handleScroll = (event: any) => {
         const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
         const distanceFromBottom = contentSize.height - layoutMeasurement.height - contentOffset.y;
@@ -72,6 +73,45 @@ export const Conversation = ({ messages, isTyping }: ConversationProps) => {
             return newSet;
         });
     };
+
+    // Copy message to clipboard
+    const handleCopy = useCallback(async (content: string) => {
+        try {
+            await Clipboard.setStringAsync(content);
+            
+            // Show feedback
+            if (Platform.OS === 'android') {
+                ToastAndroid.show('Copied to clipboard', ToastAndroid.SHORT);
+            } else {
+                // On iOS, we could use a custom toast, but Alert is simpler
+                // In production, you'd want a proper toast library like react-native-toast-message
+            }
+        } catch (error) {
+            console.error('Copy error:', error);
+            Alert.alert('Error', 'Could not copy to clipboard');
+        }
+    }, []);
+
+    // Share message
+    const handleShare = useCallback(async (content: string) => {
+        try {
+            const isAvailable = await Sharing.isAvailableAsync();
+            if (!isAvailable) {
+                Alert.alert('Sharing not available', 'Sharing is not available on this device');
+                return;
+            }
+
+            await Sharing.shareAsync(content, {
+                dialogTitle: 'Share Message',
+                mimeType: 'text/plain',
+            });
+        } catch (error) {
+            // User cancelled or error
+            if ((error as any)?.message !== 'User did not share') {
+                console.error('Share error:', error);
+            }
+        }
+    }, []);
 
     if (messages.length === 0 && !isTyping) {
         return null;
@@ -99,6 +139,8 @@ export const Conversation = ({ messages, isTyping }: ConversationProps) => {
                                 isStreaming={message.isStreaming}
                                 isLiked={likedMessages.has(message.id)}
                                 onLike={() => toggleLike(message.id)}
+                                onCopy={() => handleCopy(message.content)}
+                                onShare={() => handleShare(message.content)}
                             />
                         )}
                     </View>
@@ -117,8 +159,11 @@ export const Conversation = ({ messages, isTyping }: ConversationProps) => {
                     <AnimatedView animation="scaleIn" duration={200}>
                         <Pressable
                             onPress={scrollToBottom}
-                            className="w-10 h-10 bg-secondary border border-border rounded-full items-center justify-center"
+                            className="w-10 h-10 bg-secondary border border-border rounded-full items-center justify-center active:opacity-70"
                             style={shadowPresets.small}
+                            accessibilityLabel="Scroll to bottom"
+                            accessibilityHint="Double tap to scroll to the latest messages"
+                            accessibilityRole="button"
                         >
                             <Icon name="ArrowDown" size={18} />
                         </Pressable>
@@ -152,9 +197,11 @@ type AssistantMessageProps = {
     isStreaming?: boolean;
     isLiked: boolean;
     onLike: () => void;
+    onCopy: () => void;
+    onShare: () => void;
 };
 
-const AssistantMessage = ({ content, isStreaming, isLiked, onLike }: AssistantMessageProps) => {
+const AssistantMessage = ({ content, isStreaming, isLiked, onLike, onCopy, onShare }: AssistantMessageProps) => {
     const colors = useThemeColors();
 
     const markdownStyles = StyleSheet.create({
@@ -254,7 +301,11 @@ const AssistantMessage = ({ content, isStreaming, isLiked, onLike }: AssistantMe
                         <View className="flex-row mt-2">
                             <Pressable
                                 onPress={onLike}
-                                className="flex-row items-center mr-6"
+                                className="flex-row items-center mr-6 active:opacity-60"
+                                accessibilityLabel={isLiked ? "Unlike message" : "Like message"}
+                                accessibilityHint="Double tap to like this response"
+                                accessibilityRole="button"
+                                accessibilityState={{ selected: isLiked }}
                             >
                                 <Icon
                                     name="Heart"
@@ -263,10 +314,22 @@ const AssistantMessage = ({ content, isStreaming, isLiked, onLike }: AssistantMe
                                     fill={isLiked ? "#E57DDF" : "none"}
                                 />
                             </Pressable>
-                            <Pressable className="flex-row items-center mr-6">
+                            <Pressable 
+                                onPress={onCopy}
+                                className="flex-row items-center mr-6 active:opacity-60"
+                                accessibilityLabel="Copy message"
+                                accessibilityHint="Double tap to copy this response to clipboard"
+                                accessibilityRole="button"
+                            >
                                 <Icon name="Copy" size={18} />
                             </Pressable>
-                            <Pressable className="flex-row items-center">
+                            <Pressable 
+                                onPress={onShare}
+                                className="flex-row items-center active:opacity-60"
+                                accessibilityLabel="Share message"
+                                accessibilityHint="Double tap to share this response"
+                                accessibilityRole="button"
+                            >
                                 <Icon name="Share2" size={18} />
                             </Pressable>
                         </View>
@@ -290,7 +353,7 @@ const TypingIndicator = () => (
                 />
             ))}
         </View>
-        <ThemedText className="ml-3 text-sm text-subtext">Luna is thinking...</ThemedText>
+        <ThemedText className="ml-3 text-sm text-subtext">ALIAS is thinking...</ThemedText>
     </View>
 );
 

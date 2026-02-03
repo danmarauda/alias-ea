@@ -45,7 +45,7 @@ const Subscription = () => {
           <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }} className='bg-background flex-1 h-full  py-4 flex-1'>
             <View className='w-full justify-between flex-row items-center px-4'>
               <View className='flex-row items-center'>
-                <ThemedText className='text-3xl font-outfit-bold'>Luna</ThemedText>
+                <ThemedText className='text-3xl font-outfit-bold'>ALIAS</ThemedText>
                 <View
                   className='px-2 py-1 bg-highlight rounded-lg ml-2'>
                   <Text className='text-white font-outfit-bold'>PRO</Text>
@@ -124,11 +124,11 @@ const SelectPlan = (props: { badge: any; save: any; price: any; period: any; isS
       <View>
         <View className='flex-row items-center mb-2'>
           <Text className='text-lg font-semibold text-primary'>{period}</Text>
-          {badge &&
+          {badge ?
             <View className='px-1 py-1 ml-2 bg-highlight rounded-md'><Text className='text-xs text-white'>{badge}</Text></View>
-          }
+          : null}
         </View>
-        <Text className='text-sm text-primary'>{price} {save && <Text className='text-highlight text-xs'>{save}</Text>}</Text>
+        <Text className='text-sm text-primary'>{price} {save ? <Text className='text-highlight text-xs'>{save}</Text> : null}</Text>
       </View>
       <View className={`w-6 h-6 items-center justify-center border rounded-full bg-secondary ${isSelected ? 'border-sky-500' : 'border-transparent'}`}>
         <View className={`w-4 h-4 items-center justify-center border rounded-full  ${isSelected ? 'bg-sky-500 border-sky-500' : 'bg-transparent border-transparent'}`} />

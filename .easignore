@@ -1,0 +1,12 @@
+# Selective ignore for EAS Cloud
+# Keep ios/ source code but skip massive build/dependency artifacts
+ios/Pods/
+ios/build/
+android/app/build/
+
+# Ignore node_modules
+node_modules/
+
+# Ignore local build artifacts
+.expo/
+*.log

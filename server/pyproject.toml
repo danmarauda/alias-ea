@@ -1,0 +1,18 @@
+[project]
+name = "alias-voice-agent"
+version = "0.1.0"
+description = "ALIAS Executive Agent - LiveKit Voice Agent Server"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "python-dotenv>=1.0.0",
+    "fastapi>=0.115.0",
+    "livekit-agents[openai,silero,elevenlabs]~=1.0",
+    "livekit-api>=1.1.0",
+    "uvicorn>=0.32.0",
+    "httpx>=0.28.0",
+]
+
+[project.scripts]
+agent = "agent:main"
+

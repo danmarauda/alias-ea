@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
-import { View, Pressable, StyleSheet, Platform } from 'react-native';
+import { View, Pressable, StyleSheet, Alert } from 'react-native';
 import { Stack, Link, router } from 'expo-router';
 import Input from '@/components/forms/Input';
 import ThemedText from '@/components/ThemedText';
 import { Button } from '@/components/Button';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import useThemeColors from '@/app/contexts/ThemeColors';
+import { useAuth } from '@/app/contexts/AuthContext';
 
 export default function LoginScreen() {
   const colors = useThemeColors();
+  const { login, loginWithGoogle, loginWithApple, isLoading, error, clearError } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -40,36 +41,57 @@ export default function LoginScreen() {
     return true;
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    clearError();
     const isEmailValid = validateEmail(email);
     const isPasswordValid = validatePassword(password);
 
     if (isEmailValid && isPasswordValid) {
-      setIsLoading(true);
-      // Simulate API call
-      setTimeout(() => {
-        setIsLoading(false);
+      try {
+        await login({ email, password });
         // Navigate to home screen after successful login
-        router.replace('/(drawer)/(tabs)/');
-      }, 1500);
+        router.replace('/(drawer)/');
+      } catch (err) {
+        // Error is handled by AuthContext and displayed below
+        console.error('Login failed:', err);
+      }
     }
   };
 
-  const handleSocialLogin = (provider: string) => {
-    console.log(`Login with ${provider}`);
-    // Implement social login logic here
+  const handleGoogleLogin = async () => {
+    clearError();
+    try {
+      await loginWithGoogle();
+      router.replace('/(drawer)/');
+    } catch (err) {
+      Alert.alert('Google Login Failed', error || 'Could not sign in with Google');
+    }
+  };
+
+  const handleAppleLogin = async () => {
+    clearError();
+    try {
+      await loginWithApple();
+      router.replace('/(drawer)/');
+    } catch (err) {
+      Alert.alert('Apple Login Failed', error || 'Could not sign in with Apple');
+    }
   };
 
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={{paddingTop: insets.top }} className="flex-1 bg-background pt-20  p-10">
-     
-      
+    <View style={{paddingTop: insets.top }} className="flex-1 bg-background pt-20 p-10">
       <View className="mt-8">
-      <ThemedText className="text-4xl font-outfit-bold mb-14">Luna.</ThemedText>
+        <ThemedText className="text-4xl font-outfit-bold mb-14">ALIAS.</ThemedText>
         <ThemedText className="text-3xl font-bold mb-1">Welcome back</ThemedText>
         <ThemedText className="text-subtext mb-14">Sign in to your account</ThemedText>
+        
+        {error && (
+          <View className="mb-4 p-3 bg-red-100 border border-red-300 rounded-lg">
+            <ThemedText className="text-red-600 text-sm">{error}</ThemedText>
+          </View>
+        )}
         
         <Input
           label="Email"
@@ -83,6 +105,7 @@ export default function LoginScreen() {
           keyboardType="email-address"
           autoCapitalize="none"
           autoComplete="email"
+          editable={!isLoading}
         />
         
         <Input
@@ -96,21 +119,50 @@ export default function LoginScreen() {
           error={passwordError}
           isPassword={true}
           autoCapitalize="none"
+          editable={!isLoading}
         />
         
         <Link className='underline text-primary text-sm mb-4' href="/screens/forgot-password">
-            Forgot Password?
+          Forgot Password?
         </Link>
-       
         
         <Button 
           title="Login" 
           onPress={handleLogin} 
           loading={isLoading}
+          disabled={isLoading}
           size="large"
           className="mb-6"
           rounded="full"
         />
+
+        {/* Social Login Options */}
+        <View className="flex-row items-center mb-6">
+          <View className="flex-1 h-px bg-border" />
+          <ThemedText className="mx-4 text-subtext text-sm">or continue with</ThemedText>
+          <View className="flex-1 h-px bg-border" />
+        </View>
+
+        <View className="flex-row gap-3 mb-6">
+          <Button
+            title="Google"
+            variant="outline"
+            onPress={handleGoogleLogin}
+            loading={isLoading}
+            disabled={isLoading}
+            className="flex-1"
+            rounded="full"
+          />
+          <Button
+            title="Apple"
+            variant="outline"
+            onPress={handleAppleLogin}
+            loading={isLoading}
+            disabled={isLoading}
+            className="flex-1"
+            rounded="full"
+          />
+        </View>
         
         <View className="flex-row justify-center">
           <ThemedText className="text-subtext">Don't have an account? </ThemedText>

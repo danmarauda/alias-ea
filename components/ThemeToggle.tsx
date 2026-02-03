@@ -59,7 +59,13 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ value, onChange }) => {
   const isActive = value !== undefined ? value : isDark;
 
   return (
-    <Pressable onPress={handlePress}>
+    <Pressable 
+      onPress={handlePress}
+      accessibilityLabel={isActive ? "Switch to light theme" : "Switch to dark theme"}
+      accessibilityHint={`Double tap to switch to ${isActive ? 'light' : 'dark'} mode`}
+      accessibilityRole="switch"
+      accessibilityState={{ checked: isActive }}
+    >
       <Animated.View
         style={{
           transform: [

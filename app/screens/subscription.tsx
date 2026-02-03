@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, Stack } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import useThemeColors from '../contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import Icon from '@/components/Icon';
 import ActionSheet, { ActionSheetRef } from 'react-native-actions-sheet';
 import ThemedScroller from '@/components/ThemeScroller';

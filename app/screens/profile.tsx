@@ -6,7 +6,7 @@ import ListLink from '@/components/ListLink';
 import AnimatedView from '@/components/AnimatedView';
 import ThemedScroller from '@/components/ThemeScroller';
 import { shadowPresets } from '@/utils/useShadow';
-import { useAuth } from '@/app/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { router } from 'expo-router';
 
 export default function ProfileScreen() {

@@ -20,7 +20,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { ImagePickerAsset } from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import { CardScroller } from "./CardScroller";
-import useThemeColors from "@/app/contexts/ThemeColors";
+import useThemeColors from "@/contexts/ThemeColors";
 import { LinearGradient } from "expo-linear-gradient";
 import LottieView from "lottie-react-native";
 import { useRecording } from "@/hooks/useRecording";

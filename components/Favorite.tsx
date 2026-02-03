@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Pressable, View, Text } from 'react-native';
 import Icon from './Icon';
 import { Button } from './Button';
-import { useThemeColors } from '@/app/contexts/ThemeColors';
+import { useThemeColors } from '@/contexts/ThemeColors';
 import ActionSheetThemed from './ActionSheetThemed';
 import { ActionSheetRef } from 'react-native-actions-sheet';
 import ThemedText from './ThemedText';
@@ -42,7 +42,7 @@ const Favorite: React.FC<FavoriteProps> = ({
   const handleViewFavorites = () => {
     actionSheetRef.current?.hide();
     // Navigate to favorites screen
-    router.push('/(drawer)/(tabs)/favorites');
+    router.push('/(protected)/(drawer)/');
   };
 
   return (

@@ -1,7 +1,7 @@
 PODS:
   - EASClient (55.0.2):
     - ExpoModulesCore
-  - EXApplication (55.0.4):
+  - EXApplication (6.0.2):
     - ExpoModulesCore
   - EXConstants (55.0.3):
     - ExpoModulesCore
@@ -187,6 +187,10 @@ PODS:
     - ExpoModulesCore
   - ExpoBlur (55.0.4):
     - ExpoModulesCore
+  - ExpoCrypto (15.0.8):
+    - ExpoModulesCore
+  - ExpoDocumentPicker (13.0.3):
+    - ExpoModulesCore
   - ExpoDomWebView (55.0.2):
     - ExpoModulesCore
   - ExpoFileSystem (55.0.4):
@@ -243,14 +247,18 @@ PODS:
     - ReactCommon
   - ExpoNotifications (55.0.5):
     - ExpoModulesCore
-  - ExpoRouter (55.0.0-beta.4):
+  - ExpoRouter (55.0.0-preview.5):
     - ExpoModulesCore
     - RNScreens
+  - ExpoSecureStore (15.0.8):
+    - ExpoModulesCore
   - ExpoSharing (55.0.5):
     - ExpoModulesCore
   - ExpoSymbols (55.0.3):
     - ExpoModulesCore
   - ExpoSystemUI (55.0.4):
+    - ExpoModulesCore
+  - ExpoWebBrowser (15.0.10):
     - ExpoModulesCore
   - EXStructuredHeaders (55.0.0)
   - EXUpdates (55.0.6):
@@ -330,12 +338,88 @@ PODS:
   - livekit-react-native-webrtc (137.0.2):
     - React-Core
     - WebRTC-SDK (= 137.7151.04)
+  - LiveKitExpoPlugin (1.0.1):
+    - ExpoModulesCore
+    - livekit-react-native
   - lottie-ios (4.5.0)
   - lottie-react-native (7.3.5):
     - hermes-engine
     - lottie-ios (= 4.5.0)
     - RCTRequired
     - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
+  - MMKVCore (2.2.4)
+  - NitroMmkv (4.1.2):
+    - hermes-engine
+    - MMKVCore (= 2.2.4)
+    - NitroModules
+    - RCTRequired
+    - RCTTypeSafety
+    - React-callinvoker
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
+  - NitroModules (0.33.5):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-callinvoker
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
+  - QuickCrypto (1.0.9):
+    - hermes-engine
+    - NitroModules
+    - RCTRequired
+    - RCTTypeSafety
+    - React-callinvoker
     - React-Core
     - React-Core-prebuilt
     - React-debug
@@ -1795,6 +1879,30 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
+  - react-native-netinfo (11.5.2):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
+  - react-native-quick-base64 (2.2.2):
+    - React-Core
   - react-native-safe-area-context (5.6.2):
     - hermes-engine
     - RCTRequired
@@ -2295,6 +2403,28 @@ PODS:
     - React-utils (= 0.83.1)
     - ReactNativeDependencies
   - ReactNativeDependencies (0.83.1)
+  - RNCAsyncStorage (2.2.0):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
   - RNCMaskedView (0.3.2):
     - hermes-engine
     - RCTRequired
@@ -2626,6 +2756,8 @@ DEPENDENCIES:
   - ExpoAsset (from `../node_modules/expo-asset/ios`)
   - ExpoAudio (from `../node_modules/expo-audio/ios`)
   - ExpoBlur (from `../node_modules/expo-blur/ios`)
+  - ExpoCrypto (from `../node_modules/expo-crypto/ios`)
+  - ExpoDocumentPicker (from `../node_modules/expo-document-picker/ios`)
   - "ExpoDomWebView (from `../node_modules/@expo/dom-webview/ios`)"
   - ExpoFileSystem (from `../node_modules/expo-file-system/ios`)
   - ExpoFont (from `../node_modules/expo-font/ios`)
@@ -2640,9 +2772,11 @@ DEPENDENCIES:
   - ExpoModulesJSI (from `../node_modules/expo-modules-core`)
   - ExpoNotifications (from `../node_modules/expo-notifications/ios`)
   - ExpoRouter (from `../node_modules/expo-router/ios`)
+  - ExpoSecureStore (from `../node_modules/expo-secure-store/ios`)
   - ExpoSharing (from `../node_modules/expo-sharing/ios`)
   - ExpoSymbols (from `../node_modules/expo-symbols/ios`)
   - ExpoSystemUI (from `../node_modules/expo-system-ui/ios`)
+  - ExpoWebBrowser (from `../node_modules/expo-web-browser/ios`)
   - EXStructuredHeaders (from `../node_modules/expo-structured-headers/ios`)
   - EXUpdates (from `../node_modules/expo-updates/ios`)
   - EXUpdatesInterface (from `../node_modules/expo-updates-interface/ios`)
@@ -2650,7 +2784,11 @@ DEPENDENCIES:
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - "livekit-react-native (from `../node_modules/@livekit/react-native`)"
   - "livekit-react-native-webrtc (from `../node_modules/@livekit/react-native-webrtc`)"
+  - "LiveKitExpoPlugin (from `../node_modules/@livekit/react-native-expo-plugin/ios`)"
   - lottie-react-native (from `../node_modules/lottie-react-native`)
+  - NitroMmkv (from `../node_modules/react-native-mmkv`)
+  - NitroModules (from `../node_modules/react-native-nitro-modules`)
+  - QuickCrypto (from `../node_modules/react-native-quick-crypto`)
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
   - RCTRequired (from `../node_modules/react-native/Libraries/Required`)
   - RCTSwiftUI (from `../node_modules/react-native/ReactApple/RCTSwiftUI`)
@@ -2689,6 +2827,8 @@ DEPENDENCIES:
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
   - react-native-maps (from `../node_modules/react-native-maps`)
+  - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
+  - react-native-quick-base64 (from `../node_modules/react-native-quick-base64`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - "react-native-viewpager (from `../node_modules/@react-native-community/viewpager`)"
@@ -2726,6 +2866,7 @@ DEPENDENCIES:
   - ReactCodegen (from `build/generated/ios/ReactCodegen`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeDependencies (from `../node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -2741,6 +2882,7 @@ SPEC REPOS:
     - libdav1d
     - libwebp
     - lottie-ios
+    - MMKVCore
     - ReachabilitySwift
     - SDWebImage
     - SDWebImageAVIFCoder
@@ -2775,6 +2917,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-audio/ios"
   ExpoBlur:
     :path: "../node_modules/expo-blur/ios"
+  ExpoCrypto:
+    :path: "../node_modules/expo-crypto/ios"
+  ExpoDocumentPicker:
+    :path: "../node_modules/expo-document-picker/ios"
   ExpoDomWebView:
     :path: "../node_modules/@expo/dom-webview/ios"
   ExpoFileSystem:
@@ -2803,12 +2949,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-notifications/ios"
   ExpoRouter:
     :path: "../node_modules/expo-router/ios"
+  ExpoSecureStore:
+    :path: "../node_modules/expo-secure-store/ios"
   ExpoSharing:
     :path: "../node_modules/expo-sharing/ios"
   ExpoSymbols:
     :path: "../node_modules/expo-symbols/ios"
   ExpoSystemUI:
     :path: "../node_modules/expo-system-ui/ios"
+  ExpoWebBrowser:
+    :path: "../node_modules/expo-web-browser/ios"
   EXStructuredHeaders:
     :path: "../node_modules/expo-structured-headers/ios"
   EXUpdates:
@@ -2824,8 +2974,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@livekit/react-native"
   livekit-react-native-webrtc:
     :path: "../node_modules/@livekit/react-native-webrtc"
+  LiveKitExpoPlugin:
+    :path: "../node_modules/@livekit/react-native-expo-plugin/ios"
   lottie-react-native:
     :path: "../node_modules/lottie-react-native"
+  NitroMmkv:
+    :path: "../node_modules/react-native-mmkv"
+  NitroModules:
+    :path: "../node_modules/react-native-nitro-modules"
+  QuickCrypto:
+    :path: "../node_modules/react-native-quick-crypto"
   RCTDeprecation:
     :path: "../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation"
   RCTRequired:
@@ -2900,6 +3058,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
   react-native-maps:
     :path: "../node_modules/react-native-maps"
+  react-native-netinfo:
+    :path: "../node_modules/@react-native-community/netinfo"
+  react-native-quick-base64:
+    :path: "../node_modules/react-native-quick-base64"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-slider:
@@ -2974,6 +3136,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   ReactNativeDependencies:
     :podspec: "../node_modules/react-native/third-party-podspecs/ReactNativeDependencies.podspec"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCMaskedView:
     :path: "../node_modules/@react-native-masked-view/masked-view"
   RNDateTimePicker:
@@ -2993,7 +3157,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   EASClient: 7eead1417d9970757ad2654d1eddee4de796d1ee
-  EXApplication: d37b6538c496f2817660e4df76cad446f73a22d1
+  EXApplication: 4c72f6017a14a65e338c5e74fca418f35141e819
   EXConstants: 9b0ceaa3eb81fc2501ba4f857c1c108a5148c792
   EXJSONUtils: 0080c14b673cfa9a6be5e3fe429768ffe3d42dfb
   EXManifests: 0e79074d7d7777f5fe9254590aafe2f3750baa57
@@ -3005,6 +3169,8 @@ SPEC CHECKSUMS:
   ExpoAsset: 247242c8177e7d9f80ce5590119b5dd09d97db10
   ExpoAudio: 14c5909ec48267bfc514bb44c546fcf6fac93837
   ExpoBlur: 20dfc34d3d4fdc13f43e5e21d1aa37f9afb778a0
+  ExpoCrypto: b6105ebaa15d6b38a811e71e43b52cd934945322
+  ExpoDocumentPicker: 6d3d499cf15b692688a804f42927d0f35de5ebaa
   ExpoDomWebView: c0343b93dabed758db1e14ef1d1e570a1498562a
   ExpoFileSystem: 134b6426e62c1a4e8a75504a3d01bf79b752dbac
   ExpoFont: f01db35a4e4efef9c0d06fdbadee21c889cb13cb
@@ -3018,10 +3184,12 @@ SPEC CHECKSUMS:
   ExpoModulesCore: e740862426c682cb35439a83f4b164bdc277971f
   ExpoModulesJSI: bbbae7c82b5f7028456e328cc5a3cad1d65f18bb
   ExpoNotifications: 697a24f3bb4674e43dc6d73456557252b6e7c201
-  ExpoRouter: ea3d8f248c08fc9940cb5eda461ee4c82a3f93ae
+  ExpoRouter: 7e94129591ee60718ccf3348dba902c6e4b619b1
+  ExpoSecureStore: d32f751874a2ceb5aaeebeb3578e165c1ba2b24a
   ExpoSharing: 2b777c6bb79e7963995fcaa23812c32ae4fffee6
   ExpoSymbols: 2f7bc13638130613935601bdbb31c5b9fc2927fb
   ExpoSystemUI: 3bc12983a22e5159e61b30a3bb20076844de2bb5
+  ExpoWebBrowser: 17b064c621789e41d4816c95c93f429b84971f52
   EXStructuredHeaders: aa49a5557fa24aa61dda4ac665f3987bf3e9e35d
   EXUpdates: ecf196dab790f163d48c573e1fb43c8588c99331
   EXUpdatesInterface: fea7c1edceb8e8f9d2d3fc16df444a040e9ee74c
@@ -3032,8 +3200,13 @@ SPEC CHECKSUMS:
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   livekit-react-native: 08b63e23bca754ff60c75fe7766d6e375d478d84
   livekit-react-native-webrtc: c03e72c608fbb8284a99e095dd7835a85bdb0279
+  LiveKitExpoPlugin: 8e0f4bdffa921c27c13e1504ea0e668b6f859278
   lottie-ios: a881093fab623c467d3bce374367755c272bdd59
   lottie-react-native: 8e5dd0e51847600666057d2c9b95815ac9fdb165
+  MMKVCore: f2dd4c9befea04277a55e84e7812f930537993df
+  NitroMmkv: c9fd61d98afd00a6e4e1656a415c28f7be0fd74e
+  NitroModules: 9743535bf4ad639eaf4ef5114268c2da7a386706
+  QuickCrypto: c7a9c58f3fe278c4cf20a214ba253f748399c164
   RCTDeprecation: a93fe21ed2fd99e13bf3b011390d1e9769c83d23
   RCTRequired: 176145d35686c966863f268c0f938f58ae23dc78
   RCTSwiftUI: a6c7271c39098bf00dbdad8f8ed997a59bbfbe44
@@ -3072,6 +3245,8 @@ SPEC CHECKSUMS:
   React-Mapbuffer: a6fc74cc27085555ac5839b2f792c19dc918d8bb
   React-microtasksnativemodule: 0f26742ab54a7d6cd59efb2299956dc9e60ab335
   react-native-maps: a1a4eb15eee016a2d0a009b24155ec92cc6f4ef6
+  react-native-netinfo: f852c868bf5175e46165c7e4db48a204a95c3800
+  react-native-quick-base64: 6568199bb2ac8e72ecdfdc73a230fbc5c1d3aac4
   react-native-safe-area-context: 37e680fc4cace3c0030ee46e8987d24f5d3bdab2
   react-native-slider: f954578344106f0a732a4358ce3a3e11015eb6e1
   react-native-viewpager: ddaf7a06b1864faed597e6742306a8d24c3e0785
@@ -3109,6 +3284,7 @@ SPEC CHECKSUMS:
   ReactCodegen: fc927f8651c51b06a38dff2328ffe27e75f4e211
   ReactCommon: c24a308601d0bce5c9edf2f36afb0dbf7afaf6ef
   ReactNativeDependencies: 0451696d3e6bff4b0ed376dfae3d727ba6570bf1
+  RNCAsyncStorage: 3a4f5e2777dae1688b781a487923a08569e27fe4
   RNCMaskedView: d2578d41c59b936db122b2798ba37e4722d21035
   RNDateTimePicker: 9c0a849bbe1c256f0854fea255734b715f5ea876
   RNGestureHandler: 5494787ce29288a8941fa825663f2b1fa0a5aaf1

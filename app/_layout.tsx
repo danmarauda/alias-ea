@@ -11,10 +11,10 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useFonts, Outfit_400Regular, Outfit_700Bold } from '@expo-google-fonts/outfit';
 import * as SplashScreen from 'expo-splash-screen';
 
-import { AuthProvider } from './contexts/AuthContext';
-import { ConvexClientProvider } from './contexts/ConvexClientProvider';
-import { ThemeProvider, useTheme } from './contexts/ThemeContext';
-import { DrawerProvider } from '@/app/contexts/DrawerContext';
+import { AuthProvider } from '@/contexts/AuthContext';
+import { ConvexClientProvider } from '@/contexts/ConvexClientProvider';
+import { ThemeProvider, useTheme } from '@/contexts/ThemeContext';
+import { DrawerProvider } from '@/contexts/DrawerContext';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { GlobalErrorHandler } from '@/components/GlobalErrorHandler';
 import useThemedNavigation from './hooks/useThemedNavigation';

@@ -1,8 +1,8 @@
-import { useBusinessMode } from "@/app/contexts/BusinesModeContext";
+import { useBusinessMode } from "@/contexts/BusinesModeContext";
 import { Pressable, Text, View, Animated, Easing } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import Icon from "./Icon";
-import useThemeColors from "@/app/contexts/ThemeColors";
+import useThemeColors from "@/contexts/ThemeColors";
 import { useRef } from "react";
 
 

@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect, useCallback, Rea
 import * as WebBrowser from 'expo-web-browser';
 import * as Linking from 'expo-linking';
 import { useMutation } from 'convex/react';
-import { api } from '../../convex/_generated/api';
+import { api } from '../convex/_generated/api';
 import { authService, User, LoginCredentials, SignupCredentials } from '@/services/auth';
 import {
   getSignInUrl,

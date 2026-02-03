@@ -1,7 +1,7 @@
 import { View, Text, Pressable, Animated, Easing, Dimensions } from 'react-native';
 import { shadowPresets } from '@/utils/useShadow';
 import Icon from './Icon';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { useState, useEffect } from 'react';
 import { useRef } from 'react';
 import LottieView from 'lottie-react-native';

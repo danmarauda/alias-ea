@@ -1,6 +1,6 @@
 import React from 'react';
 import { Drawer } from 'expo-router/drawer';
-import { useThemeColors } from '@/app/contexts/ThemeColors';
+import { useThemeColors } from '@/contexts/ThemeColors';
 import CustomDrawerContent from '@/components/CustomDrawerContent';
 
 export default function DrawerLayout() {

@@ -6,7 +6,7 @@ import { ChatInput } from '@/components/ChatInput';
 import { BotSwitch } from '@/components/BotSwitch';
 import { AiCircle } from '@/components/AiCircle';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useThemeColors } from '@/app/contexts/ThemeColors';
+import { useThemeColors } from '@/contexts/ThemeColors';
 import { Conversation, Message } from '@/components/Conversation';
 import { streamMessage, isConfigured, AIMessage } from '@/services/ai';
 

@@ -4,7 +4,7 @@ import { Link, router } from 'expo-router';
 import Icon, { IconName } from '@/components/Icon';
 import ThemedScroller from '@/components/ThemeScroller';
 import ThemedText from '@/components/ThemedText';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { Chip } from '@/components/Chip';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CardScroller } from '@/components/CardScroller';

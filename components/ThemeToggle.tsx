@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Pressable, Animated } from 'react-native';
-import { useTheme } from 'app/contexts/ThemeContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import Icon from './Icon';
 
 interface ThemeToggleProps {

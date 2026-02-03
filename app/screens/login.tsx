@@ -5,8 +5,8 @@ import Input from '@/components/forms/Input';
 import ThemedText from '@/components/ThemedText';
 import { Button } from '@/components/Button';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import useThemeColors from '@/app/contexts/ThemeColors';
-import { useAuth } from '@/app/contexts/AuthContext';
+import useThemeColors from '@/contexts/ThemeColors';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function LoginScreen() {
   const colors = useThemeColors();
@@ -50,7 +50,7 @@ export default function LoginScreen() {
       try {
         await login({ email, password });
         // Navigate to home screen after successful login
-        router.replace('/(drawer)/');
+        router.replace('/(protected)/(drawer)/');
       } catch (err) {
         // Error is handled by AuthContext and displayed below
         console.error('Login failed:', err);
@@ -62,7 +62,7 @@ export default function LoginScreen() {
     clearError();
     try {
       await loginWithGoogle();
-      router.replace('/(drawer)/');
+      router.replace('/(protected)/(drawer)/');
     } catch (err) {
       Alert.alert('Google Login Failed', error || 'Could not sign in with Google');
     }
@@ -72,7 +72,7 @@ export default function LoginScreen() {
     clearError();
     try {
       await loginWithApple();
-      router.replace('/(drawer)/');
+      router.replace('/(protected)/(drawer)/');
     } catch (err) {
       Alert.alert('Apple Login Failed', error || 'Could not sign in with Apple');
     }

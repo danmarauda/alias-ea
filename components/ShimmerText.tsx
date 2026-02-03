@@ -9,7 +9,7 @@ import Animated, {
     withTiming,
     Easing,
 } from 'react-native-reanimated';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 
 type ShimmerTextProps = {
     text: string;

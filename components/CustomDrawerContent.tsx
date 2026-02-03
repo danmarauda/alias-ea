@@ -3,12 +3,12 @@ import { View, TouchableOpacity, TextInput, Touchable, FlatList } from 'react-na
 import { shadowPresets } from '@/utils/useShadow';
 import ThemedText from './ThemedText';
 import Icon, { IconName } from './Icon';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import ThemeToggle from '@/components/ThemeToggle';
 import ThemedScroller from './ThemeScroller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Avatar from './Avatar';
-import { useAuth } from '@/app/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { messageService, Conversation } from '@/services/messages';
 
@@ -55,7 +55,7 @@ export default function CustomDrawerContent() {
     const handleNewChat = async () => {
         const newConv = messageService.createConversation();
         await messageService.saveConversation(newConv);
-        router.push('/(drawer)/');
+        router.push('/(protected)/(drawer)/');
     };
 
     return (
@@ -115,7 +115,7 @@ export default function CustomDrawerContent() {
                         scrollEnabled={false}
                         renderItem={({ item }) => (
                             <TouchableOpacity
-                                onPress={() => router.push('/(drawer)/')}
+                                onPress={() => router.push('/(protected)/(drawer)/')}
                                 className='py-3 px-4 active:opacity-70'
                                 accessibilityLabel={item.title}
                                 accessibilityHint="Double tap to open this conversation"

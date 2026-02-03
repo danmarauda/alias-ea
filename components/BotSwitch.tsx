@@ -4,7 +4,7 @@ import ThemedText from "./ThemedText";
 import Icon from "./Icon";
 import ActionSheetThemed from "./ActionSheetThemed";
 import { ActionSheetRef } from "react-native-actions-sheet";
-import { useThemeColors } from "@/app/contexts/ThemeColors";
+import { useThemeColors } from "@/contexts/ThemeColors";
 
 export const BotSwitch = () => {
     const [selectedModel, setSelectedModel] = useState('ChatGPT');

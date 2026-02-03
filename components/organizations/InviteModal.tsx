@@ -5,7 +5,7 @@ import ThemedText from '@/components/ThemedText';
 import Input from '@/components/forms/Input';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { Id } from '@/convex/_generated/dataModel';
 
 interface InviteModalProps {

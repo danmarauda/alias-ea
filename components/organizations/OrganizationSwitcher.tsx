@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { View, Pressable, Modal, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useOrganizations } from '@/hooks/useOrganizations';
-import { useAuth } from '@/app/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import ThemedText from '@/components/ThemedText';
 import Icon from '@/components/Icon';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { Id } from '@/convex/_generated/dataModel';
 
 interface OrganizationSwitcherProps {

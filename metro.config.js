@@ -12,4 +12,8 @@ config.resolver.alias = {
   crypto: 'react-native-crypto',
 };
 
+// Add resolver for packages with missing exports field (Expo 55 preview issue)
+config.resolver.resolverMainFields = ['react-native', 'browser', 'main'];
+config.resolver.sourceExts = [...config.resolver.sourceExts, 'mjs', 'cjs'];
+
 module.exports = withNativeWind(config, { input: './global.css' });

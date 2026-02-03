@@ -6,7 +6,7 @@ import { Button } from '@/components/Button';
 import Section from '@/components/layout/Section';
 import LottieView from 'lottie-react-native';
 import { shadowPresets } from "@/utils/useShadow";
-import useThemeColors from '../contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { VoiceSelectCard } from '@/components/VoiceSelectCard';
 import ThemedText from '@/components/ThemedText';
 

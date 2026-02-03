@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "runtimeVersion": "1.0.0",
     "scheme": "alias-executive-agent",
+    "newArchEnabled": true,
     "experiments": {
       "tsconfigPaths": true
     },
@@ -22,7 +23,6 @@
       "@livekit/react-native-expo-plugin",
       "./plugins/withDisableBundleSigning.js",
       "expo-secure-store",
-      "expo-image",
       "expo-web-browser"
     ],
     "orientation": "portrait",
@@ -70,15 +70,6 @@
           "experimental": {
             "ios": {
               "appExtensions": [
-                {
-                  "targetName": "expo-sharing-extension",
-                  "bundleIdentifier": "ai.aliaslabs.aea.expo-sharing-extension",
-                  "entitlements": {
-                    "com.apple.security.application-groups": [
-                      "group.ai.aliaslabs.aea"
-                    ]
-                  }
-                },
                 {
                   "targetName": "expo-sharing-extension",
                   "bundleIdentifier": "ai.aliaslabs.aea.expo-sharing-extension",

@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, View, ViewStyle } from 'react-native';
 import Icon from './Icon';
 import Avatar from './Avatar';
-import { useThemeColors } from 'app/contexts/ThemeColors';
+import { useThemeColors } from '@/contexts/ThemeColors';
 import { DrawerActions, useNavigation, NavigationProp } from '@react-navigation/native';
 
 interface DrawerButtonProps {

@@ -7,7 +7,7 @@ import { Divider } from './layout/Divider';
 import AnimatedView from './AnimatedView';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useThemeColors } from '@/app/contexts/ThemeColors';
+import { useThemeColors } from '@/contexts/ThemeColors';
 import ShimmerText from './ShimmerText';
 
 type Message = {

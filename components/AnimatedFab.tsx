@@ -9,7 +9,7 @@ import Animated, {
   runOnJS
 } from 'react-native-reanimated';
 import Icon, { IconName } from './Icon';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 
 const { width: windowWidth } = Dimensions.get('window');
 type AnimatedFabProps = {

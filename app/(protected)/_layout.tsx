@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack, Redirect } from 'expo-router';
-import { useAuth } from '@/app/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function ProtectedLayout() {
   const { isAuthenticated, isInitializing } = useAuth();

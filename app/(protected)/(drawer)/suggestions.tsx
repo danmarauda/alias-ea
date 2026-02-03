@@ -8,7 +8,7 @@ import { ChatInput } from '@/components/ChatInput';
 import { BotSwitch } from '@/components/BotSwitch';
 import { CardScroller } from '@/components/CardScroller';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useThemeColors } from '@/app/contexts/ThemeColors';
+import { useThemeColors } from '@/contexts/ThemeColors';
 import { Conversation, Message } from '@/components/Conversation';
 import { streamMessage, isConfigured, AIMessage } from '@/services/ai';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

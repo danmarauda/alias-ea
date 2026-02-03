@@ -4,7 +4,7 @@ import { useOrganizationMembers, useOrganization } from '@/hooks/useOrganization
 import ThemedText from '@/components/ThemedText';
 import Icon from '@/components/Icon';
 import Button from '@/components/Button';
-import useThemeColors from '@/app/contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { Id } from '@/convex/_generated/dataModel';
 
 interface MemberListProps {

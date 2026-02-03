@@ -4,13 +4,13 @@ import ThemedText from '@/components/ThemedText';
 import { StatusBar } from 'expo-status-bar';
 import ThemeToggle from '@/components/ThemeToggle';
 import { AntDesign } from '@expo/vector-icons';
-import useThemeColors from '../contexts/ThemeColors';
+import useThemeColors from '@/contexts/ThemeColors';
 import { router } from 'expo-router';
 import React from 'react';
 import Icon from '@/components/Icon';
 import LottieView from 'lottie-react-native';
 import { useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
-import { useAuth } from '@/app/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 const { width } = Dimensions.get('window');
 const windowWidth = Dimensions.get('window').width;
@@ -50,7 +50,7 @@ export default function OnboardingScreen() {
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle();
-      router.replace('/(drawer)/');
+      router.replace('/(protected)/(drawer)/');
     } catch (err) {
       Alert.alert('Login Failed', 'Could not sign in with Google');
     }
@@ -59,7 +59,7 @@ export default function OnboardingScreen() {
   const handleAppleLogin = async () => {
     try {
       await loginWithApple();
-      router.replace('/(drawer)/');
+      router.replace('/(protected)/(drawer)/');
     } catch (err) {
       Alert.alert('Login Failed', 'Could not sign in with Apple');
     }

@@ -1,42 +1,12 @@
-import { createMMKV } from 'react-native-mmkv';
-import type { MMKV } from 'react-native-mmkv';
+import { MMKV } from 'react-native-mmkv';
 
-// Lazy MMKV instances - created on first access to ensure
-// native Nitro modules are ready before instantiation
-let _app: MMKV | null = null;
-let _cache: MMKV | null = null;
-let _auth: MMKV | null = null;
-let _state: MMKV | null = null;
-let _prefs: MMKV | null = null;
-
-function getApp() {
-  if (!_app) _app = createMMKV({ id: 'app' });
-  return _app;
-}
-function getCache() {
-  if (!_cache) _cache = createMMKV({ id: 'cache' });
-  return _cache;
-}
-function getAuth() {
-  if (!_auth) _auth = createMMKV({ id: 'auth' });
-  return _auth;
-}
-function getState() {
-  if (!_state) _state = createMMKV({ id: 'state' });
-  return _state;
-}
-function getPrefs() {
-  if (!_prefs) _prefs = createMMKV({ id: 'prefs' });
-  return _prefs;
-}
-
-// Proxy object that lazily creates MMKV instances on first access
+// Simple MMKV instances
 export const storage = {
-  get app() { return getApp(); },
-  get cache() { return getCache(); },
-  get auth() { return getAuth(); },
-  get state() { return getState(); },
-  get prefs() { return getPrefs(); },
+  app: new MMKV({ id: 'app' }),
+  cache: new MMKV({ id: 'cache' }),
+  auth: new MMKV({ id: 'auth' }),
+  state: new MMKV({ id: 'state' }),
+  prefs: new MMKV({ id: 'prefs' }),
 };
 
 // Simple cache - just set/get/remove
@@ -55,7 +25,7 @@ export const cache = {
   },
 
   remove: (key: string) => {
-    storage.cache.remove(key);
+    storage.cache.delete(key);
   },
 
   clear: () => {
@@ -105,7 +75,7 @@ export const prefs = {
   },
 
   remove: (key: string) => {
-    storage.prefs.remove(key);
+    storage.prefs.delete(key);
   },
 
   clear: () => {
@@ -115,8 +85,10 @@ export const prefs = {
 
 // Auth helpers - quick access to session
 export const auth = {
+  // Check if there's a session in cache (fast)
   hasSession: (): boolean => {
     try {
+      // Supabase stores the session with the project key
       const keys = storage.auth.getAllKeys();
       return keys.some(key => key.includes('auth-token') || key.includes('session'));
     } catch {
@@ -124,6 +96,7 @@ export const auth = {
     }
   },
 
+  // Get the complete session if it exists
   getSession: (): any | null => {
     try {
       const keys = storage.auth.getAllKeys();
@@ -141,11 +114,13 @@ export const auth = {
     }
   },
 
+  // Check if the session is valid (not expired)
   isSessionValid: (): boolean => {
     try {
       const session = auth.getSession();
       if (!session) return false;
 
+      // Check expiration
       if (session.expires_at) {
         const expiresAt = new Date(session.expires_at * 1000);
         return expiresAt > new Date();
@@ -177,10 +152,6 @@ export const debug = {
   }),
 
   clearAll: () => {
-    storage.app.clearAll();
-    storage.cache.clearAll();
-    storage.auth.clearAll();
-    storage.state.clearAll();
-    storage.prefs.clearAll();
+    Object.values(storage).forEach(instance => instance.clearAll());
   },
 };

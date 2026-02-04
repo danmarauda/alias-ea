@@ -223,7 +223,7 @@ PODS:
     - ExpoModulesCore
   - ExpoLocation (55.0.5):
     - ExpoModulesCore
-  - ExpoLogBox (55.0.5):
+  - ExpoLogBox (55.0.4):
     - React-Core
   - ExpoMediaLibrary (55.0.4):
     - ExpoModulesCore
@@ -433,11 +433,6 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - PurchasesHybridCommon (17.31.0):
-    - RevenueCat (= 5.57.0)
-  - PurchasesHybridCommonUI (17.31.0):
-    - PurchasesHybridCommon (= 17.31.0)
-    - RevenueCatUI (= 5.57.0)
   - QuickCrypto (1.0.9):
     - hermes-engine
     - NitroModules
@@ -2429,9 +2424,6 @@ PODS:
     - React-utils (= 0.83.1)
     - ReactNativeDependencies
   - ReactNativeDependencies (0.83.1)
-  - RevenueCat (5.57.0)
-  - RevenueCatUI (5.57.0):
-    - RevenueCat (= 5.57.0)
   - RNCAsyncStorage (2.2.0):
     - hermes-engine
     - RCTRequired
@@ -2520,12 +2512,6 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - RNPaywalls (9.7.6):
-    - PurchasesHybridCommonUI (= 17.31.0)
-    - React-Core
-  - RNPurchases (9.7.6):
-    - PurchasesHybridCommon (= 17.31.0)
-    - React-Core
   - RNReanimated (4.2.1):
     - hermes-engine
     - RCTRequired
@@ -3021,8 +3007,6 @@ DEPENDENCIES:
   - "RNCMaskedView (from `../node_modules/@react-native-masked-view/masked-view`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
-  - RNPaywalls (from `../node_modules/react-native-purchases-ui`)
-  - RNPurchases (from `../node_modules/react-native-purchases`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -3038,11 +3022,7 @@ SPEC REPOS:
     - libwebp
     - lottie-ios
     - MMKVCore
-    - PurchasesHybridCommon
-    - PurchasesHybridCommonUI
     - ReachabilitySwift
-    - RevenueCat
-    - RevenueCatUI
     - SDWebImage
     - SDWebImageAVIFCoder
     - SDWebImageSVGCoder
@@ -3328,10 +3308,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/datetimepicker"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
-  RNPaywalls:
-    :path: "../node_modules/react-native-purchases-ui"
-  RNPurchases:
-    :path: "../node_modules/react-native-purchases"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -3375,7 +3351,7 @@ SPEC CHECKSUMS:
   ExpoLinearGradient: 0be3870e71366d2d31a1d629eb60c4c738aa0deb
   ExpoLinking: 15555356f3299a9329120bc2d80c71f7bc07a6fe
   ExpoLocation: 640d3648543e1029f74c4f3375c09188aa06f3a2
-  ExpoLogBox: 10ba15b7428e0020da6743a309f53fd553165112
+  ExpoLogBox: ecf60d496a29ab167c50f438646509f92c22e6b6
   ExpoMediaLibrary: afec53e63b7706d018b488414b9e9809398c41a8
   ExpoModulesCore: a2dbc9172056f8c8437e85075ed86d6e19156567
   ExpoModulesJSI: d675675e3c3c2801d66dd18b5c6d3af550a5fffc
@@ -3405,8 +3381,6 @@ SPEC CHECKSUMS:
   MMKVCore: f2dd4c9befea04277a55e84e7812f930537993df
   NitroMmkv: c9fd61d98afd00a6e4e1656a415c28f7be0fd74e
   NitroModules: 9743535bf4ad639eaf4ef5114268c2da7a386706
-  PurchasesHybridCommon: 21a11c5d66c8a52cf9aede45cecc2efe1551b98b
-  PurchasesHybridCommonUI: 60fbb660ebbf224df733c90849c4f3b8f6819f4b
   QuickCrypto: c7a9c58f3fe278c4cf20a214ba253f748399c164
   RCTDeprecation: a93fe21ed2fd99e13bf3b011390d1e9769c83d23
   RCTRequired: 176145d35686c966863f268c0f938f58ae23dc78
@@ -3486,14 +3460,10 @@ SPEC CHECKSUMS:
   ReactCodegen: fc927f8651c51b06a38dff2328ffe27e75f4e211
   ReactCommon: c24a308601d0bce5c9edf2f36afb0dbf7afaf6ef
   ReactNativeDependencies: 0451696d3e6bff4b0ed376dfae3d727ba6570bf1
-  RevenueCat: 2d8aa56c68fa8e92c0d669e5e797c4a93e284f20
-  RevenueCatUI: 25c86cf10c6cb9e3e9f308c48df55b31bf7fdba5
   RNCAsyncStorage: 3a4f5e2777dae1688b781a487923a08569e27fe4
   RNCMaskedView: d2578d41c59b936db122b2798ba37e4722d21035
   RNDateTimePicker: 9c0a849bbe1c256f0854fea255734b715f5ea876
   RNGestureHandler: 5494787ce29288a8941fa825663f2b1fa0a5aaf1
-  RNPaywalls: d8ebe418a058fdc7c7b6dd1b3ecb07058d4f1d89
-  RNPurchases: 462fb7edb0304dba1db46e3d38368a271ebe4cc2
   RNReanimated: 86e5991396f1aa514db90d6c79d4c3e37a37bb10
   RNScreens: 03a87569e6febf47b08a8c061ee953ea47b9f653
   RNSVG: bb9dc09f078cafaf09683a67dd5fde641e3e33cb

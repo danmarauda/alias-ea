@@ -8,30 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		22383DA9F9890B64E69E2AED /* libPods-ALIASExecutiveAgent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E0DD99524E9640B78E21FC04 /* libPods-ALIASExecutiveAgent.a */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		8FBFD4EC437D8566E34F0462 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 5A8A030599AA7B3C796DB09E /* PrivacyInfo.xcprivacy */; };
+		6E30A35BDCCE466686FD1365 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1703A2E338274F4CB5AA4323 /* noop-file.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		D13A5B5BF4A9C01FA89A7865 /* libPods-ALIASExecutiveAgent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA611B013F5BB6799067F67 /* libPods-ALIASExecutiveAgent.a */; };
-		DA1193048CA3679D0B146B66 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48AA1CF38DF75C78D7E029E /* ExpoModulesProvider.swift */; };
-		DE23484A4AB44C4E9F7108F7 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA710CBE4EB144F3B9447CD1 /* noop-file.swift */; };
+		EBF5FEF7F839272E316A89C1 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4992148631E9E4B10075E8 /* ExpoModulesProvider.swift */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
+		F4A960A3B43FB714A5A03450 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 57175CD4BBE7A6658E4B4647 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		13B07F961A680F5B00A75B9A /* ALIASExecutiveAgent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ALIASExecutiveAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ALIASExecutiveAgent/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ALIASExecutiveAgent/Info.plist; sourceTree = "<group>"; };
-		19BA95370AA99327BC97ABBE /* Pods-ALIASExecutiveAgent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALIASExecutiveAgent.release.xcconfig"; path = "Target Support Files/Pods-ALIASExecutiveAgent/Pods-ALIASExecutiveAgent.release.xcconfig"; sourceTree = "<group>"; };
-		5A8A030599AA7B3C796DB09E /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = ALIASExecutiveAgent/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		1703A2E338274F4CB5AA4323 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "ALIASExecutiveAgent/noop-file.swift"; sourceTree = "<group>"; };
+		27CC5699F8007D1BD9D41D5C /* Pods-ALIASExecutiveAgent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALIASExecutiveAgent.debug.xcconfig"; path = "Target Support Files/Pods-ALIASExecutiveAgent/Pods-ALIASExecutiveAgent.debug.xcconfig"; sourceTree = "<group>"; };
+		30A3BD0DC64EC1CA79F50042 /* Pods-ALIASExecutiveAgent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALIASExecutiveAgent.release.xcconfig"; path = "Target Support Files/Pods-ALIASExecutiveAgent/Pods-ALIASExecutiveAgent.release.xcconfig"; sourceTree = "<group>"; };
+		57175CD4BBE7A6658E4B4647 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = ALIASExecutiveAgent/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = ALIASExecutiveAgent/SplashScreen.storyboard; sourceTree = "<group>"; };
-		AE43D80842E2ADC8831BAC60 /* Pods-ALIASExecutiveAgent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALIASExecutiveAgent.debug.xcconfig"; path = "Target Support Files/Pods-ALIASExecutiveAgent/Pods-ALIASExecutiveAgent.debug.xcconfig"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		CDA611B013F5BB6799067F67 /* libPods-ALIASExecutiveAgent.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ALIASExecutiveAgent.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E48AA1CF38DF75C78D7E029E /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-ALIASExecutiveAgent/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		EA710CBE4EB144F3B9447CD1 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "ALIASExecutiveAgent/noop-file.swift"; sourceTree = "<group>"; };
+		E0DD99524E9640B78E21FC04 /* libPods-ALIASExecutiveAgent.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ALIASExecutiveAgent.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ALIASExecutiveAgent/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* ALIASExecutiveAgent-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ALIASExecutiveAgent-Bridging-Header.h"; path = "ALIASExecutiveAgent/ALIASExecutiveAgent-Bridging-Header.h"; sourceTree = "<group>"; };
+		FF4992148631E9E4B10075E8 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-ALIASExecutiveAgent/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,7 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D13A5B5BF4A9C01FA89A7865 /* libPods-ALIASExecutiveAgent.a in Frameworks */,
+				22383DA9F9890B64E69E2AED /* libPods-ALIASExecutiveAgent.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,8 +55,8 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				EA710CBE4EB144F3B9447CD1 /* noop-file.swift */,
-				5A8A030599AA7B3C796DB09E /* PrivacyInfo.xcprivacy */,
+				1703A2E338274F4CB5AA4323 /* noop-file.swift */,
+				57175CD4BBE7A6658E4B4647 /* PrivacyInfo.xcprivacy */,
 			);
 			name = ALIASExecutiveAgent;
 			sourceTree = "<group>";
@@ -65,9 +65,25 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				CDA611B013F5BB6799067F67 /* libPods-ALIASExecutiveAgent.a */,
+				E0DD99524E9640B78E21FC04 /* libPods-ALIASExecutiveAgent.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6079145F4CD74E413BD86053 /* ALIASExecutiveAgent */ = {
+			isa = PBXGroup;
+			children = (
+				FF4992148631E9E4B10075E8 /* ExpoModulesProvider.swift */,
+			);
+			name = ALIASExecutiveAgent;
+			sourceTree = "<group>";
+		};
+		6FAD8D3751E45986AB3A6225 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				6079145F4CD74E413BD86053 /* ALIASExecutiveAgent */,
+			);
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -84,8 +100,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				AFF86304BC4B5514363D26CB /* Pods */,
-				F959E70A124016EE6737F799 /* ExpoModulesProviders */,
+				D70366F734DBF47225113452 /* Pods */,
+				6FAD8D3751E45986AB3A6225 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -100,16 +116,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AFF86304BC4B5514363D26CB /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				AE43D80842E2ADC8831BAC60 /* Pods-ALIASExecutiveAgent.debug.xcconfig */,
-				19BA95370AA99327BC97ABBE /* Pods-ALIASExecutiveAgent.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,20 +125,14 @@
 			path = ALIASExecutiveAgent/Supporting;
 			sourceTree = "<group>";
 		};
-		E98439A4B0113F5952EB88D7 /* ALIASExecutiveAgent */ = {
+		D70366F734DBF47225113452 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E48AA1CF38DF75C78D7E029E /* ExpoModulesProvider.swift */,
+				27CC5699F8007D1BD9D41D5C /* Pods-ALIASExecutiveAgent.debug.xcconfig */,
+				30A3BD0DC64EC1CA79F50042 /* Pods-ALIASExecutiveAgent.release.xcconfig */,
 			);
-			name = ALIASExecutiveAgent;
-			sourceTree = "<group>";
-		};
-		F959E70A124016EE6737F799 /* ExpoModulesProviders */ = {
-			isa = PBXGroup;
-			children = (
-				E98439A4B0113F5952EB88D7 /* ALIASExecutiveAgent */,
-			);
-			name = ExpoModulesProviders;
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,13 +143,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "ALIASExecutiveAgent" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				5276BA7BD7A2618BBD035359 /* [Expo] Configure project */,
+				6C981624B89F7169D289B458 /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				ADE9AC5F0125C98655664E6E /* [CP] Embed Pods Frameworks */,
+				4318CFB0F5FC61A072C4D2EB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -199,7 +199,7 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				8FBFD4EC437D8566E34F0462 /* PrivacyInfo.xcprivacy in Resources */,
+				F4A960A3B43FB714A5A03450 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,7 +245,33 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5276BA7BD7A2618BBD035359 /* [Expo] Configure project */ = {
+		4318CFB0F5FC61A072C4D2EB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ALIASExecutiveAgent/Pods-ALIASExecutiveAgent-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/QuickCrypto/OpenSSL.framework/OpenSSL",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/React-Core-prebuilt/React.framework/React",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ReactNativeDependencies/ReactNativeDependencies.framework/ReactNativeDependencies",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/WebRTC-SDK/WebRTC.framework/WebRTC",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermesvm.framework/hermesvm",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactNativeDependencies.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermesvm.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ALIASExecutiveAgent/Pods-ALIASExecutiveAgent-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C981624B89F7169D289B458 /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -285,14 +311,11 @@
 				"${PODS_CONFIGURATION_BUILD_DIR}/ExpoNotifications/ExpoNotifications_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/ExpoSystemUI/ExpoSystemUI_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/ExpoTaskManager/ExpoTaskManager_privacy.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/PurchasesHybridCommon/PurchasesHybridCommon.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/RNCAsyncStorage/RNCAsyncStorage_resources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/RNSVG/RNSVGFilters.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/ReachabilitySwift/ReachabilitySwift.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/React-Core_privacy.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-cxxreact/React-cxxreact_privacy.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/RevenueCat/RevenueCat.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/RevenueCatUI/RevenueCat_RevenueCatUI.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage/SDWebImage.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Stripe/StripeBundle.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/StripeCore/StripeCoreBundle.bundle",
@@ -318,14 +341,11 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoNotifications_privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoSystemUI_privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoTaskManager_privacy.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PurchasesHybridCommon.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RNCAsyncStorage_resources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RNSVGFilters.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ReachabilitySwift.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/React-Core_privacy.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/React-cxxreact_privacy.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RevenueCat.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RevenueCat_RevenueCatUI.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SDWebImage.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/StripeBundle.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/StripeCoreBundle.bundle",
@@ -345,32 +365,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ALIASExecutiveAgent/Pods-ALIASExecutiveAgent-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		ADE9AC5F0125C98655664E6E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ALIASExecutiveAgent/Pods-ALIASExecutiveAgent-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/QuickCrypto/OpenSSL.framework/OpenSSL",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/React-Core-prebuilt/React.framework/React",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ReactNativeDependencies/ReactNativeDependencies.framework/ReactNativeDependencies",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/WebRTC-SDK/WebRTC.framework/WebRTC",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermesvm.framework/hermesvm",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactNativeDependencies.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermesvm.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ALIASExecutiveAgent/Pods-ALIASExecutiveAgent-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -379,8 +373,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				DE23484A4AB44C4E9F7108F7 /* noop-file.swift in Sources */,
-				DA1193048CA3679D0B146B66 /* ExpoModulesProvider.swift in Sources */,
+				6E30A35BDCCE466686FD1365 /* noop-file.swift in Sources */,
+				EBF5FEF7F839272E316A89C1 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,7 +383,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE43D80842E2ADC8831BAC60 /* Pods-ALIASExecutiveAgent.debug.xcconfig */;
+			baseConfigurationReference = 27CC5699F8007D1BD9D41D5C /* Pods-ALIASExecutiveAgent.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -425,7 +419,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 19BA95370AA99327BC97ABBE /* Pods-ALIASExecutiveAgent.release.xcconfig */;
+			baseConfigurationReference = 30A3BD0DC64EC1CA79F50042 /* Pods-ALIASExecutiveAgent.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

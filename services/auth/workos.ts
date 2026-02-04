@@ -21,8 +21,12 @@ const PKCE_TTL_MS = 10 * 60 * 1000; // 10 minutes
 // Custom URL scheme for OAuth callback - uses app's scheme
 export const REDIRECT_URI = 'alias-executive-agent://callback';
 
-// Initialize WorkOS in public client mode (no API key needed for PKCE)
-const workos = new WorkOS({ clientId: WORKOS_CLIENT_ID });
+// Lazy WorkOS initialization - crypto polyfill must be loaded first
+let _workos: WorkOS | null = null;
+function getWorkOS(): WorkOS {
+  if (!_workos) _workos = new WorkOS({ clientId: WORKOS_CLIENT_ID });
+  return _workos;
+}
 
 // Storage keys
 const KEYS = {
@@ -81,7 +85,7 @@ interface PkceState {
  */
 export async function getSignInUrl(): Promise<string> {
   const { url, codeVerifier } =
-    await workos.userManagement.getAuthorizationUrlWithPKCE({
+    await getWorkOS().userManagement.getAuthorizationUrlWithPKCE({
       redirectUri: REDIRECT_URI,
       provider: 'authkit',
     });
@@ -112,7 +116,7 @@ export async function handleCallback(code: string): Promise<{ user: WorkOSUser; 
   }
 
   // Exchange authorization code for tokens using PKCE
-  const auth = await workos.userManagement.authenticateWithCode({
+  const auth = await getWorkOS().userManagement.authenticateWithCode({
     code,
     codeVerifier: pkceState.codeVerifier,
   });
@@ -172,7 +176,7 @@ export async function getUser(): Promise<{ user: WorkOSUser; organization?: Work
   if (isExpired) {
     try {
       const refreshed =
-        await workos.userManagement.authenticateWithRefreshToken({
+        await getWorkOS().userManagement.authenticateWithRefreshToken({
           refreshToken: session.refreshToken,
         });
 

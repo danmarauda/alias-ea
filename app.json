@@ -11,10 +11,17 @@
     },
     "platforms": [
       "ios",
-      "android"
+      "android",
+      "web"
     ],
     "plugins": [
-      "expo-router",
+      [
+        "expo-router",
+        {
+          "origin": "https://luna.alias.ai",
+          "root": "./app"
+        }
+      ],
       "expo-font",
       "expo-audio",
       "@react-native-community/datetimepicker",
@@ -23,7 +30,18 @@
       "@livekit/react-native-expo-plugin",
       "./plugins/withDisableBundleSigning.js",
       "expo-secure-store",
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": [
+            "merchant.com.aliaslabs.aea"
+          ]
+        }
+      ],
+      "expo-build-properties",
+      "expo-image",
+      "expo-video"
     ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -60,6 +78,11 @@
         "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "server",
+      "favicon": "./assets/icon.png"
     },
     "extra": {
       "router": {

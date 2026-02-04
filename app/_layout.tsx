@@ -1,3 +1,4 @@
+import '../polyfills';
 import 'react-native-reanimated';
 import '../global.css';
 
@@ -15,6 +16,7 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import { ConvexClientProvider } from '@/contexts/ConvexClientProvider';
 import { ThemeProvider, useTheme } from '@/contexts/ThemeContext';
 import { DrawerProvider } from '@/contexts/DrawerContext';
+
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { GlobalErrorHandler } from '@/components/GlobalErrorHandler';
 import useThemedNavigation from './hooks/useThemedNavigation';
@@ -149,10 +151,10 @@ export default function RootLayout() {
             <ThemeProvider>
               <AuthProvider>
                 <DrawerProvider>
-                  <AppInitializer>
-                    <ThemedLayout />
-                  </AppInitializer>
-                </DrawerProvider>
+                    <AppInitializer>
+                      <ThemedLayout />
+                    </AppInitializer>
+                  </DrawerProvider>
               </AuthProvider>
             </ThemeProvider>
           </ConvexClientProvider>

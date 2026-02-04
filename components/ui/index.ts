@@ -43,3 +43,5 @@ export type { Option } from './select';
 export { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
 
 export { Text, TextClassContext } from './text';
+
+export { default as CustomMarkdown } from './CustomMarkdown';

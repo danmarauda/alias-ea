@@ -19,6 +19,7 @@
     "@ai-sdk/openai": "^3.0.25",
     "@config-plugins/react-native-webrtc": "^13.0.0",
     "@expo-google-fonts/outfit": "^0.3.0",
+    "@expo/html-elements": "^0.13.8",
     "@expo/vector-icons": "^15.0.2",
     "@livekit/components-react": "^2.9.19",
     "@livekit/react-native": "^2.9.6",

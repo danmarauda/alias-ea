@@ -382,7 +382,6 @@ const styles = StyleSheet.create({
   // Weather
   weatherCard: {
     padding: 16,
-    backgroundColor: 'linear-gradient(135deg, #1E3A5F 0%, #172554 100%)',
     backgroundColor: '#1E3A5F',
     borderRadius: 16,
   },

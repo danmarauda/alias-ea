@@ -148,66 +148,67 @@ export const CameraCapture: React.FC<CameraCaptureProps> = ({
     >
       <StatusBar style="light" />
       
+      {/* Camera - no children allowed in expo-camera v16+ */}
       <CameraView
         ref={cameraRef}
         style={styles.camera}
         facing={facing}
         flash={flashMode}
         mode="picture"
-      >
-        {/* Header controls */}
-        <View style={styles.header}>
-          <Pressable
-            onPress={onClose}
-            style={styles.headerButton}
-            accessibilityLabel="Close camera"
-            accessibilityHint="Double tap to close the camera"
-          >
-            <Icon name="X" size={28} color="white" />
-          </Pressable>
+      />
+      
+      {/* Header controls - positioned absolutely */}
+      <View style={styles.header}>
+        <Pressable
+          onPress={onClose}
+          style={styles.headerButton}
+          accessibilityLabel="Close camera"
+          accessibilityHint="Double tap to close the camera"
+        >
+          <Icon name="X" size={28} color="white" />
+        </Pressable>
 
-          <Pressable
-            onPress={toggleFlash}
-            style={styles.headerButton}
-            accessibilityLabel={`Flash: ${flashMode}`}
-            accessibilityHint="Double tap to change flash mode"
-          >
-            <Icon
-              name={flashMode === 'on' ? 'Zap' : flashMode === 'auto' ? 'ZapOff' : 'FlashlightOff'}
-              size={24}
-              color={flashMode === 'on' ? '#FCD34D' : 'white'}
-            />
-          </Pressable>
-        </View>
+        <Pressable
+          onPress={toggleFlash}
+          style={styles.headerButton}
+          accessibilityLabel={`Flash: ${flashMode}`}
+          accessibilityHint="Double tap to change flash mode"
+        >
+          <Icon
+            name={flashMode === 'on' ? 'Zap' : flashMode === 'auto' ? 'ZapOff' : 'FlashlightOff'}
+            size={24}
+            color={flashMode === 'on' ? '#FCD34D' : 'white'}
+          />
+        </Pressable>
+      </View>
 
-        {/* Bottom controls */}
-        <View style={styles.controls}>
-          <Pressable
-            onPress={toggleCameraFacing}
-            style={styles.flipButton}
-            accessibilityLabel="Flip camera"
-            accessibilityHint="Double tap to switch between front and back camera"
-          >
-            <Icon name="RefreshCw" size={28} color="white" />
-          </Pressable>
+      {/* Bottom controls - positioned absolutely */}
+      <View style={styles.controls}>
+        <Pressable
+          onPress={toggleCameraFacing}
+          style={styles.flipButton}
+          accessibilityLabel="Flip camera"
+          accessibilityHint="Double tap to switch between front and back camera"
+        >
+          <Icon name="RefreshCw" size={28} color="white" />
+        </Pressable>
 
-          <Pressable
-            onPress={takePicture}
-            disabled={isCapturing}
-            style={[styles.captureButton, isCapturing && styles.captureButtonDisabled]}
-            accessibilityLabel="Take photo"
-            accessibilityHint="Double tap to capture a photo"
-          >
-            {isCapturing ? (
-              <ActivityIndicator color="white" size="large" />
-            ) : (
-              <View style={styles.captureInner} />
-            )}
-          </Pressable>
+        <Pressable
+          onPress={takePicture}
+          disabled={isCapturing}
+          style={[styles.captureButton, isCapturing && styles.captureButtonDisabled]}
+          accessibilityLabel="Take photo"
+          accessibilityHint="Double tap to capture a photo"
+        >
+          {isCapturing ? (
+            <ActivityIndicator color="white" size="large" />
+          ) : (
+            <View style={styles.captureInner} />
+          )}
+        </Pressable>
 
-          <View style={styles.flipButton} /> {/* Spacer for alignment */}
-        </View>
-      </CameraView>
+        <View style={styles.flipButton} />
+      </View>
     </Animated.View>
   );
 };
@@ -239,15 +240,20 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   camera: {
-    flex: 1,
+    ...StyleSheet.absoluteFillObject,
   },
   header: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
+    zIndex: 10,
   },
   headerButton: {
     width: 44,
@@ -266,6 +272,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     paddingHorizontal: 30,
+    zIndex: 10,
   },
   flipButton: {
     width: 50,

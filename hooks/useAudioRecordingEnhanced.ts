@@ -4,7 +4,7 @@
  */
 
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { Audio, RecordingStatus as ExpoRecordingStatus } from 'expo-av';
+import { Audio, AVPlaybackStatus } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { Alert } from 'react-native';
 
@@ -85,7 +85,7 @@ export function useAudioRecordingEnhanced(): EnhancedAudioRecordingResult {
       await recording.prepareToRecordAsync(Audio.RecordingOptionsPresets.HIGH_QUALITY);
       
       // Set up status callback for audio levels
-      recording.setOnRecordingStatusUpdate((status: ExpoRecordingStatus) => {
+      recording.setOnRecordingStatusUpdate((status: Audio.RecordingStatus) => {
         if (status.isRecording && status.metering !== undefined) {
           // Convert dB to 0-1 range
           const normalizedLevel = Math.min(1, Math.max(0, (status.metering + 60) / 60));

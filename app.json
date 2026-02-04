@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "runtimeVersion": "1.0.0",
     "scheme": "alias-executive-agent",
-    "newArchEnabled": true,
+    
     "experiments": {
       "tsconfigPaths": true
     },
@@ -34,9 +34,7 @@
       [
         "@stripe/stripe-react-native",
         {
-          "merchantIdentifier": [
-            "merchant.com.aliaslabs.aea"
-          ]
+          "merchantIdentifier": []
         }
       ],
       [
@@ -73,12 +71,6 @@
       "bundleIdentifier": "ai.aliaslabs.aea",
       "infoPlist": {
         "NSMicrophoneUsageDescription": "This app uses the microphone for speech-to-text functionality."
-      },
-      "entitlements": {
-        "com.apple.security.application-groups": [
-          "group.ai.aliaslabs.aea"
-        ],
-        "aps-environment": "development"
       }
     },
     "android": {
@@ -104,21 +96,6 @@
       },
       "eas": {
         "build": {
-          "experimental": {
-            "ios": {
-              "appExtensions": [
-                {
-                  "targetName": "expo-sharing-extension",
-                  "bundleIdentifier": "ai.aliaslabs.aea.expo-sharing-extension",
-                  "entitlements": {
-                    "com.apple.security.application-groups": [
-                      "group.ai.aliaslabs.aea"
-                    ]
-                  }
-                }
-              ]
-            }
-          }
         },
         "projectId": "e03210ce-4264-4e68-b7b2-3378bd91e145"
       }

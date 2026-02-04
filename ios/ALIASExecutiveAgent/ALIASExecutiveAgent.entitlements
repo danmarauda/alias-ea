@@ -4,13 +4,5 @@
   <dict>
     <key>aps-environment</key>
     <string>development</string>
-    <key>com.apple.developer.in-app-payments</key>
-    <array>
-      <string>merchant.com.aliaslabs.aea</string>
-    </array>
-    <key>com.apple.security.application-groups</key>
-    <array>
-      <string>group.ai.aliaslabs.aea</string>
-    </array>
   </dict>
 </plist>

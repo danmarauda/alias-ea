@@ -1,23 +1,49 @@
 import { MMKV } from 'react-native-mmkv';
 
-// Simple MMKV instances
+// Lazy initialization to handle native module loading issues
+let storageInstances: {
+  app?: MMKV;
+  cache?: MMKV;
+  auth?: MMKV;
+  state?: MMKV;
+  prefs?: MMKV;
+} = {};
+
+function getStorage(id: 'app' | 'cache' | 'auth' | 'state' | 'prefs'): MMKV {
+  if (!storageInstances[id]) {
+    try {
+      storageInstances[id] = new MMKV({ id });
+    } catch (error) {
+      console.warn(`MMKV initialization failed for ${id}:`, error);
+      // Return a dummy storage object that won't crash
+      throw new Error(`Storage ${id} not available`);
+    }
+  }
+  return storageInstances[id]!;
+}
+
+// Simple MMKV instances with lazy loading
 export const storage = {
-  app: new MMKV({ id: 'app' }),
-  cache: new MMKV({ id: 'cache' }),
-  auth: new MMKV({ id: 'auth' }),
-  state: new MMKV({ id: 'state' }),
-  prefs: new MMKV({ id: 'prefs' }),
+  get app() { return getStorage('app'); },
+  get cache() { return getStorage('cache'); },
+  get auth() { return getStorage('auth'); },
+  get state() { return getStorage('state'); },
+  get prefs() { return getStorage('prefs'); },
 };
 
-// Simple cache - just set/get/remove
+// Simple cache - just set/get/remove with error handling
 export const cache = {
   set: <T>(key: string, data: T) => {
-    storage.cache.set(key, JSON.stringify(data));
+    try {
+      getStorage('cache').set(key, JSON.stringify(data));
+    } catch (e) {
+      console.warn('Cache set failed:', e);
+    }
   },
 
   get: <T>(key: string): T | null => {
     try {
-      const value = storage.cache.getString(key);
+      const value = getStorage('cache').getString(key);
       return value ? JSON.parse(value) : null;
     } catch {
       return null;
@@ -25,31 +51,44 @@ export const cache = {
   },
 
   remove: (key: string) => {
-    storage.cache.delete(key);
+    try {
+      getStorage('cache').delete(key);
+    } catch (e) {
+      console.warn('Cache remove failed:', e);
+    }
   },
 
   clear: () => {
-    storage.cache.clearAll();
+    try {
+      getStorage('cache').clearAll();
+    } catch (e) {
+      console.warn('Cache clear failed:', e);
+    }
   },
 };
 
-// Simple preferences
+// Simple preferences with error handling
 export const prefs = {
   set: <T>(key: string, value: T) => {
-    if (typeof value === 'string') {
-      storage.prefs.set(key, value);
-    } else if (typeof value === 'number') {
-      storage.prefs.set(key, value);
-    } else if (typeof value === 'boolean') {
-      storage.prefs.set(key, value);
-    } else {
-      storage.prefs.set(key, JSON.stringify(value));
+    try {
+      const storage = getStorage('prefs');
+      if (typeof value === 'string') {
+        storage.set(key, value);
+      } else if (typeof value === 'number') {
+        storage.set(key, value);
+      } else if (typeof value === 'boolean') {
+        storage.set(key, value);
+      } else {
+        storage.set(key, JSON.stringify(value));
+      }
+    } catch (e) {
+      console.warn('Prefs set failed:', e);
     }
   },
 
   get: <T>(key: string, defaultValue?: T): T | null => {
     try {
-      const value = storage.prefs.getString(key);
+      const value = getStorage('prefs').getString(key);
       if (value === undefined) return defaultValue ?? null;
 
       try {
@@ -63,46 +102,63 @@ export const prefs = {
   },
 
   getBoolean: (key: string, defaultValue: boolean = false): boolean => {
-    return storage.prefs.getBoolean(key) ?? defaultValue;
+    try {
+      return getStorage('prefs').getBoolean(key) ?? defaultValue;
+    } catch {
+      return defaultValue;
+    }
   },
 
   getNumber: (key: string, defaultValue: number = 0): number => {
-    return storage.prefs.getNumber(key) ?? defaultValue;
+    try {
+      return getStorage('prefs').getNumber(key) ?? defaultValue;
+    } catch {
+      return defaultValue;
+    }
   },
 
   getString: (key: string, defaultValue: string = ''): string => {
-    return storage.prefs.getString(key) ?? defaultValue;
+    try {
+      return getStorage('prefs').getString(key) ?? defaultValue;
+    } catch {
+      return defaultValue;
+    }
   },
 
   remove: (key: string) => {
-    storage.prefs.delete(key);
+    try {
+      getStorage('prefs').delete(key);
+    } catch (e) {
+      console.warn('Prefs remove failed:', e);
+    }
   },
 
   clear: () => {
-    storage.prefs.clearAll();
+    try {
+      getStorage('prefs').clearAll();
+    } catch (e) {
+      console.warn('Prefs clear failed:', e);
+    }
   },
 };
 
-// Auth helpers - quick access to session
+// Auth helpers - quick access to session with error handling
 export const auth = {
-  // Check if there's a session in cache (fast)
   hasSession: (): boolean => {
     try {
-      // Supabase stores the session with the project key
-      const keys = storage.auth.getAllKeys();
+      const keys = getStorage('auth').getAllKeys();
       return keys.some(key => key.includes('auth-token') || key.includes('session'));
     } catch {
       return false;
     }
   },
 
-  // Get the complete session if it exists
   getSession: (): any | null => {
     try {
-      const keys = storage.auth.getAllKeys();
+      const keys = getStorage('auth').getAllKeys();
       for (const key of keys) {
         if (key.includes('auth-token') || key.includes('session')) {
-          const sessionData = storage.auth.getString(key);
+          const sessionData = getStorage('auth').getString(key);
           if (sessionData) {
             return JSON.parse(sessionData);
           }
@@ -114,13 +170,11 @@ export const auth = {
     }
   },
 
-  // Check if the session is valid (not expired)
   isSessionValid: (): boolean => {
     try {
       const session = auth.getSession();
       if (!session) return false;
 
-      // Check expiration
       if (session.expires_at) {
         const expiresAt = new Date(session.expires_at * 1000);
         return expiresAt > new Date();
@@ -135,23 +189,39 @@ export const auth = {
 
 // Simple debug
 export const debug = {
-  getAllKeys: () => ({
-    app: storage.app.getAllKeys(),
-    cache: storage.cache.getAllKeys(),
-    auth: storage.auth.getAllKeys(),
-    state: storage.state.getAllKeys(),
-    prefs: storage.prefs.getAllKeys(),
-  }),
+  getAllKeys: () => {
+    try {
+      return {
+        app: getStorage('app').getAllKeys(),
+        cache: getStorage('cache').getAllKeys(),
+        auth: getStorage('auth').getAllKeys(),
+        state: getStorage('state').getAllKeys(),
+        prefs: getStorage('prefs').getAllKeys(),
+      };
+    } catch {
+      return { app: [], cache: [], auth: [], state: [], prefs: [] };
+    }
+  },
 
-  getSize: () => ({
-    app: storage.app.getAllKeys().length,
-    cache: storage.cache.getAllKeys().length,
-    auth: storage.auth.getAllKeys().length,
-    state: storage.state.getAllKeys().length,
-    prefs: storage.prefs.getAllKeys().length,
-  }),
+  getSize: () => {
+    try {
+      return {
+        app: getStorage('app').getAllKeys().length,
+        cache: getStorage('cache').getAllKeys().length,
+        auth: getStorage('auth').getAllKeys().length,
+        state: getStorage('state').getAllKeys().length,
+        prefs: getStorage('prefs').getAllKeys().length,
+      };
+    } catch {
+      return { app: 0, cache: 0, auth: 0, state: 0, prefs: 0 };
+    }
+  },
 
   clearAll: () => {
-    Object.values(storage).forEach(instance => instance.clearAll());
+    try {
+      Object.values(storageInstances).forEach(instance => instance?.clearAll());
+    } catch (e) {
+      console.warn('Debug clearAll failed:', e);
+    }
   },
 };

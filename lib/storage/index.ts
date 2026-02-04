@@ -1,25 +1,104 @@
-import { MMKV } from 'react-native-mmkv';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Try to import MMKV v4 - may fail in Expo Go
+let createMMKVFn: ((config: { id: string }) => import('react-native-mmkv').MMKV) | null = null;
+try {
+  const mmkvModule = require('react-native-mmkv');
+  const fn = mmkvModule.createMMKV;
+  // Test instantiation
+  fn({ id: '__test__' });
+  createMMKVFn = fn;
+} catch {
+  console.log('MMKV not available, using AsyncStorage fallback');
+  createMMKVFn = null;
+}
+
+type MMKVInstance = import('react-native-mmkv').MMKV;
 
 // Lazy initialization to handle native module loading issues
-let storageInstances: {
-  app?: MMKV;
-  cache?: MMKV;
-  auth?: MMKV;
-  state?: MMKV;
-  prefs?: MMKV;
-} = {};
+const storageInstances: Record<string, MMKVInstance> = {};
 
-function getStorage(id: 'app' | 'cache' | 'auth' | 'state' | 'prefs'): MMKV {
-  if (!storageInstances[id]) {
-    try {
-      storageInstances[id] = new MMKV({ id });
-    } catch (error) {
-      console.warn(`MMKV initialization failed for ${id}:`, error);
-      // Return a dummy storage object that won't crash
-      throw new Error(`Storage ${id} not available`);
-    }
+// AsyncStorage-based fallback that mimics MMKV interface
+class AsyncStorageFallback {
+  private prefix: string;
+  private memCache: Map<string, string> = new Map();
+
+  constructor(id: string) {
+    this.prefix = `@${id}:`;
+    this.loadCache();
   }
-  return storageInstances[id]!;
+
+  private async loadCache() {
+    try {
+      const keys = await AsyncStorage.getAllKeys();
+      const relevantKeys = keys.filter(k => k.startsWith(this.prefix));
+      const pairs = await AsyncStorage.multiGet(relevantKeys);
+      for (const [key, value] of pairs) {
+        if (value !== null) this.memCache.set(key, value);
+      }
+    } catch {}
+  }
+
+  set(key: string, value: string | number | boolean) {
+    const fullKey = this.prefix + key;
+    const strValue = typeof value === 'string' ? value : JSON.stringify(value);
+    this.memCache.set(fullKey, strValue);
+    AsyncStorage.setItem(fullKey, strValue).catch(() => {});
+  }
+
+  getString(key: string): string | undefined {
+    return this.memCache.get(this.prefix + key);
+  }
+
+  getNumber(key: string): number | undefined {
+    const val = this.getString(key);
+    return val !== undefined ? Number(val) : undefined;
+  }
+
+  getBoolean(key: string): boolean | undefined {
+    const val = this.getString(key);
+    return val !== undefined ? val === 'true' : undefined;
+  }
+
+  remove(key: string): boolean {
+    const fullKey = this.prefix + key;
+    const existed = this.memCache.has(fullKey);
+    this.memCache.delete(fullKey);
+    AsyncStorage.removeItem(fullKey).catch(() => {});
+    return existed;
+  }
+
+  getAllKeys(): string[] {
+    return Array.from(this.memCache.keys())
+      .filter(k => k.startsWith(this.prefix))
+      .map(k => k.slice(this.prefix.length));
+  }
+
+  clearAll() {
+    const keys = Array.from(this.memCache.keys()).filter(k => k.startsWith(this.prefix));
+    for (const k of keys) {
+      this.memCache.delete(k);
+    }
+    AsyncStorage.multiRemove(keys).catch(() => {});
+  }
+}
+
+const fallbackInstances: Record<string, AsyncStorageFallback> = {};
+
+type StorageInstance = MMKVInstance | AsyncStorageFallback;
+
+function getStorage(id: 'app' | 'cache' | 'auth' | 'state' | 'prefs'): StorageInstance {
+  if (createMMKVFn) {
+    if (!storageInstances[id]) {
+      storageInstances[id] = createMMKVFn({ id });
+    }
+    return storageInstances[id];
+  } else {
+    if (!fallbackInstances[id]) {
+      fallbackInstances[id] = new AsyncStorageFallback(id);
+    }
+    return fallbackInstances[id];
+  }
 }
 
 // Simple MMKV instances with lazy loading
@@ -52,7 +131,7 @@ export const cache = {
 
   remove: (key: string) => {
     try {
-      getStorage('cache').delete(key);
+      getStorage('cache').remove(key);
     } catch (e) {
       console.warn('Cache remove failed:', e);
     }
@@ -127,7 +206,7 @@ export const prefs = {
 
   remove: (key: string) => {
     try {
-      getStorage('prefs').delete(key);
+      getStorage('prefs').remove(key);
     } catch (e) {
       console.warn('Prefs remove failed:', e);
     }

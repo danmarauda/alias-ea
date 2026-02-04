@@ -1,17 +1,18 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
 import * as WebBrowser from 'expo-web-browser';
 import * as Linking from 'expo-linking';
 import { useMutation } from 'convex/react';
 import { api } from '../convex/_generated/api';
-import { authService, User, LoginCredentials, SignupCredentials } from '@/services/auth';
+import { authService, type User, type LoginCredentials, type SignupCredentials } from '@/services/auth';
 import {
   getSignInUrl,
+  getGoogleSignInUrl,
+  getAppleSignInUrl,
   handleCallback,
   getUser as getWorkOSUser,
   clearSession,
   getSessionId,
   getLogoutUrl,
-  getOrganization,
   REDIRECT_URI,
   type WorkOSUser,
   type WorkOSOrganization,
@@ -29,8 +30,8 @@ interface AuthContextType {
   isInitializing: boolean;
   login: (credentials: LoginCredentials) => Promise<void>;
   signup: (credentials: SignupCredentials) => Promise<void>;
-  loginWithGoogle: () => Promise<void>;
-  loginWithApple: () => Promise<void>;
+  loginWithGoogle: () => Promise<{ success: boolean; error?: string }>;
+  loginWithApple: () => Promise<{ success: boolean; error?: string }>;
   loginWithWorkOS: () => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
   updateProfile: (updates: Partial<User>) => Promise<void>;
@@ -200,39 +201,131 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const loginWithGoogle = async () => {
-    setIsLoading(true);
-    setError(null);
-    
+  const loginWithGoogle = useCallback(async (): Promise<{
+    success: boolean;
+    error?: string;
+  }> => {
     try {
-      const user = await authService.loginWithGoogle();
-      setUser(user);
+      console.log('[Auth] Starting Google sign in via WorkOS...');
+      setIsLoading(true);
+      setError(null);
+      const url = await getGoogleSignInUrl();
+      console.log('[Auth] Got Google sign in URL');
+
+      const result = await WebBrowser.openAuthSessionAsync(url, REDIRECT_URI);
+      console.log('[Auth] WebBrowser result:', result.type);
+
+      if (result.type !== 'success' || !result.url) {
+        return { success: false, error: 'Authentication was cancelled' };
+      }
+
+      const parsed = Linking.parse(result.url);
+
+      const error = parsed.queryParams?.error as string | undefined;
+      if (error) {
+        const errorDesc = parsed.queryParams?.error_description as string;
+        return { success: false, error: errorDesc || error };
+      }
+
+      const code = parsed.queryParams?.code as string | undefined;
+      if (!code) {
+        return { success: false, error: 'No authorization code received' };
+      }
+
+      console.log('[Auth] Exchanging code for tokens...');
+      const { user: newUser, organization } = await handleCallback(code);
+      console.log('[Auth] Got user:', newUser.email);
+
+      await storeUser({
+        workosId: newUser.id,
+        email: newUser.email,
+        firstName: newUser.firstName ?? undefined,
+        lastName: newUser.lastName ?? undefined,
+        profilePictureUrl: newUser.profilePictureUrl ?? undefined,
+      });
+
+      setWorkOSUser(newUser);
+      setWorkOSOrganization(organization ?? null);
+      setUser({
+        id: newUser.id,
+        email: newUser.email,
+        name: `${newUser.firstName || ''} ${newUser.lastName || ''}`.trim() || newUser.email,
+        avatarUrl: newUser.profilePictureUrl ?? undefined,
+      });
       setIsAuthenticated(true);
+      return { success: true };
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Google login failed';
-      setError(message);
-      throw err;
+      console.error('[Auth] Google sign in failed:', err);
+      const errorMsg = err instanceof Error ? err.message : 'Google login failed';
+      setError(errorMsg);
+      return { success: false, error: errorMsg };
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [storeUser]);
 
-  const loginWithApple = async () => {
-    setIsLoading(true);
-    setError(null);
-
+  const loginWithApple = useCallback(async (): Promise<{
+    success: boolean;
+    error?: string;
+  }> => {
     try {
-      const user = await authService.loginWithApple();
-      setUser(user);
+      console.log('[Auth] Starting Apple sign in via WorkOS...');
+      setIsLoading(true);
+      setError(null);
+      const url = await getAppleSignInUrl();
+      console.log('[Auth] Got Apple sign in URL');
+
+      const result = await WebBrowser.openAuthSessionAsync(url, REDIRECT_URI);
+      console.log('[Auth] WebBrowser result:', result.type);
+
+      if (result.type !== 'success' || !result.url) {
+        return { success: false, error: 'Authentication was cancelled' };
+      }
+
+      const parsed = Linking.parse(result.url);
+
+      const error = parsed.queryParams?.error as string | undefined;
+      if (error) {
+        const errorDesc = parsed.queryParams?.error_description as string;
+        return { success: false, error: errorDesc || error };
+      }
+
+      const code = parsed.queryParams?.code as string | undefined;
+      if (!code) {
+        return { success: false, error: 'No authorization code received' };
+      }
+
+      console.log('[Auth] Exchanging code for tokens...');
+      const { user: newUser, organization } = await handleCallback(code);
+      console.log('[Auth] Got user:', newUser.email);
+
+      await storeUser({
+        workosId: newUser.id,
+        email: newUser.email,
+        firstName: newUser.firstName ?? undefined,
+        lastName: newUser.lastName ?? undefined,
+        profilePictureUrl: newUser.profilePictureUrl ?? undefined,
+      });
+
+      setWorkOSUser(newUser);
+      setWorkOSOrganization(organization ?? null);
+      setUser({
+        id: newUser.id,
+        email: newUser.email,
+        name: `${newUser.firstName || ''} ${newUser.lastName || ''}`.trim() || newUser.email,
+        avatarUrl: newUser.profilePictureUrl ?? undefined,
+      });
       setIsAuthenticated(true);
+      return { success: true };
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Apple login failed';
-      setError(message);
-      throw err;
+      console.error('[Auth] Apple sign in failed:', err);
+      const errorMsg = err instanceof Error ? err.message : 'Apple login failed';
+      setError(errorMsg);
+      return { success: false, error: errorMsg };
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [storeUser]);
 
   const loginWithWorkOS = useCallback(async (): Promise<{
     success: boolean;
@@ -351,7 +444,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setIsAuthenticated(false);
       }
       return success;
-    } catch (err) {
+    } catch {
       setUser(null);
       setWorkOSUser(null);
       setWorkOSOrganization(null);

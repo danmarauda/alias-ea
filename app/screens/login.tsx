@@ -60,21 +60,21 @@ export default function LoginScreen() {
 
   const handleGoogleLogin = async () => {
     clearError();
-    try {
-      await loginWithGoogle();
+    const result = await loginWithGoogle();
+    if (result.success) {
       router.replace('/(protected)/(drawer)/');
-    } catch (err) {
-      Alert.alert('Google Login Failed', error || 'Could not sign in with Google');
+    } else if (result.error && result.error !== 'Authentication was cancelled') {
+      Alert.alert('Google Login Failed', result.error || 'Could not sign in with Google');
     }
   };
 
   const handleAppleLogin = async () => {
     clearError();
-    try {
-      await loginWithApple();
+    const result = await loginWithApple();
+    if (result.success) {
       router.replace('/(protected)/(drawer)/');
-    } catch (err) {
-      Alert.alert('Apple Login Failed', error || 'Could not sign in with Apple');
+    } else if (result.error && result.error !== 'Authentication was cancelled') {
+      Alert.alert('Apple Login Failed', result.error || 'Could not sign in with Apple');
     }
   };
 

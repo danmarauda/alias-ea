@@ -2,7 +2,8 @@
  * WorkOS Authentication Module with PKCE support
  *
  * This module provides WorkOS authentication using PKCE flow:
- * - getSignInUrl() generates PKCE-protected authorization URL
+ * - getSignInUrl() generates PKCE-protected authorization URL for AuthKit
+ * - getSignInUrlWithProvider() generates URL for specific OAuth provider (Google, Apple)
  * - handleCallback() exchanges code for tokens
  * - getUser() returns current user (with auto-refresh)
  * - clearSession() clears stored credentials
@@ -20,6 +21,9 @@ const PKCE_TTL_MS = 10 * 60 * 1000; // 10 minutes
 
 // Custom URL scheme for OAuth callback - uses app's scheme
 export const REDIRECT_URI = 'alias-executive-agent://callback';
+
+// Supported OAuth providers
+export type OAuthProvider = 'authkit' | 'GoogleOAuth' | 'AppleOAuth' | 'GitHubOAuth' | 'MicrosoftOAuth';
 
 // Lazy WorkOS initialization - crypto polyfill must be loaded first
 let _workos: WorkOS | null = null;
@@ -82,12 +86,13 @@ interface PkceState {
 /**
  * Generate sign-in URL with PKCE challenge.
  * The WorkOS SDK handles PKCE generation automatically via getAuthorizationUrlWithPKCE.
+ * @param provider - OAuth provider ('authkit', 'GoogleOAuth', 'AppleOAuth', etc.)
  */
-export async function getSignInUrl(): Promise<string> {
+export async function getSignInUrl(provider: OAuthProvider = 'authkit'): Promise<string> {
   const { url, codeVerifier } =
     await getWorkOS().userManagement.getAuthorizationUrlWithPKCE({
       redirectUri: REDIRECT_URI,
-      provider: 'authkit',
+      provider,
     });
 
   // Store code verifier securely - needed for token exchange
@@ -98,6 +103,20 @@ export async function getSignInUrl(): Promise<string> {
   await SecureStore.setItemAsync(KEYS.PKCE, JSON.stringify(pkceState));
 
   return url;
+}
+
+/**
+ * Generate sign-in URL for Google OAuth with PKCE.
+ */
+export async function getGoogleSignInUrl(): Promise<string> {
+  return getSignInUrl('GoogleOAuth');
+}
+
+/**
+ * Generate sign-in URL for Apple OAuth with PKCE.
+ */
+export async function getAppleSignInUrl(): Promise<string> {
+  return getSignInUrl('AppleOAuth');
 }
 
 /**
